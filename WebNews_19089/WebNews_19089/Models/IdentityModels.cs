@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -21,13 +22,24 @@ namespace WebNews_19089.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
+            : base("DefaultConnection", throwIfV1Schema: false){
         }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<Photos> Photos { get; set; }
+        public virtual DbSet<Comments> Comments { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
