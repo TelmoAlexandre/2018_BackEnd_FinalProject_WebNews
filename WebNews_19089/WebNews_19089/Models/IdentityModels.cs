@@ -33,6 +33,7 @@ namespace WebNews_19089.Models
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Photos> Photos { get; set; }
         public virtual DbSet<Comments> Comments { get; set; }
+        public virtual DbSet<UsersProfile> UsersProfile { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 

@@ -23,7 +23,9 @@ namespace WebNews_19089.Models {
         public int NewsFK { get; set; }
         public virtual News News { get; set; }
 
-        // FK para o utilizador autenticado
-        public string UserName { get; set; }
+        [ForeignKey("UserProfile")]
+        public int UserProfileFK { get; set; }
+        public virtual UsersProfile UserProfile { get; set; }
+
     }
 }

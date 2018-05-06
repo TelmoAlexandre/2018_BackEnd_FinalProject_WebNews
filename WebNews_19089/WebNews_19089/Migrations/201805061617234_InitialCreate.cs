@@ -15,10 +15,13 @@ namespace WebNews_19089.Migrations
                         Content = c.String(),
                         CommentDate = c.DateTime(nullable: false),
                         NewsFK = c.Int(nullable: false),
+                        UserProfileFK = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.News", t => t.NewsFK)
-                .Index(t => t.NewsFK);
+                .ForeignKey("dbo.UsersProfiles", t => t.UserProfileFK)
+                .Index(t => t.NewsFK)
+                .Index(t => t.UserProfileFK);
             
             CreateTable(
                 "dbo.News",
@@ -38,6 +41,18 @@ namespace WebNews_19089.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.UsersProfiles",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Birthday = c.DateTime(nullable: false),
+                        Bio = c.String(),
+                        UserName = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -122,6 +137,19 @@ namespace WebNews_19089.Migrations
                 .Index(t => t.Photos_ID)
                 .Index(t => t.News_ID);
             
+            CreateTable(
+                "dbo.UsersProfileNews",
+                c => new
+                    {
+                        UsersProfile_ID = c.Int(nullable: false),
+                        News_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.UsersProfile_ID, t.News_ID })
+                .ForeignKey("dbo.UsersProfiles", t => t.UsersProfile_ID)
+                .ForeignKey("dbo.News", t => t.News_ID)
+                .Index(t => t.UsersProfile_ID)
+                .Index(t => t.News_ID);
+            
         }
         
         public override void Down()
@@ -130,9 +158,14 @@ namespace WebNews_19089.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Comments", "UserProfileFK", "dbo.UsersProfiles");
             DropForeignKey("dbo.Comments", "NewsFK", "dbo.News");
+            DropForeignKey("dbo.UsersProfileNews", "News_ID", "dbo.News");
+            DropForeignKey("dbo.UsersProfileNews", "UsersProfile_ID", "dbo.UsersProfiles");
             DropForeignKey("dbo.PhotosNews", "News_ID", "dbo.News");
             DropForeignKey("dbo.PhotosNews", "Photos_ID", "dbo.Photos");
+            DropIndex("dbo.UsersProfileNews", new[] { "News_ID" });
+            DropIndex("dbo.UsersProfileNews", new[] { "UsersProfile_ID" });
             DropIndex("dbo.PhotosNews", new[] { "News_ID" });
             DropIndex("dbo.PhotosNews", new[] { "Photos_ID" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -141,13 +174,16 @@ namespace WebNews_19089.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Comments", new[] { "UserProfileFK" });
             DropIndex("dbo.Comments", new[] { "NewsFK" });
+            DropTable("dbo.UsersProfileNews");
             DropTable("dbo.PhotosNews");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.UsersProfiles");
             DropTable("dbo.Photos");
             DropTable("dbo.News");
             DropTable("dbo.Comments");

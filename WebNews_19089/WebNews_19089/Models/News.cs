@@ -10,6 +10,7 @@ namespace WebNews_19089.Models {
         public News() {
             CommentsList = new HashSet<Comments>();
             PhotosList = new HashSet<Photos>();
+            UsersProfileList = new HashSet<UsersProfile>();
         }
 
         [Key]
@@ -28,5 +29,8 @@ namespace WebNews_19089.Models {
 
         // Lista das fotos associadas com a notícia
         public ICollection<Photos> PhotosList { get; set; }
+
+        // Lista dos users que criaram a notícia
+        public ICollection<UsersProfile> UsersProfileList { get; set; }
     }
 }
