@@ -4,6 +4,7 @@
     background-image: url("https://i.imgur.com/W9YCify.png");
     padding: 0px;
     margin: 0px;
+    font-size: 1rem;
 }
 
 .title {
@@ -25,29 +26,45 @@
     border-right: 1px solid black;
 }
 
-
 .bodyContainer {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
     margin-top: 10px;
     border-top: 3px solid black;
-}
-
-.bodyContainer > div {
-    flex-grow: 0;
-    flex-basis: 20%;
     text-align: center;
-    padding: 0 10px;
 }
 
-.bodyContainer div p {
-    font-family: "Roboto", sans-serif;
-    text-align: left;
+a{
+    text-decoration: none;
+    color: black;
 }
 
-h1 {
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+h1:hover {
+    padding-left: 20px;
+    transition: 0.5s;
+}
+
+.news{
+    width: 20%;
+    max-height: 30%;
+    margin-top: 10px;
+}
+
+.newsTitle {
     font-size: 2.5em;
+    font-weight: bold;
+}
+
+.newsDescription {
+    font-family: "Roboto", sans-serif;
+}
+
+.newsDescription,
+.newsTitle {
+    padding: 0px 10px;
 }
 
 img {
@@ -65,14 +82,4 @@ img {
     padding: 5px 0;
     border-top: 3px double black;
     border-bottom: 3px double black;
-}
-
-@media only screen and (max-width: 1024px) {
-    .columns {
-        flex-direction: column;
-    }
-
-    .columns > div {
-        padding: 0 10px;
-    }
 }
