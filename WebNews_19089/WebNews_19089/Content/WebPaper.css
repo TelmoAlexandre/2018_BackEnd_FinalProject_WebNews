@@ -7,6 +7,10 @@
     font-size: 1rem;
 }
 
+/*
+    Header
+*/
+
 .title {
     font-size: 4.5em;
     font-weight: bold;
@@ -26,46 +30,55 @@
     border-right: 1px solid black;
 }
 
+.headerContainer .userLogin {
+    display: inline;
+    float: left;
+}
+
+
+/*
+    Body
+*/
 .bodyContainer {
     margin-top: 10px;
     border-top: 3px solid black;
     text-align: center;
 }
 
-a{
-    text-decoration: none;
-    color: black;
-}
+    .bodyContainer a {
+        text-decoration: none;
+        color: black;
+    }
 
-a:hover {
-    text-decoration: none;
-    color: black;
-}
+        .bodyContainer a:hover {
+            text-decoration: none;
+            color: black;
+        }
 
-h1:hover {
-    padding-left: 20px;
-    transition: 0.5s;
-}
+    .bodyContainer h1:hover {
+        padding-left: 20px;
+        transition: 0.5s;
+    }
 
-.news{
-    width: 20%;
-    max-height: 30%;
-    margin-top: 10px;
-}
+    .bodyContainer .news {
+        width: 20%;
+        max-height: 30%;
+        margin-top: 10px;
+    }
 
-.newsTitle {
-    font-size: 2.5em;
-    font-weight: bold;
-}
+    .bodyContainer .newsTitle {
+        font-size: 2.5em;
+        font-weight: bold;
+    }
 
-.newsDescription {
-    font-family: "Roboto", sans-serif;
-}
+    .bodyContainer .newsDescription {
+        font-family: "Roboto", sans-serif;
+    }
 
-.newsDescription,
-.newsTitle {
-    padding: 0px 10px;
-}
+    .bodyContainer .newsDescription,
+    .bodyContainer .newsTitle {
+        padding: 0px 10px;
+    }
 
 img {
     width: 100%;
