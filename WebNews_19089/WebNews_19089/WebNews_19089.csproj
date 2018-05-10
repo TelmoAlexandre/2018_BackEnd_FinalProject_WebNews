@@ -221,6 +221,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\WebPaper.css.map" />
+    <Content Include="Content\WebPaper.sass" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\_Layout.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
