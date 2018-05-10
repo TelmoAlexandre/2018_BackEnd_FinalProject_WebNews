@@ -1,10 +1,31 @@
-﻿body {
-    font-family: "Fondamento", cursive;
-    background-color: rgb(235, 234, 231);
-    background-image: url("https://i.imgur.com/W9YCify.png");
-    padding: 0px;
-    margin: 0px;
-    font-size: 1rem;
+body {
+  font-family: "Fondamento", cursive;
+  background-color: #ebeae7;
+  background-image: url("https://i.imgur.com/W9YCify.png");
+  padding: 0px;
+  margin: 0px;
+  font-size: 1rem;
+}
+
+.headerContainer .loginRegister {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding-right: 20px;
+}
+
+.headerContainer .loginRegister li:hover {
+  text-decoration: underline;
+  transform: 0.5s;
+}
+
+.headerContainer .login {
+  display: inline;
+}
+
+.headerContainer .login li {
+  display: inline;
+  padding-left: 10px;
 }
 
 /*
@@ -12,22 +33,27 @@
 */
 
 .title {
-    font-size: 4.5em;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 40px;
-    padding-bottom: 10px;
-    border-bottom: 10px double black;
+  font-size: 4.5em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+  padding-bottom: 10px;
+  border-bottom: 10px double black;
+}
+
+.title a:hover {
+  padding-left: 20px;
+  transition: 0.5s;
 }
 
 .date {
-    font: 1em "Roboto Mono", monospace;
-    text-align: center;
-    width: 280px;
-    margin: auto;
-    margin-top: 10px;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+  font: 1em "Roboto Mono", monospace;
+  text-align: center;
+  width: 280px;
+  margin: auto;
+  margin-top: 10px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .headerContainer .userLogin {
@@ -40,59 +66,59 @@
     Body
 */
 .bodyContainer {
-    margin-top: 10px;
-    border-top: 3px solid black;
-    text-align: center;
+  margin-top: 10px;
+  border-top: 3px solid black;
+  text-align: center;
 }
 
-    .bodyContainer a {
-        text-decoration: none;
-        color: black;
-    }
+a {
+  text-decoration: none;
+  color: black;
+}
 
-        .bodyContainer a:hover {
-            text-decoration: none;
-            color: black;
-        }
+a:hover {
+  text-decoration: none;
+  color: black;
+}
 
-    .bodyContainer h1:hover {
-        padding-left: 20px;
-        transition: 0.5s;
-    }
+h1:hover {
+  padding-left: 20px;
+  transition: 0.5s;
+}
 
-    .bodyContainer .news {
-        width: 20%;
-        max-height: 30%;
-        margin-top: 10px;
-    }
+.news {
+  width: 20%;
+  max-height: 30%;
+  margin-top: 10px;
+}
 
-    .bodyContainer .newsTitle {
-        font-size: 2.5em;
-        font-weight: bold;
-    }
+.newsTitle {
+  font-size: 2.5em;
+  font-weight: bold;
+}
 
-    .bodyContainer .newsDescription {
-        font-family: "Roboto", sans-serif;
-    }
+.newsDescription {
+  font-family: "Roboto", sans-serif;
+  padding: 0px 10px;
+}
 
-    .bodyContainer .newsDescription,
-    .bodyContainer .newsTitle {
-        padding: 0px 10px;
-    }
+.newsTitle {
+  padding: 0px 10px;
+}
 
 img {
-    width: 100%;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-    image-rendering: pixelated;
+  width: 100%;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  image-rendering: pixelated;
 }
 
 .footer {
-    text-align: center;
-    font-size: 1em;
-    font-weight: bold;
-    margin-top: 20px;
-    padding: 5px 0;
-    border-top: 3px double black;
-    border-bottom: 3px double black;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 5px 0;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
 }
