@@ -15,8 +15,8 @@ body {
 }
 
 .headerContainer .loginRegister li:hover {
+  font-weight: bold;
   text-decoration: underline;
-  transform: 0.5s;
 }
 
 .headerContainer .login {
@@ -27,10 +27,6 @@ body {
   display: inline;
   padding-left: 10px;
 }
-
-/*
-    Header
-*/
 
 .title {
   font-size: 4.5em;
@@ -56,15 +52,6 @@ body {
   border-right: 1px solid black;
 }
 
-.headerContainer .userLogin {
-    display: inline;
-    float: left;
-}
-
-
-/*
-    Body
-*/
 .bodyContainer {
   margin-top: 10px;
   border-top: 3px solid black;
@@ -122,3 +109,4 @@ img {
   border-top: 3px double black;
   border-bottom: 3px double black;
 }
+/*# sourceMappingURL=WebPaper.css.map */
