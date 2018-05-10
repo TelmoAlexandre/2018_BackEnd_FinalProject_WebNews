@@ -8,7 +8,7 @@ namespace WebNews_19089.Models {
     public class Categories {
 
         public Categories() {
-            News = new HashSet<News>();
+            NewsList = new HashSet<News>();
         }
 
         [Key]
@@ -16,7 +16,7 @@ namespace WebNews_19089.Models {
 
         public string Name { get; set; }
 
-        public ICollection<News> News { get; set; }
+        public ICollection<News> NewsList { get; set; }
 
     }
 }
