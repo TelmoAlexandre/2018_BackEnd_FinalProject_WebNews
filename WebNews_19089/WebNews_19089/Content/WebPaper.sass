@@ -7,16 +7,19 @@ body
   font-size: 1rem
 
 .headerContainer
-    .loginRegister
-        position: absolute
-        top: 0px
-        right: 0px
-        padding-right: 20px
-    .login
-        display: inline
-        li
-            display: inline
-            padding-left: 10px
+  .loginRegister
+    position: absolute
+    top: 0px
+    right: 0px
+    padding-right: 20px
+    li:hover
+      text-decoration: underline
+      transform: 0.5s
+  .login
+    display: inline
+    li
+      display: inline
+      padding-left: 10px
 
 .title
   font-size: 4.5em
@@ -25,6 +28,9 @@ body
   margin-top: 40px
   padding-bottom: 10px
   border-bottom: 10px double black
+  a:hover
+      padding-left: 20px
+      transition: 0.5s
 
 .date
   font: 1em "Roboto Mono", monospace

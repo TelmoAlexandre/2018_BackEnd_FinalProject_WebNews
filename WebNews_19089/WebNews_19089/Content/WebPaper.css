@@ -14,6 +14,11 @@ body {
   padding-right: 20px;
 }
 
+.headerContainer .loginRegister li:hover {
+  text-decoration: underline;
+  transform: 0.5s;
+}
+
 .headerContainer .login {
   display: inline;
 }
@@ -30,6 +35,11 @@ body {
   margin-top: 40px;
   padding-bottom: 10px;
   border-bottom: 10px double black;
+}
+
+.title a:hover {
+  padding-left: 20px;
+  transition: 0.5s;
 }
 
 .date {
