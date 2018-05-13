@@ -4,47 +4,34 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="col-12 newsDetail">
 
-<div>
-    <h4>News</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <div class="newsDetailHeaderContainer row">
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+        <div class="newsDetailHeaderTitleContainer col-6">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                <h1 class="newsTitle">
+                    @Html.DisplayFor(model => model.Title)
+                </h1>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+                <p class="newsDescription">
+                    @Html.DisplayFor(model => model.Description)
+                </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NewsDate)
-        </dt>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.NewsDate)
-        </dd>
+        <div class="newsDetailHeaderImagesContainer col-6">
+            <img src="~/Images/News1.jpg" />
+        </div>
 
-    </dl>
+    </div>
+
+    <div class="newsDetailBodyContainer">
+        @Html.DisplayFor(model => model.Content)
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -197,42 +197,42 @@ namespace WebNews_19089.Migrations {
             var photos = new List<Photos> {
                 new Photos {
                     ID=1,
-                    Name="News1",
+                    Name="News1.jpg",
                     NewsFK=1
                 },
                 new Photos {
                     ID=2,
-                    Name="News2",
+                    Name="News2.jpg",
                     NewsFK=2
                 },
                 new Photos {
                     ID=3,
-                    Name="News3",
+                    Name="News3.jpg",
                     NewsFK=3
                 },
                 new Photos {
                     ID=4,
-                    Name="News4",
+                    Name="News4.jpg",
                     NewsFK=4
                 },
                 new Photos {
                     ID=5,
-                    Name="News5",
+                    Name="News5.jpg",
                     NewsFK=5
                 },
                 new Photos {
                     ID=6,
-                    Name="News6",
+                    Name="News6.jpg",
                     NewsFK=6
                 },
                 new Photos {
                     ID=7,
-                    Name="News7",
+                    Name="News7.jpg",
                     NewsFK=7
                 },
                 new Photos {
                     ID=8,
-                    Name="News8",
+                    Name="News8.jpg",
                     NewsFK=8
                 }
             };
