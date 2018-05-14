@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebNews_19089.Models
@@ -79,6 +80,12 @@ namespace WebNews_19089.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        // Campos da tabela 'UserProfile' que serão utilizados na view 'Register'
+        public string Name { get; set; }
+        public DateTime Birthday { get; set; }
+        public string Bio { get; set; }
+
     }
 
     public class ResetPasswordViewModel

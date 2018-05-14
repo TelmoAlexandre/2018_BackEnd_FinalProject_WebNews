@@ -18,6 +18,9 @@ namespace WebNews_19089.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        // Declarar o contexto da BD
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public AccountController()
         {
         }
@@ -156,7 +159,17 @@ namespace WebNews_19089.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    UsersProfile userProfile = new UsersProfile {
+                        Name = model.Name,
+                        Birthday = model.Birthday,
+                        Bio = model.Bio,
+                        UserName = model.Email
+                    };
+
+                    db.UsersProfile.Add(userProfile);
+                    db.SaveChanges();
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
