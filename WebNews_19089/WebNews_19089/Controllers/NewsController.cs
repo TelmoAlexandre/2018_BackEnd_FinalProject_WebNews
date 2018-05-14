@@ -12,7 +12,7 @@ namespace WebNews_19089.Controllers
 {
     public class NewsController : Controller
     {
-        private NewsDb db = new NewsDb();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: News
         public ActionResult Index()
