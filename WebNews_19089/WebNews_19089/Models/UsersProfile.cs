@@ -24,9 +24,9 @@ namespace WebNews_19089.Models {
         public string UserName { get; set; }
 
         // Comentários do utilizador
-        public ICollection<Comments> CommentsList { get; set; }
+        public virtual ICollection<Comments> CommentsList { get; set; }
 
         // Notícias do utlizador (Jornalista)
-        public ICollection<News> NewsList { get; set; }
+        public virtual ICollection<News> NewsList { get; set; }
     }
 }

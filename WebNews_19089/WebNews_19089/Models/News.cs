@@ -30,12 +30,12 @@ namespace WebNews_19089.Models {
         public virtual Categories Category { get; set; }
 
         // Lista dos comentários feitos na notícia
-        public ICollection<Comments> CommentsList { get; set; }
+        public virtual ICollection<Comments> CommentsList { get; set; }
 
         // Lista das fotos associadas com a notícia
-        public ICollection<Photos> PhotosList { get; set; }
+        public virtual ICollection<Photos> PhotosList { get; set; }
 
         // Lista dos users que criaram a notícia
-        public ICollection<UsersProfile> UsersProfileList { get; set; }
+        public virtual ICollection<UsersProfile> UsersProfileList { get; set; }
     }
 }

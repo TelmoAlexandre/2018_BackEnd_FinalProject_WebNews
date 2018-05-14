@@ -203,6 +203,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\News.cs" />
+    <Compile Include="Models\NewsDb.cs" />
     <Compile Include="Models\Photos.cs" />
     <Compile Include="Models\UsersProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -19,7 +19,7 @@ namespace WebNews_19089.Controllers
         private ApplicationUserManager _userManager;
 
         // Declarar o contexto da BD
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private NewsDb db = new NewsDb();
 
         public AccountController()
         {

@@ -25,7 +25,9 @@
         </div>
 
         <div class="newsDetailHeaderImagesContainer col-6">
-            <img src="~/Images/News1.jpg" />
+            @foreach(var photo in Model.PhotosList) {
+                <img src="~/Images/@photo.Name" />
+            }
         </div>
 
     </div>

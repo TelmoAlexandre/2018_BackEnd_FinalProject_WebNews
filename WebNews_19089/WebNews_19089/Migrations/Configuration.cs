@@ -6,12 +6,12 @@ namespace WebNews_19089.Migrations {
     using System.Linq;
     using WebNews_19089.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WebNews_19089.Models.ApplicationDbContext> {
+    internal sealed class Configuration : DbMigrationsConfiguration<WebNews_19089.Models.NewsDb> {
         public Configuration() {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(WebNews_19089.Models.ApplicationDbContext context) {
+        protected override void Seed(WebNews_19089.Models.NewsDb context) {
 
             // -------------------------------------------------------- 
             //                          Categories

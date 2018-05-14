@@ -16,7 +16,7 @@ namespace WebNews_19089.Models {
 
         public string Name { get; set; }
 
-        public ICollection<News> NewsList { get; set; }
+        public virtual ICollection<News> NewsList { get; set; }
 
     }
 }
