@@ -1,5 +1,4 @@
 body
-  font-family: "Fondamento", cursive
   background-color: rgb(235, 234, 231)
   background-image: url("https://i.imgur.com/W9YCify.png")
   padding: 0rem
@@ -20,6 +19,7 @@ a
     right: 0px
     margin-right: 1.25rem
     margin-top: .2rem
+    font-family: "Fondamento", cursive
     .login
       display: inline
       div
@@ -49,6 +49,7 @@ a
     margin-top: 2.5rem
     padding-bottom: .6rem
     border-bottom: .6rem double black
+    font-family: "Fondamento", cursive
     a:hover
         padding-left: 1.25rem
         transition: 0.5s
@@ -66,50 +67,89 @@ a
   margin-top: .6rem
   border-top: .19rem solid black
   text-align: center
+  font-family: "Roboto", sans-serif
   .newsTitle
     font-size: 2.5em
     font-weight: bold
     padding: 0rem .6rem
+    font-family: "Fondamento", cursive
   .newsDescription
-      font-family: "Roboto", sans-serif
-      padding: 0rem .6rem
-      margin-top: 1.25rem
+    padding: 0rem .6rem
+    margin-top: 1.25rem
 
-  // News/Index
-  .newsBlock
-    width: 20%
-    max-height: 30%
-    margin-top: 1rem
-    h1:hover
-      padding-left: 1.25rem
-      transition: 0.5s
+// News/Index
+.newsBlock
+  width: 20%
+  max-height: 30%
+  margin-top: 1rem
+  h1:hover
+    padding-left: 1.25rem
+    transition: 0.5s
 
-  // News/Details/{id}
-  .newsDetail
-    margin-top: 1rem
-    .newsDetailHeaderContainer
-      margin: .4rem auto
-      width: 100%
-      .newsDetailHeaderTitleContainer
-        div
-          margin-top: 10% 
-      .newsDetailHeaderImagesContainer
-        img
-          height: 100%
-    .newsDetailBodyContainer
-      font-family: "Roboto", sans-serif
-      margin: .4rem auto
-      width: 100%
-      padding: .5rem 2rem
+// News/Details/{id}
+.newsDetail
+  margin-top: 1rem
+
+  // News (header)
+  .newsDetailHeaderContainer
+    margin: .4rem auto
+    width: 100%
+    .newsDetailHeaderTitleContainer
+      .newsTitle
+        font-size: 3em
+      .newsDescription
+        margin-top: 2rem
+        text-align: justify
+        font-weight: bold
+    .newsDetailHeaderImagesContainer
+      img
+        height: 100%
+
+  // News (body)
+  .newsDetailBodyContainer
+    text-align: justify
+    margin: .4rem auto
+    width: 100%
+    padding: .5rem 2rem
+    p
+      padding: 0
+      margin: 0 0 1.5rem
+      font-weight: bold
+  
+//Comments
+.newsCommentsContainer
+  border-top: .6rem double
+  margin-top: 4rem
+  text-align: left
+  h2
+    margin: 1.5rem 0 2rem
+    font-family: "Fondamento", cursive
+    font-weight: bold
+  .comment
+    padding: 2rem .5rem 2rem
+    border-top: .06rem solid
+    p
+      margin: 0
+
+    .commentHeaderContainer
+      .commentHeaderUser
+        font-weight: bold
+      .commentHeaderDate
+        font-size: .8em
+    
+    .commentBodyContainer
+      margin-top: 1rem
+
+      
 
 div
   //border: 1px solid
   
 img
   width: 100%
-  -webkit-filter: grayscale(100%)
-  filter: grayscale(100%)
-  image-rendering: pixelated
+  //-webkit-filter: grayscale(100%)
+  //filter: grayscale(100%)
+  //image-rendering: pixelated
 
 .footer
   text-align: center

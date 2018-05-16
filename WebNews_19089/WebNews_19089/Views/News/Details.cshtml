@@ -4,27 +4,21 @@
     ViewBag.Title = "Details";
 }
 
-<div class="col-12 newsDetail">
+<div class="col-12 newsDetail row">
 
-    <div class="newsDetailHeaderContainer row">
+    <div class="newsDetailHeaderContainer col-6">
 
-        <div class="newsDetailHeaderTitleContainer col-6">
+        <div class="newsDetailHeaderTitleContainer">
 
-            <div>
+            <h1 class="newsTitle">
+                @Html.DisplayFor(model => model.Title)
+            </h1>
 
-                <h1 class="newsTitle">
-                    @Html.DisplayFor(model => model.Title)
-                </h1>
-
-                <p class="newsDescription">
-                    @Html.DisplayFor(model => model.Description)
-                </p>
-
-            </div>
+            
 
         </div>
 
-        <div class="newsDetailHeaderImagesContainer col-6">
+        <div class="newsDetailHeaderImagesContainer">
             @foreach(var photo in Model.PhotosList) {
                 <img src="~/Images/@photo.Name" />
             }
@@ -32,8 +26,48 @@
 
     </div>
 
-    <div class="newsDetailBodyContainer">
+
+    <div class="newsDetailBodyContainer col-6">
+        <p class="newsDescription">
+            @Model.Description
+        </p>
+
         @Html.DisplayFor(model => model.Content)
     </div>
+    
+</div>
+
+
+<div class="col-12 newsCommentsContainer">
+
+    <h2>
+        Comments
+    </h2>
+
+    @foreach (var comment in Model.CommentsList) {
+
+        <div class="comment">
+
+            <div class="commentHeaderContainer">
+                
+                <p class="commentHeaderUser">
+                    by @comment.UserProfile.Name
+                </p>
+
+                <p class="commentHeaderDate">
+                    @comment.CommentDate.Date
+                </p>
+
+            </div>
+
+            <div class="commentBodyContainer">
+                @comment.Content
+            </div>
+
+        </div>
+
+    }
+
+
 
 </div>

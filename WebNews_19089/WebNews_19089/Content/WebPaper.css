@@ -1,5 +1,4 @@
 body {
-  font-family: "Fondamento", cursive;
   background-color: #ebeae7;
   background-image: url("https://i.imgur.com/W9YCify.png");
   padding: 0rem;
@@ -23,6 +22,7 @@ a:hover {
   right: 0px;
   margin-right: 1.25rem;
   margin-top: .2rem;
+  font-family: "Fondamento", cursive;
 }
 
 .headerContainer .loginRegister .login {
@@ -60,6 +60,7 @@ a:hover {
   margin-top: 2.5rem;
   padding-bottom: .6rem;
   border-bottom: .6rem double black;
+  font-family: "Fondamento", cursive;
 }
 
 .headerContainer .title a:hover {
@@ -81,60 +82,103 @@ a:hover {
   margin-top: .6rem;
   border-top: .19rem solid black;
   text-align: center;
+  font-family: "Roboto", sans-serif;
 }
 
 .bodyContainer .newsTitle {
   font-size: 2.5em;
   font-weight: bold;
   padding: 0rem .6rem;
+  font-family: "Fondamento", cursive;
 }
 
 .bodyContainer .newsDescription {
-  font-family: "Roboto", sans-serif;
   padding: 0rem .6rem;
   margin-top: 1.25rem;
 }
 
-.bodyContainer .newsBlock {
+.newsBlock {
   width: 20%;
   max-height: 30%;
   margin-top: 1rem;
 }
 
-.bodyContainer .newsBlock h1:hover {
+.newsBlock h1:hover {
   padding-left: 1.25rem;
   transition: 0.5s;
 }
 
-.bodyContainer .newsDetail {
+.newsDetail {
   margin-top: 1rem;
 }
 
-.bodyContainer .newsDetail .newsDetailHeaderContainer {
+.newsDetail .newsDetailHeaderContainer {
   margin: .4rem auto;
   width: 100%;
 }
 
-.bodyContainer .newsDetail .newsDetailHeaderContainer .newsDetailHeaderTitleContainer div {
-  margin-top: 10%;
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderTitleContainer .newsTitle {
+  font-size: 3em;
 }
 
-.bodyContainer .newsDetail .newsDetailHeaderContainer .newsDetailHeaderImagesContainer img {
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderTitleContainer .newsDescription {
+  margin-top: 2rem;
+  text-align: justify;
+  font-weight: bold;
+}
+
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderImagesContainer img {
   height: 100%;
 }
 
-.bodyContainer .newsDetail .newsDetailBodyContainer {
-  font-family: "Roboto", sans-serif;
+.newsDetail .newsDetailBodyContainer {
+  text-align: justify;
   margin: .4rem auto;
   width: 100%;
   padding: .5rem 2rem;
 }
 
+.newsDetail .newsDetailBodyContainer p {
+  padding: 0;
+  margin: 0 0 1.5rem;
+  font-weight: bold;
+}
+
+.newsCommentsContainer {
+  border-top: .6rem double;
+  margin-top: 4rem;
+  text-align: left;
+}
+
+.newsCommentsContainer h2 {
+  margin: 1.5rem 0 2rem;
+  font-family: "Fondamento", cursive;
+  font-weight: bold;
+}
+
+.newsCommentsContainer .comment {
+  padding: 2rem .5rem 2rem;
+  border-top: .06rem solid;
+}
+
+.newsCommentsContainer .comment p {
+  margin: 0;
+}
+
+.newsCommentsContainer .comment .commentHeaderContainer .commentHeaderUser {
+  font-weight: bold;
+}
+
+.newsCommentsContainer .comment .commentHeaderContainer .commentHeaderDate {
+  font-size: .8em;
+}
+
+.newsCommentsContainer .comment .commentBodyContainer {
+  margin-top: 1rem;
+}
+
 img {
   width: 100%;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-  image-rendering: pixelated;
 }
 
 .footer {
