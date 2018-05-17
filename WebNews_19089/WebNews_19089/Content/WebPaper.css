@@ -177,6 +177,37 @@ a:hover {
   margin-top: 1rem;
 }
 
+.registerContainer {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.registerContainer h2 h4 {
+  font-family: "Fondamento", cursive;
+}
+
+.registerContainer div {
+  padding-left: 0;
+}
+
+.registerContainer input {
+  padding-left: 0;
+}
+
+.login {
+  text-align: left;
+  margin-top: 2rem;
+  font-family: "Fondamento", cursive;
+}
+
+.login div {
+  padding-left: 0;
+}
+
+.login input {
+  padding-left: 0;
+}
+
 img {
   width: 100%;
 }

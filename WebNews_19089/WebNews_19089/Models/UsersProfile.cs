@@ -17,6 +17,7 @@ namespace WebNews_19089.Models {
 
         public string Name { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
 
         public string Bio { get; set; }
