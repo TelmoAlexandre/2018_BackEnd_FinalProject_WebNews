@@ -14,12 +14,12 @@
                 @Html.DisplayFor(model => model.Title)
             </h1>
 
-            
+
 
         </div>
 
         <div class="newsDetailHeaderImagesContainer">
-            @foreach(var photo in Model.PhotosList) {
+            @foreach (var photo in Model.PhotosList) {
                 <img src="~/Images/@photo.Name" />
             }
         </div>
@@ -34,7 +34,7 @@
 
         @Html.DisplayFor(model => model.Content)
     </div>
-    
+
 </div>
 
 
@@ -49,7 +49,7 @@
         <div class="comment">
 
             <div class="commentHeaderContainer">
-                
+
                 <p class="commentHeaderUser">
                     by @comment.UserProfile.Name
                 </p>

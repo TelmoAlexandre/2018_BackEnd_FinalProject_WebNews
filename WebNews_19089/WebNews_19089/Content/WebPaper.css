@@ -180,9 +180,6 @@ a:hover {
 .registerContainer {
   text-align: left;
   margin-top: 2rem;
-}
-
-.registerContainer h2 h4 {
   font-family: "Fondamento", cursive;
 }
 
@@ -192,6 +189,14 @@ a:hover {
 
 .registerContainer input {
   padding-left: 0;
+}
+
+.registerContainer .bioEditor {
+  height: 10rem;
+}
+
+.registerContainer .birthdayEditor {
+  width: 40%;
 }
 
 .login {
@@ -208,8 +213,35 @@ a:hover {
   padding-left: 0;
 }
 
+.editNews {
+  text-align: left;
+  margin-top: 2rem;
+  font-family: "Fondamento", cursive;
+}
+
+.editNews div {
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.editNews input {
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.editNews .descriptionEditor {
+  height: 8rem;
+}
+
+.editNews .contentEditor {
+  height: 25rem;
+  width: 100%;
+}
+
 img {
   width: 100%;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
 .footer {

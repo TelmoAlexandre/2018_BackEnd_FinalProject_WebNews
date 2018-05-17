@@ -5,10 +5,10 @@
 }
 
 @foreach (var news in Model) {
-    
+
     <div class="newsBlock col-4">
         <h1 class="newsTitle">
-            @Html.ActionLink(""+news.Title, "Details", new { id = news.ID })
+            @Html.ActionLink("" + news.Title, "Details", new { id = news.ID })
         </h1>
         <p class="newsDescription">
             @Html.DisplayFor(modelNews => news.Description)

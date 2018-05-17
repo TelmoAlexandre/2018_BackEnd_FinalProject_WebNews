@@ -17,7 +17,8 @@ namespace WebNews_19089.Controllers
         // GET: News
         public ActionResult Index()
         {
-            return View(db.News.ToList());
+            var news = db.News.Include(n => n.Category);
+            return View(news.ToList());
         }
 
         // GET: News/Details/5
@@ -38,6 +39,7 @@ namespace WebNews_19089.Controllers
         // GET: News/Create
         public ActionResult Create()
         {
+            ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace WebNews_19089.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Description,Content,NewsDate")] News news)
+        public ActionResult Create([Bind(Include = "ID,Title,Description,Content,NewsDate,CategoryFK")] News news)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace WebNews_19089.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name", news.CategoryFK);
             return View(news);
         }
 
@@ -70,6 +73,7 @@ namespace WebNews_19089.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name", news.CategoryFK);
             return View(news);
         }
 
@@ -78,7 +82,7 @@ namespace WebNews_19089.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Description,Content,NewsDate")] News news)
+        public ActionResult Edit([Bind(Include = "ID,Title,Description,Content,NewsDate,CategoryFK")] News news)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace WebNews_19089.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name", news.CategoryFK);
             return View(news);
         }
 

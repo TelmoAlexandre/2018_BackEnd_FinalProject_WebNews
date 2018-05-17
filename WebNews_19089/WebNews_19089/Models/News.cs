@@ -21,8 +21,10 @@ namespace WebNews_19089.Models {
 
         public string Description { get; set; }
 
+        /*[DataType(DataType.MultilineText)]*/
         public string Content { get; set; }
 
+        
         public DateTime NewsDate { get; set; }
 
         [ForeignKey("Category")]
