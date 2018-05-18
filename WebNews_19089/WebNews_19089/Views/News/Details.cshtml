@@ -32,7 +32,9 @@
             @Model.Description
         </p>
 
-        @Html.DisplayFor(model => model.Content)
+        <div class="newsDetailBody">
+            @Html.Raw(Model.Content)
+        </div>
     </div>
 
 </div>

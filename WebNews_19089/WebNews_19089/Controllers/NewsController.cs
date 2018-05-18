@@ -50,6 +50,13 @@ namespace WebNews_19089.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Description,Content,NewsDate,CategoryFK")] News news)
         {
+
+            // Registar a data da noticia
+            news.NewsDate = DateTime.Now;
+
+            // Adicionar o HTML para o paragrafo na string
+            news.Content = news.Content.Replace("\r\n", "<br/>");
+
             if (ModelState.IsValid)
             {
                 db.News.Add(news);

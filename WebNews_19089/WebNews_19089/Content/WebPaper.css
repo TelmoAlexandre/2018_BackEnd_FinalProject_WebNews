@@ -196,7 +196,7 @@ a:hover {
 }
 
 .registerContainer .birthdayEditor {
-  width: 40%;
+  width: 50%;
 }
 
 .login {
@@ -230,11 +230,11 @@ a:hover {
 }
 
 .editNews .descriptionEditor {
-  height: 8rem;
+  height: 6rem;
 }
 
 .editNews .contentEditor {
-  height: 25rem;
+  height: 15rem;
   width: 100%;
 }
 
@@ -254,8 +254,12 @@ a:hover {
   max-width: 100%;
 }
 
+.createNews .createDescription {
+  height: 6rem;
+}
+
 .createNews .createContent {
-  height: 8rem;
+  height: 15rem;
 }
 
 .createNews .createDate {
