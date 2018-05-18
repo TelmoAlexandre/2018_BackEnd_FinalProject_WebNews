@@ -238,6 +238,30 @@ a:hover {
   width: 100%;
 }
 
+.createNews {
+  text-align: left;
+  margin-top: 2rem;
+  font-family: "Fondamento", cursive;
+}
+
+.createNews div {
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.createNews input {
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.createNews .createContent {
+  height: 8rem;
+}
+
+.createNews .createDate {
+  width: 35%;
+}
+
 img {
   width: 100%;
   -webkit-filter: grayscale(100%);
