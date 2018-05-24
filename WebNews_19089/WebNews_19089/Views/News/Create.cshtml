@@ -7,7 +7,12 @@
 
 <div class="col-6 createNews">
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm(
+            "Create",
+            "News",
+            FormMethod.Post,
+            new { enctype = "multipart/form-data" }
+        )) {
 
         @Html.AntiForgeryToken()
 
@@ -41,19 +46,28 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NewsDate, htmlAttributes: new { @class = "control-label" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NewsDate, new { htmlAttributes = new { @class = "form-control createDate", type = "date" } })
-                @Html.ValidationMessageFor(model => model.NewsDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.CategoryFK, "CategoryFK", htmlAttributes: new { @class = "control-label" })
             <div class="col-md-10">
                 @Html.DropDownList("CategoryFK", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryFK, "", new { @class = "text-danger" })
             </div>
+        </div>
+
+        <div class="form-group">
+            Photos
+            <div class="col-md-10">
+
+                @* File Upload *@
+                <input type="file"
+                       name="fileUploadPhoto"
+                       multiple
+                       style="color:blue;"
+                       accept=".jpg"
+                       onchange="refreshUploadedImg(event)" />
+
+            </div>
+
+
         </div>
 
         <div class="form-group">
@@ -66,6 +80,23 @@
 </div>
 
 
+<script>
+
+    // atualiza o preview da imagem
+    var refreshUploadedImg = function (event) {
+        S
+
+        // referencia à tag <img/>
+        var img = document.getElementById('imgNews');
+
+        // altera o 'src' da <img/> para o da imagem carregada
+        img.src = URL.createObjectURL(event.target.files[0]);
+    }
+
+</script>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
