@@ -51,7 +51,7 @@ namespace WebNews_19089.Controllers {
 
             // Adicionar o HTML para o paragrafo na string
             News.Content = News.Content.Replace("\r\n", "<br/>");
-            
+
             if (ModelState.IsValid) {
 
                 // Tratamento de cada imagem carregada
@@ -133,7 +133,17 @@ namespace WebNews_19089.Controllers {
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing) {
+
+        // GET: Categories for the dropdown list
+        [ChildActionOnly]
+        public ActionResult CategoriesDropdown() {
+
+            var categories = db.Categories.ToList();
+
+            return PartialView("_categoriesDropdownPartial", categories);
+        }
+
+    protected override void Dispose(bool disposing) {
             if (disposing) {
                 db.Dispose();
             }

@@ -13,23 +13,31 @@
 
     <!-- CSS do _Layout -->
     <link href="~/Content/WebPaper.css" rel="stylesheet" />
-
+    <link href="~/Content/DropdownMenus.css" rel="stylesheet" />
 
 </head>
 <body>
+    <header>
+        <div class="headerContainer">
 
-    <div class="headerContainer">
+            <div class="headerLinks">
 
-        @Html.ActionLink("Create News", "Create", "News")
+                @Html.Action("categoriesDropdown", "News")
 
-        @Html.Partial("_LoginPartial")
-        <div class="title">
-            @Html.ActionLink("Web Paper", "Index", "News")
+                @Html.ActionLink("Create News", "Create", "News")
+
+                @Html.Partial("_LoginPartial")
+
+            </div>
+            
+            <div class="title">
+                @Html.ActionLink("Web Paper", "Index", "News")
+            </div>
+
+            <div class="date">@DateTime.Now.DayOfWeek, @DateTime.Now.ToString("MMMM") @DateTime.Now.ToString("dd"), @DateTime.Now.Year</div>
         </div>
+    </header>
 
-        <div class="date">@DateTime.Now.DayOfWeek, @DateTime.Now.ToString("MMMM") @DateTime.Now.ToString("dd"), @DateTime.Now.Year</div>
-
-    </div>
 
     <div class="bodyContainer">
         <div class="container">
