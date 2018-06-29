@@ -163,7 +163,6 @@ namespace WebNews_19089.Controllers
                     UsersProfile userProfile = new UsersProfile {
                         Name = model.Name,
                         Birthday = model.Birthday,
-                        Bio = model.Bio,
                         UserName = model.Email
                     };
 
@@ -462,7 +461,7 @@ namespace WebNews_19089.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "News");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

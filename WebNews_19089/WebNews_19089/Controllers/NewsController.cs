@@ -16,6 +16,10 @@ namespace WebNews_19089.Controllers {
         // GET: News/Index/id?
         public ActionResult Index(int? categoryID) {
 
+
+            // Caso o caregoryID tenha conteudo
+            // Significa foi pedido um index com filtragem de categorias
+            // Retorna as noticias dessa categoria
             if(categoryID != null) {
 
                 var NewsCategories = db.News.Where(n => n.Category.ID == categoryID);
@@ -23,12 +27,20 @@ namespace WebNews_19089.Controllers {
 
             } 
 
+
+            // Caso o categoryID esteja vazio
+            // Significa que foram pedidas todas as noticias
+            // Retorna todas as noticias
             var News = db.News.Include(n => n.Category).OrderByDescending(n => n.NewsDate);
             return View(News.ToList());
         }
 
         // GET: News/Details/5
         public ActionResult Details(int? id) {
+
+            // Caso o id esteja vazio
+            // Significa que não foi enviado nenhum id por parametro
+            // Redireciona para um 'BadRequest'
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -39,6 +51,7 @@ namespace WebNews_19089.Controllers {
             return View(News);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: News/Create
         public ActionResult Create() {
             ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name");
@@ -54,8 +67,6 @@ namespace WebNews_19089.Controllers {
 
             // Registar a data da noticia
             News.NewsDate = DateTime.Now;
-
-            int assa = News.CategoryFK;
 
             // Adicionar o HTML para o paragrafo na string
             News.Content = News.Content.Replace("\r\n", "<br/>");
@@ -141,13 +152,16 @@ namespace WebNews_19089.Controllers {
             return RedirectToAction("Index");
         }
 
+        // Dropdown list das categorias ------------------------------------------------------
 
         // GET: Categories for the dropdown list
         [ChildActionOnly]
         public ActionResult CategoriesDropdown() {
 
+            // Recolhe todas as categorias
             var categories = db.Categories.ToList();
 
+            // Retorna a PartialView da dropdown
             return PartialView("_categoriesDropdownPartial", categories);
         }
 

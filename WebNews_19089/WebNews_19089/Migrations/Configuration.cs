@@ -47,28 +47,24 @@ namespace WebNews_19089.Migrations {
                     ID=1,
                     Name="Test1",
                     Birthday=new DateTime(1950,01,01),
-                    Bio="Nulla blandit feugiat dui eget gravida. Phasellus fermentum euismod congue. Proin lorem quam, placerat nec justo et, consectetur tincidunt justo.",
                     UserName="Test1@mail.com"
                 },
                 new UsersProfile {
                     ID=2,
                     Name="Test2",
                     Birthday=new DateTime(1975,11,23),
-                    Bio="interdum iaculis augue. Nullam ac tellus vestibulum, porttitor magna vel, fringilla sem. Integer at tincidunt odio, nec bibendum elit.",
                     UserName="Test2@mail.com"
                 },
                 new UsersProfile {
                     ID=3,
                     Name="Test3",
                     Birthday=new DateTime(1980,03,05),
-                    Bio="Morbi eu massa lorem. Integer aliquet leo ut dui aliquam dictum. Integer vulputate viverra ante sed vestibulum. Nullam ut malesuada arcu.",
                     UserName="Test3@mail.com"
                 },
                 new UsersProfile {
                     ID=4,
                     Name="Test4",
                     Birthday=new DateTime(1943,02,13),
-                    Bio="Maecenas erat risus, dignissim eget laoreet at, porttitor vitae risus. Nunc aliquet interdum lacus nec consequat. Cras dui ipsum, efficitur a massa sit amet.",
                     UserName="Test4@mail.com"
                 }
             };

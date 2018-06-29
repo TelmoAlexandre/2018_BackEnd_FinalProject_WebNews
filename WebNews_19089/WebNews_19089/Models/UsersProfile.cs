@@ -20,8 +20,6 @@ namespace WebNews_19089.Models {
         [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
 
-        public string Bio { get; set; }
-
         public string UserName { get; set; }
 
         // Comentários do utilizador
