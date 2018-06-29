@@ -13,8 +13,16 @@ namespace WebNews_19089.Controllers {
     public class NewsController : Controller {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: News
-        public ActionResult Index() {
+        // GET: News/Index/id?
+        public ActionResult Index(int? categoryID) {
+
+            if(categoryID != null) {
+
+                var NewsCategories = db.News.Where(n => n.Category.ID == categoryID);
+                return View(NewsCategories.ToList());
+
+            } 
+
             var News = db.News.Include(n => n.Category).OrderByDescending(n => n.NewsDate);
             return View(News.ToList());
         }

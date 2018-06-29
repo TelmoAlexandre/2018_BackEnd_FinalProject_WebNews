@@ -1,15 +1,14 @@
 ﻿@model IEnumerable<WebNews_19089.Models.Categories>
 
 <div class="dropdown">
-    <input class="dropdown-toggle" type="text">
-    <div class="dropdown-text">Categories</div>
-    <ul class="dropdown-content">
+    <div class="nav-item nav-item-dropdown">
+        <span class="dropdown-trigger">Categories</span>
+        <ul class="dropdown-menu">
+            @foreach (var category in Model) {
 
-        @foreach (var category in Model) {
-
-            <li><a href="#">@category.Name</a></li>
-
-        }
-
-    </ul>
+                <li class="dropdown-menu-item">@Html.ActionLink(category.Name, "Index", "News", new { categoryID = category.ID }, null)</li>
+                
+            }
+        </ul>
+    </div>
 </div>
