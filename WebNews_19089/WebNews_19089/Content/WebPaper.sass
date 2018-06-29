@@ -12,9 +12,11 @@ a
     text-decoration: none
     color: black
 
+.cursive
+  font-family: "Fondamento", cursive
+
 .headerContainer
   .headerLinks
-
   .loginRegister
     position: absolute
     top: 0
@@ -77,19 +79,32 @@ a
     padding: 0rem .6rem
     margin-top: 1.25rem
 
+.footer
+  font-family: "Fondamento", cursive
+
 // News/Index
 .newsBlock
   width: 20%
   max-height: 30%
   margin-top: 1rem
+  font-family: "Fondamento", cursive
   h1:hover
     padding-left: 1.25rem
     transition: 0.5s
+  .newsEdit
+    font-size: 1.5em
+    font-weight: bold
+    cursor: pointer
+  .newsEdit
+    &:hover
+      text-decoration: underline
+
+
 
 // News/Details/{id}
 .newsDetail
   margin-top: 1rem
-
+  font-family: "Fondamento", cursive
   // News (header)
   .newsDetailHeaderContainer
     margin: .4rem auto
@@ -215,7 +230,7 @@ img
   border-top: 0.19rem double black
   border-bottom: 0.19rem double black
 
-// Dropdown menu no _layout
+// Dropdown menu no _layout -----------------------------------------------------------------------------
 
 .nav-container
   background-color: #fff

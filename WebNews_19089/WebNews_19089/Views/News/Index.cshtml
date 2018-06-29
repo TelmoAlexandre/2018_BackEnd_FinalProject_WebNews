@@ -13,6 +13,18 @@
         <p class="newsDescription">
             @Html.DisplayFor(modelNews => news.Description)
         </p>
+
+        @*
+            Caso o utilizador logado seja administrator ou editor de redação ele pode alterar a noticia
+        *@
+
+        @if( User.IsInRole("Admin") || User.IsInRole("NewsEditor") ) {
+            
+            <div>
+                @Html.ActionLink("Edit", "Edit", new { id = news.ID }, new { @class = "newsEdit aUnderline" })
+            </div>
+
+        }
     </div>
 
 }

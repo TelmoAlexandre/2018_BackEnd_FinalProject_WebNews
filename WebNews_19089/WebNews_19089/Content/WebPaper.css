@@ -17,6 +17,10 @@ a:hover {
   color: black;
 }
 
+.cursive {
+  font-family: "Fondamento", cursive;
+}
+
 .headerContainer .loginRegister {
   position: absolute;
   top: 0;
@@ -102,10 +106,15 @@ a:hover {
   margin-top: 1.25rem;
 }
 
+.footer {
+  font-family: "Fondamento", cursive;
+}
+
 .newsBlock {
   width: 20%;
   max-height: 30%;
   margin-top: 1rem;
+  font-family: "Fondamento", cursive;
 }
 
 .newsBlock h1:hover {
@@ -114,8 +123,19 @@ a:hover {
   transition: 0.5s;
 }
 
+.newsBlock .newsEdit {
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.newsBlock .newsEdit:hover {
+  text-decoration: underline;
+}
+
 .newsDetail {
   margin-top: 1rem;
+  font-family: "Fondamento", cursive;
 }
 
 .newsDetail .newsDetailHeaderContainer {

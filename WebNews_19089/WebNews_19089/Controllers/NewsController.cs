@@ -107,7 +107,10 @@ namespace WebNews_19089.Controllers {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             News News = db.News.Find(id);
+            News.Content = News.Content.Replace("<br/>", "\r\n");
+
             if (News == null) {
                 return HttpNotFound();
             }
@@ -122,6 +125,8 @@ namespace WebNews_19089.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Title,Description,Content,NewsDate,CategoryFK")] News News) {
             if (ModelState.IsValid) {
+                // Adicionar o HTML para o paragrafo na string
+                News.Content = News.Content.Replace("\r\n", "<br/>");
                 db.Entry(News).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

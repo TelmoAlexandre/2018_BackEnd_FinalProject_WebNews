@@ -24,7 +24,12 @@
 
                 @Html.Action("categoriesDropdown", "News")
 
-                @Html.ActionLink("Create News", "Create", "News")
+                @if (User.IsInRole("Journalist") || User.IsInRole("Admin")) {
+
+                    @Html.ActionLink("Create News", "Create", "News", new { @class = "cursive" })
+                }
+
+
 
                 @Html.Partial("_LoginPartial")
 
