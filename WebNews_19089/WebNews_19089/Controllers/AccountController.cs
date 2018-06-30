@@ -430,6 +430,7 @@ namespace WebNews_19089.Controllers
                     _signInManager.Dispose();
                     _signInManager = null;
                 }
+                db.Dispose();
             }
 
             base.Dispose(disposing);

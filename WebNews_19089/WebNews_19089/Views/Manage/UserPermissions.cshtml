@@ -1,0 +1,39 @@
+﻿@model WebNews_19089.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="col-3"></div>
+<div class="col-6">
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="adminUserPermissions">
+            <h2>Edit User Permissions.</h2>
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                <span class="bold">Email: </span> @Model.Email
+            </div>
+            <div class="form-group">
+                @Html.Label("Roles:", new { @class = "bold" })
+                <span>
+                    @foreach (var item in Model.RolesList) {
+                        <p>
+                            <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                            @Html.Label(item.Value, new { @class = "control-label" })
+                        </p>
+                    }
+                </span>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="col-3"></div>

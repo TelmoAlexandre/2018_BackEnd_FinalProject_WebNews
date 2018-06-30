@@ -5,6 +5,7 @@ body {
   padding: 0rem;
   margin: 0rem;
   font-size: 1rem;
+  font-family: "Fondamento", cursive;
 }
 
 a {
@@ -15,6 +16,10 @@ a {
 a:hover {
   text-decoration: none;
   color: black;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .cursive {
@@ -91,7 +96,6 @@ a:hover {
   margin-top: .6rem;
   border-top: .19rem solid black;
   text-align: center;
-  font-family: "Roboto", sans-serif;
 }
 
 .bodyContainer .newsTitle {
@@ -297,6 +301,32 @@ a:hover {
 
 .createNews .createDate {
   width: 35%;
+}
+
+.adminUserList {
+  font-family: "Fondamento", cursive;
+}
+
+.adminUserList a {
+  cursor: pointer;
+}
+
+.adminUserList h1 {
+  padding: 2rem .5rem 0;
+}
+
+.adminUserList .userBlock {
+  text-align: center;
+  font-family: "Fondamento", cursive;
+  padding: .5rem;
+}
+
+.adminUserPermissions {
+  text-align: left;
+}
+
+.adminUserPermissions h2 {
+  padding: 1rem 0 1rem;
 }
 
 img {

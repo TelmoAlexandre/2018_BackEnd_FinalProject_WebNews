@@ -66,6 +66,18 @@ namespace WebNews_19089.Migrations {
                     Name="Test4",
                     Birthday=new DateTime(1943,02,13),
                     UserName="Test4@mail.com"
+                },
+                new UsersProfile {
+                    ID=4,
+                    Name="Admin",
+                    Birthday=new DateTime(1980,03,05),
+                    UserName="admin@mail.com"
+                },
+                new UsersProfile {
+                    ID=4,
+                    Name="Editor",
+                    Birthday=new DateTime(1980,03,05),
+                    UserName="editor@mail.com"
                 }
             };
             user.ForEach(uu => context.UsersProfile.AddOrUpdate(u => u.ID, uu));
