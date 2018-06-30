@@ -80,7 +80,7 @@ namespace WebNews_19089.Controllers {
                 foreach (var item in fileUploadPhoto) {
 
                     // Garantir que existe uma fotografia em cada iteração do array de fotos carregadas
-                    if(item != null) {
+                    if (item != null) {
 
                         // Cria um nome para a imagem recebida e guarda a mesma
                         string photoName = DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
@@ -94,7 +94,7 @@ namespace WebNews_19089.Controllers {
                         News.PhotosList.Add(photo);
                         item.SaveAs(photoPath);
                     }
-                    
+
                     i++;
                 }
 
@@ -157,9 +157,63 @@ namespace WebNews_19089.Controllers {
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
+
+
+            //try {
+
             News News = db.News.Find(id);
+
+            // Criar uma lista de photos para serem eliminadas
+            // Isto porque correr um foreach diretamente no News.PhotoList iria causar problemas
+            // Pois as fotos elimandas estariam a alterar o News.PhotoList o que causaria um erro.
+            List<Photos> listPhotos = new List<Photos>();
+
+            // Adicionar todas as fotos à lista
+            foreach (var photo in News.PhotosList) {
+
+                listPhotos.Add(photo);
+
+            }
+
+            // Correr a lista e eliminar as fotos
+            foreach (var photo in listPhotos) {
+
+                System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images/"), photo.Name));
+                db.Photos.Remove(photo);
+
+            }
+
+            // A mesma situação, mas para os comments
+            List<Comments> listComments = new List<Comments>();
+            
+            foreach (var comment in News.CommentsList) {
+
+                listComments.Add(comment);
+
+            }
+
+            // Remover os comentários da notícia
+            foreach (var comment in listComments) {
+
+                db.Comments.Remove(comment);
+
+            }
+
+            // Curtar a realação n-n
+            
+
+
             db.News.Remove(News);
             db.SaveChanges();
+
+
+            //} catch (Exception) {
+
+            //    ModelState.AddModelError("", string.Format("I wasn't possible to remove this news article because there's still comments associated with it."));
+
+            //}
+
+
             return RedirectToAction("Index");
         }
 
