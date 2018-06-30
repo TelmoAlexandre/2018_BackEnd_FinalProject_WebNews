@@ -24,9 +24,15 @@
 
                 <span>|</span>
                 @Html.ActionLink("Edit", "Edit", new { id = news.ID }, new { @class = "newsOptionLink" })
-                <span>||</span>
-                @Html.ActionLink("Delete", "Delete", new { id = news.ID }, new { @class = "newsOptionLink" })
                 <span>|</span>
+
+                @if (User.IsInRole("Admin")) {
+
+                    <span>|</span>
+                    @Html.ActionLink("Delete", "Delete", new { id = news.ID }, new { @class = "newsOptionLink" })
+                    <span>|</span>
+
+                }
 
             </div>
 

@@ -60,20 +60,30 @@ namespace WebNews_19089
                 roleManager.Create(role);
             }
 
-            // Criar um utilizador 'Administrador'
-            var user = new ApplicationUser {
+            // Criar um administrador
+            var admin = new ApplicationUser {
 
-                UserName = "admin@mail.pt",
-                Email = "admin@mail.pt"
+                UserName = "admin@mail.com",
+                Email = "admin@mail.com"
+            };
+            
+            // Adicionar o administrador ao role
+            if (userManager.Create(admin, "Qwe123!").Succeeded) {
 
+                userManager.AddToRole(admin.Id, "Admin");
+            }
+
+            // Criar um editor de redação
+            var editor = new ApplicationUser {
+
+                UserName = "editor@mail.com",
+                Email = "editor@mail.com"
             };
 
-            string userPWD = "123qwe!";
-            var chkUser = userManager.Create(user, userPWD);
+            // Adicionar o seu role
+            if(userManager.Create(editor, "Qwe123!").Succeeded) {
 
-            // Adicionar o Utilizador à respetiva Role-Agentes-
-            if (chkUser.Succeeded) {
-                var result1 = userManager.AddToRole(user.Id, "Admin");
+                userManager.AddToRole(editor.Id, "newsEditor");
             }
 
         }

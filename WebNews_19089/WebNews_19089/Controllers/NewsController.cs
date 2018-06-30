@@ -22,7 +22,7 @@ namespace WebNews_19089.Controllers {
             // Retorna as noticias dessa categoria
             if (categoryID != null) {
 
-                var NewsCategories = db.News.Where(n => n.Category.ID == categoryID);
+                var NewsCategories = db.News.Where(n => n.Category.ID == categoryID).OrderByDescending(n => n.NewsDate);
                 return View(NewsCategories.ToList());
 
             }
@@ -150,6 +150,7 @@ namespace WebNews_19089.Controllers {
             if (News == null) {
                 return HttpNotFound();
             }
+            News.Content = News.Content.Replace("<br/>", "\r\n");
             return View(News);
         }
 
@@ -169,16 +170,13 @@ namespace WebNews_19089.Controllers {
             List<Photos> listPhotos = new List<Photos>();
 
             // Adicionar todas as fotos à lista
-            foreach (var photo in News.PhotosList) {
-
+            foreach (var photo in News.PhotosList)
                 listPhotos.Add(photo);
-
-            }
 
             // Correr a lista e eliminar as fotos
             foreach (var photo in listPhotos) {
 
-                System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images/"), photo.Name));
+                //System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images/"), photo.Name));
                 db.Photos.Remove(photo);
 
             }
@@ -186,18 +184,12 @@ namespace WebNews_19089.Controllers {
             // A mesma situação, mas para os comments
             List<Comments> listComments = new List<Comments>();
             
-            foreach (var comment in News.CommentsList) {
-
+            foreach (var comment in News.CommentsList)
                 listComments.Add(comment);
 
-            }
-
             // Remover os comentários da notícia
-            foreach (var comment in listComments) {
-
+            foreach (var comment in listComments)
                 db.Comments.Remove(comment);
-
-            }
 
             // Curtar a realação n-n
             
