@@ -113,7 +113,7 @@ a:hover {
 .newsBlock {
   width: 20%;
   max-height: 30%;
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-family: "Fondamento", cursive;
 }
 
@@ -123,14 +123,21 @@ a:hover {
   transition: 0.5s;
 }
 
-.newsBlock .newsEdit {
+.newsBlock .newsOptions {
   font-size: 1.5em;
   font-weight: bold;
-  cursor: pointer;
 }
 
-.newsBlock .newsEdit:hover {
+.newsBlock .newsOptions .newsOptionLink {
+  cursor: pointer;
+  padding: 0 .5rem;
+}
+
+.newsBlock .newsOptions .newsOptionLink:hover {
   text-decoration: underline;
+  padding: 1.25rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .newsDetail {

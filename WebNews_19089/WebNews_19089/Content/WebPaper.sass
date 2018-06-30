@@ -86,20 +86,22 @@ a
 .newsBlock
   width: 20%
   max-height: 30%
-  margin-top: 1rem
+  margin-top: 2rem
   font-family: "Fondamento", cursive
   h1:hover
     padding-left: 1.25rem
     transition: 0.5s
-  .newsEdit
+  .newsOptions
     font-size: 1.5em
     font-weight: bold
-    cursor: pointer
-  .newsEdit
-    &:hover
-      text-decoration: underline
-
-
+    .newsOptionLink
+      cursor: pointer
+      padding: 0 .5rem
+      &:hover
+        text-decoration: underline
+        padding: 1.25rem
+        transition: 0.5s
+    
 
 // News/Details/{id}
 .newsDetail

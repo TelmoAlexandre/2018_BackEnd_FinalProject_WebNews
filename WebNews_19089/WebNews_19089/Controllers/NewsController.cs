@@ -20,12 +20,12 @@ namespace WebNews_19089.Controllers {
             // Caso o caregoryID tenha conteudo
             // Significa foi pedido um index com filtragem de categorias
             // Retorna as noticias dessa categoria
-            if(categoryID != null) {
+            if (categoryID != null) {
 
                 var NewsCategories = db.News.Where(n => n.Category.ID == categoryID);
                 return View(NewsCategories.ToList());
 
-            } 
+            }
 
 
             // Caso o categoryID esteja vazio
@@ -65,40 +65,46 @@ namespace WebNews_19089.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Description,Content,CategoryFK")] News News, HttpPostedFileBase[] fileUploadPhoto) {
 
-            // Registar a data da noticia
-            News.NewsDate = DateTime.Now;
-
-            // Adicionar o HTML para o paragrafo na string
-            News.Content = News.Content.Replace("\r\n", "<br/>");
-
             if (ModelState.IsValid) {
+
+                // Registar a data da noticia
+                News.NewsDate = DateTime.Now;
+
+                // Adicionar o HTML para o paragrafo na string
+                News.Content = News.Content.Replace("\r\n", "<br/>");
 
                 // Tratamento de cada imagem carregada
                 int i = 0;
 
+                // Caso existam fotografias, gerir as suas criações
                 foreach (var item in fileUploadPhoto) {
 
-                    // Cria um nome para a imagem recebida e guarda a mesma
-                    string photoName = News.Title.Substring(0, 10).Replace(" ", "") + i + ".jpg";
-                    string photoPath = Path.Combine(Server.MapPath("~/Images/"), photoName);
+                    // Garantir que existe uma fotografia em cada iteração do array de fotos carregadas
+                    if(item != null) {
 
-                    // Cria um objeto photo e adiciona-lhe o nome
-                    Photos photo = new Photos {
-                        Name = photoName
-                    };
+                        // Cria um nome para a imagem recebida e guarda a mesma
+                        string photoName = DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
+                        string photoPath = Path.Combine(Server.MapPath("~/Images/"), photoName);
 
-                    News.PhotosList.Add(photo);
-                    item.SaveAs(photoPath);
+                        // Cria um objeto photo e adiciona-lhe o nome
+                        Photos photo = new Photos {
+                            Name = photoName
+                        };
 
+                        News.PhotosList.Add(photo);
+                        item.SaveAs(photoPath);
+                    }
+                    
                     i++;
                 }
+
 
                 db.News.Add(News);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name", News.CategoryFK);
+            ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name", News.CategoryFK);
             return View(News);
         }
 
@@ -170,7 +176,7 @@ namespace WebNews_19089.Controllers {
             return PartialView("_categoriesDropdownPartial", categories);
         }
 
-    protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing) {
             if (disposing) {
                 db.Dispose();
             }

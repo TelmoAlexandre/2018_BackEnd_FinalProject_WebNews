@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WebNews_19089.Models.News>
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Web Paper";
 }
 
 @foreach (var news in Model) {
@@ -18,13 +18,20 @@
             Caso o utilizador logado seja administrator ou editor de redação ele pode alterar a noticia
         *@
 
-        @if( User.IsInRole("Admin") || User.IsInRole("NewsEditor") ) {
-            
-            <div>
-                @Html.ActionLink("Edit", "Edit", new { id = news.ID }, new { @class = "newsEdit aUnderline" })
+        @if (User.IsInRole("Admin") || User.IsInRole("NewsEditor")) {
+
+            <div class="newsOptions">
+
+                <span>|</span>
+                @Html.ActionLink("Edit", "Edit", new { id = news.ID }, new { @class = "newsOptionLink" })
+                <span>||</span>
+                @Html.ActionLink("Delete", "Delete", new { id = news.ID }, new { @class = "newsOptionLink" })
+                <span>|</span>
+
             </div>
 
         }
+
     </div>
 
 }

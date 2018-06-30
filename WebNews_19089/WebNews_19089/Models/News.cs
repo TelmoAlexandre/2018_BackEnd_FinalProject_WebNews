@@ -17,11 +17,13 @@ namespace WebNews_19089.Models {
         [Key]
         public int ID { get; set; }
 
+        [Required(ErrorMessage = "A title is required.")]
         public string Title { get; set; }
 
+        [Required(ErrorMessage = "A description is required.")]
         public string Description { get; set; }
 
-        /*[DataType(DataType.MultilineText)]*/
+        [Required(ErrorMessage = "Content is required.")]
         public string Content { get; set; }
 
         
