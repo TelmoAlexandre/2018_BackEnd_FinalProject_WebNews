@@ -29,7 +29,20 @@
                     @Html.ActionLink("Create News", "Create", "News", new { @class = "cursive" })
                 }
 
+                @if (User.IsInRole("Admin")) {
 
+                    <div class="dropdown">
+                        <div class="nav-item nav-item-dropdown">
+                            <span class="dropdown-trigger">Administrator</span>
+                            <ul class="dropdown-menu">
+
+                                    <a href="@Url.Action("UserList", "Manage")"><li class="dropdown-menu-item">Permissions</li></a>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                }
 
                 @Html.Partial("_LoginPartial")
 
