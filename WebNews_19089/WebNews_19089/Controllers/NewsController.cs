@@ -150,13 +150,12 @@ namespace WebNews_19089.Controllers {
         // GET: News/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             News News = db.News.Find(id);
             if (News == null) {
                 return HttpNotFound();
             }
-            News.Content = News.Content.Replace("<br/>", "\r\n");
             return View(News);
         }
 

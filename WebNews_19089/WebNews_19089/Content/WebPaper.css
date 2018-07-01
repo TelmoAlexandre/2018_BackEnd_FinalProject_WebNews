@@ -303,6 +303,18 @@ a:hover {
   width: 35%;
 }
 
+.newsDelete {
+  text-align: left;
+}
+
+.newsDelete .newsDeleteConfirm h3 {
+  padding: 1.5rem;
+}
+
+.newsDelete .newsDeleteOptions {
+  text-align: center;
+}
+
 .adminUserList {
   font-family: "Fondamento", cursive;
 }
