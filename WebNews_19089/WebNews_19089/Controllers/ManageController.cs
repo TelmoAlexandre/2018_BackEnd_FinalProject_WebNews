@@ -53,17 +53,17 @@ namespace WebNews_19089.Controllers {
             return View(db.UsersProfile.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: /Manage/UserProfile/{id}
-        public ActionResult UserPermissions(int? id) {
+        public ActionResult UserPermissions(int? userProfileID) {
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
 
             // Se houver valor de id
-            if (id != null) {
+            if (userProfileID != null) {
 
                 // Recolhe o userProfile pelo id
-                var userProfile = db.UsersProfile.Find(id);
+                var userProfile = db.UsersProfile.Find(userProfileID);
 
                 // Recolhe o user ASPNET pelo email
                 var user = UserManager.FindByEmail(userProfile.UserName);
@@ -87,12 +87,37 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/UserProfile/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserPermissions() {
+        public ActionResult UserPermissions([Bind(Include = "Email,Id")] EditUserViewModel editUser, params string[] selectedRole) {
 
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
+            if (ModelState.IsValid) {
 
+                var user = UserManager.FindById(editUser.Id);
+                var userRoles = UserManager.GetRoles(user.Id);
 
-            return null;
+                if (user == null) {
+                    return RedirectToAction("UserList");
+                }
+                
+                selectedRole = selectedRole ?? new string[] { };
+
+                var result = UserManager.AddToRoles(user.Id, selectedRole.Except(userRoles).ToArray<string>());
+
+                if (!result.Succeeded) {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return RedirectToAction("UserList");
+                }
+                result = UserManager.RemoveFromRoles(user.Id, userRoles.Except(selectedRole).ToArray<string>());
+
+                if (!result.Succeeded) {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return RedirectToAction("UserList");
+                }
+                return RedirectToAction("UserList");
+            }
+            ModelState.AddModelError("", "Something failed.");
+            return View();
         }
 
         //

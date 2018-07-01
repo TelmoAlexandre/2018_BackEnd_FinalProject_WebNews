@@ -25,11 +25,11 @@ namespace WebNews_19089
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
 
             // Criar a Role 'Jornalista'
-            if (!roleManager.RoleExists("Jornalist")) {
+            if (!roleManager.RoleExists("Journalist")) {
 
                 var role = new IdentityRole {
 
-                    Name = "Jornalist"
+                    Name = "Journalist"
 
                 };
 
@@ -83,7 +83,46 @@ namespace WebNews_19089
             // Adicionar o seu role
             if(userManager.Create(editor, "Qwe123!").Succeeded) {
 
-                userManager.AddToRole(editor.Id, "newsEditor");
+                userManager.AddToRole(editor.Id, "NewsEditor");
+            }
+
+            // Criar um jornalista
+            var journalist1 = new ApplicationUser {
+
+                UserName = "journalist1@mail.com",
+                Email = "journalist1@mail.com"
+            };
+
+            // Adicionar o seu role
+            if (userManager.Create(journalist1, "Qwe123!").Succeeded) {
+
+                userManager.AddToRole(journalist1.Id, "Journalist");
+            }
+
+            // Criar um jornalista
+            var journalist2 = new ApplicationUser {
+
+                UserName = "journalist2@mail.com",
+                Email = "journalist2@mail.com"
+            };
+
+            // Adicionar o seu role
+            if (userManager.Create(journalist2, "Qwe123!").Succeeded) {
+
+                userManager.AddToRole(journalist2.Id, "Journalist");
+            }
+
+            // Criar um jornalista
+            var journalist3 = new ApplicationUser {
+
+                UserName = "journalist3@mail.com",
+                Email = "journalist3@mail.com"
+            };
+
+            // Adicionar o seu role
+            if (userManager.Create(journalist3, "Qwe123!").Succeeded) {
+
+                userManager.AddToRole(journalist3.Id, "Journalist");
             }
 
         }

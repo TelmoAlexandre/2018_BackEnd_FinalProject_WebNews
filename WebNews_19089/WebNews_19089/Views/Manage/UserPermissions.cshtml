@@ -12,6 +12,7 @@
             <h2>Edit User Permissions.</h2>
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Email)
 
             <div class="form-group">
                 <span class="bold">Email: </span> @Model.Email

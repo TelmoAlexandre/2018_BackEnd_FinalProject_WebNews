@@ -29,10 +29,6 @@ namespace WebNews_19089.Migrations {
                 new Categories {
                     ID=3,
                     Name="Tech"
-                },
-                new Categories {
-                    ID=4,
-                    Name="Video Games"
                 }
             };
             category.ForEach(cc => context.Categories.AddOrUpdate(c => c.ID, cc));
@@ -45,38 +41,32 @@ namespace WebNews_19089.Migrations {
             var user = new List<UsersProfile> {
                 new UsersProfile {
                     ID=1,
-                    Name="Test1",
+                    Name="Journalist1",
                     Birthday=new DateTime(1950,01,01),
-                    UserName="Test1@mail.com"
+                    UserName="journalist1@mail.com"
                 },
                 new UsersProfile {
                     ID=2,
-                    Name="Test2",
+                    Name="Journalist2",
                     Birthday=new DateTime(1975,11,23),
-                    UserName="Test2@mail.com"
+                    UserName="journalist2@mail.com"
                 },
                 new UsersProfile {
                     ID=3,
-                    Name="Test3",
+                    Name="Journalist3",
                     Birthday=new DateTime(1980,03,05),
-                    UserName="Test3@mail.com"
-                },
-                new UsersProfile {
-                    ID=4,
-                    Name="Test4",
-                    Birthday=new DateTime(1943,02,13),
-                    UserName="Test4@mail.com"
+                    UserName="journalist3@mail.com"
                 },
                 new UsersProfile {
                     ID=4,
                     Name="Admin",
-                    Birthday=new DateTime(1980,03,05),
+                    Birthday=new DateTime(1985,07,12),
                     UserName="admin@mail.com"
                 },
                 new UsersProfile {
-                    ID=4,
+                    ID=5,
                     Name="Editor",
-                    Birthday=new DateTime(1980,03,05),
+                    Birthday=new DateTime(1952,05,20),
                     UserName="editor@mail.com"
                 }
             };
@@ -140,7 +130,7 @@ namespace WebNews_19089.Migrations {
                     Content="The negotiations will resume in Bangkok in September where an extra week's meeting has now been scheduled. Delegates struggled with the complexity of agreeing a rulebook for the Paris climate pact that will come into force in 2020. Rows between rich and poor re - emerged over finance and cutting carbon. Overall progress at this meeting has been very slow, with some countries such as China looking to re - negotiate aspects of the Paris deal. UN climate chief Patricia Espinosa was putting a brave face on the talks. \"We face, I would say, a satisfactory outcome for this session but we have to be very, very clear that we have a lot of work in the months ahead,\" she said. \"We have to improve the pace of progress in order to be able to achieve a good outcome in Katowice in December,\" she said, referring to the end of year Conference of the Parties where the rulebook is due to completed and agreed. China and some other countries, perhaps frustrated by the slow pace, have sought in this Bonn meeting to go back to the position that existed before the 2015 deal, where only developed countries had to undertake to reduce their emissions.",
                     NewsDate= new DateTime(2018,05,10),
                     CategoryFK=2,
-                    UsersProfileList = new List<UsersProfile> { user[3]}
+                    UsersProfileList = new List<UsersProfile> { user[2]}
                 },
                 new News {
                     ID=7,
@@ -149,16 +139,7 @@ namespace WebNews_19089.Migrations {
                     Content="The possibility of \"financial and reputational\" damage if staff lost or misused the devices prompted the decision, reported The Register. Instead, IBM staff who need to move data around will be encouraged to do so via an internal network. The decree banning removable storage acknowledges that complying with it could be \"disruptive\". IBM staff were told about the policy in an advisory from Shamla Naidoo, the company's global chief security officer. Some IBM departments had been banned from using removable portable media for some time, said Ms Naidoo, but now the decree was being implemented worldwide.IBM staff are expected to stop using removable devices by the end of May. When asked about the policy, an IBM spokeswoman said: \"We regularly review and enhance our security standards and practices to protect both IBM and our clients in an increasingly complex threat environment.\" Security expert Kevin Beaumont said: \"It is a brave move by IBM, as USB devices do present a real risk - often it is very easy to extract data from a company via these devices, and introduce malicious software.\" However, he said, IBM may face problems implementing its plan.", 
                     NewsDate= new DateTime(2018,05,10),
                     CategoryFK=3,
-                    UsersProfileList = new List<UsersProfile> { user[3]}
-                },
-                new News {
-                    ID=8,
-                    Title="God of War Update Version 1.21 Is Live; Here’s What It Does",
-                    Description="Sony Santa Monica Studio has released the photo mode update for God of War PS4. They originally announced that God of War will get patch verison 1.20 but the actual update that is live today is for 1.21 version of the game.",
-                    Content ="Among the new additions are the Photo Mode feature and tweaks to the game’s text size. Fans were complaining of the small text size since the launch of the game so the new update now makes it easier for those who have a small screen to more easily see the text now. The download size for this update is around 450 MB and it is currently available to download now on the PS4. Some of the changes that are being mentioned by the users include access to the final weapon upgrades before finishing the game. Previously, you weren’t able to purchase the last upgrades for you weapons until you finished the game while it is possible to do so now. God of War is available now exclusively for the PS4. The game was developed by Sony Santa Monica Studio and published by Sony Interactive Entertainment.",
-                    NewsDate = new DateTime(2018,05,10),
-                    CategoryFK=4,
-                    UsersProfileList = new List<UsersProfile> { user[3]}
+                    UsersProfileList = new List<UsersProfile> { user[2]}
                 }
             };
             news.ForEach(aa => context.News.AddOrUpdate(a => a.Title, aa));
@@ -190,14 +171,14 @@ namespace WebNews_19089.Migrations {
                     UserProfileFK=3
                 },
                 new Comments {
-                    ID=4,
+                    ID=2,
                     Content="Nulla nec lectus sagittis, congue dui a, bibendum nunc. Nullam porta, lacus vel imperdiet rhoncus, felis orci aliquet urna, id condimentum leo nibh quis nisi.",
                     CommentDate=new DateTime(2018,05,07),
                     NewsFK=4,
                     UserProfileFK=2
                 },
                 new Comments {
-                    ID=5,
+                    ID=1,
                     Content="Nunc a arcu sapien. Sed convallis dignissim ligula eu dignissim. Sed et odio vel odio semper efficitur. Nulla finibus, erat non ornare tincidunt, augue nulla feugiat ante, eget ultrices diam nibh sit amet arcu. Morbi fringilla porttitor tincidunt.",
                     CommentDate=new DateTime(2018,05,08),
                     NewsFK=4,
@@ -245,11 +226,6 @@ namespace WebNews_19089.Migrations {
                     ID=7,
                     Name="News7.jpg",
                     NewsFK=7
-                },
-                new Photos {
-                    ID=8,
-                    Name="News8.jpg",
-                    NewsFK=8
                 }
             };
             photos.ForEach(pp => context.Photos.AddOrUpdate(p => p.ID, pp));

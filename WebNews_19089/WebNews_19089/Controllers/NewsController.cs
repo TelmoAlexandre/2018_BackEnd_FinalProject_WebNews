@@ -51,7 +51,7 @@ namespace WebNews_19089.Controllers {
             return View(News);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Journalist")]
         // GET: News/Create
         public ActionResult Create() {
             ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name");
@@ -63,9 +63,15 @@ namespace WebNews_19089.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Description,Content,CategoryFK")] News News, HttpPostedFileBase[] fileUploadPhoto) {
+        public ActionResult Create([Bind(Include = "ID,Title,Description,Content,CategoryFK")] News News, HttpPostedFileBase[] fileUploadPhoto, string email) {
 
             if (ModelState.IsValid) {
+
+                // Recolher o userProfile procurando o email do ASPNET
+                var userProfile = db.UsersProfile.Where(u => u.UserName == email).First();
+
+                // Acrescentar o jornalista à lista de autores da noticia
+                News.UsersProfileList = db.UsersProfile.Where(u => u.ID==userProfile.ID).ToList();
 
                 // Registar a data da noticia
                 News.NewsDate = DateTime.Now;

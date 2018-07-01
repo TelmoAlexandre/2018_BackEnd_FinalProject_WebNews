@@ -17,8 +17,8 @@
         @foreach (var user in Model) {
 
         
-        <div class="userBlock col-3">
-            <a href="@Url.Action("UserPermissions","Manage",new { id = user.ID })">
+        <div class="userBlock col-4">
+            <a href="@Url.Action("UserPermissions","Manage",new { userProfileID = user.ID })">
                 <div class="name">
                     <h1>@user.Name</h1>
                 </div>
