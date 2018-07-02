@@ -19,7 +19,8 @@
         </div>
 
         <div class="newsDetailHeaderImagesContainer">
-            @foreach (var photo in Model.PhotosList) {
+            @foreach (var photo in Model.PhotosList)
+            {
                 <img src="~/Images/@photo.Name" />
             }
         </div>
@@ -42,34 +43,51 @@
 
 <div class="col-12 newsCommentsContainer">
 
-    <h2>
-        Comments
-    </h2>
+    @if (Request.IsAuthenticated)
+    {
 
-    @foreach (var comment in Model.CommentsList) {
-
-        <div class="comment">
-
-            <div class="commentHeaderContainer">
-
-                <p class="commentHeaderUser">
-                    by @comment.UserProfile.Name
-                </p>
-
-                <p class="commentHeaderDate">
-                    @comment.CommentDate.Date
-                </p>
-
-            </div>
-
-            <div class="commentBodyContainer">
-                @comment.Content
-            </div>
-
-        </div>
-
+        @Html.Partial("../Comments/_CommentPartialView", new WebNews_19089.Models.Comments { NewsFK = Model.ID })
     }
+    <div class="commentsList">
+        @if (Model.CommentsList.Count != 0)
+        {
+
+            <h2>
+                Comments
+            </h2>
+
+            foreach (var comment in Model.CommentsList)
+            {
+
+                <div class="comment">
+
+                    <div class="commentHeaderContainer">
+
+                        <p class="commentHeaderUser">
+                            by @comment.UserProfile.Name
+                        </p>
+
+                        <p class="commentHeaderDate">
+                            @comment.CommentDate.Date
+                        </p>
+
+                    </div>
+
+                    <div class="commentBodyContainer">
+                        @comment.Content
+                    </div>
+
+                </div>
+
+            }
 
 
-
+        }
+        else
+        {
+            <h2>
+                No comments
+            </h2>
+        }
+    </div>
 </div>

@@ -187,30 +187,59 @@ a:hover {
   text-align: left;
 }
 
-.newsCommentsContainer h2 {
+.newsCommentsContainer .commentNew {
+  padding: 2rem 0;
+}
+
+.newsCommentsContainer .commentNew .commentContent {
+  width: 60%;
+  height: 8rem;
+  background-color: #ededed;
+}
+
+.newsCommentsContainer .commentNew .commentSubmit input {
+  padding-left: 0;
+  font-weight: bold;
+}
+
+.newsCommentsContainer .commentNew .commentSubmit input:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.newsCommentsContainer .commentsList {
+  border-top: .6rem double;
+}
+
+.newsCommentsContainer .commentsList h2 {
   margin: 1.5rem 0 2rem;
   font-family: "Fondamento", cursive;
   font-weight: bold;
 }
 
-.newsCommentsContainer .comment {
+.newsCommentsContainer .commentsList div::first-of-type {
+  border-top: none;
+}
+
+.newsCommentsContainer .commentsList .comment {
   padding: 2rem .5rem 2rem;
   border-top: .06rem solid;
 }
 
-.newsCommentsContainer .comment p {
+.newsCommentsContainer .commentsList .comment p {
   margin: 0;
 }
 
-.newsCommentsContainer .comment .commentHeaderContainer .commentHeaderUser {
+.newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderUser {
   font-weight: bold;
 }
 
-.newsCommentsContainer .comment .commentHeaderContainer .commentHeaderDate {
+.newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderDate {
   font-size: .8em;
 }
 
-.newsCommentsContainer .comment .commentBodyContainer {
+.newsCommentsContainer .commentsList .comment .commentBodyContainer {
   margin-top: 1rem;
 }
 
@@ -226,6 +255,13 @@ a:hover {
 
 .registerContainer input {
   padding-left: 0;
+  font-weight: bold;
+}
+
+.registerContainer input:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 .registerContainer .bioEditor {

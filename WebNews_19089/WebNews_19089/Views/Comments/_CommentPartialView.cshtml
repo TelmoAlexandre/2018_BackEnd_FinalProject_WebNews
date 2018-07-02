@@ -1,0 +1,27 @@
+﻿@model WebNews_19089.Models.Comments
+
+<div class="commentNew">
+
+    <h2>
+        Add a comment
+    </h2>
+
+    @using (Html.BeginForm("Create", "Comments"))
+    {
+
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.NewsFK)
+        <input id="UserIdentityName" name="email" type="hidden" value="@User.Identity.Name">
+
+        <div class="commentText">
+            @Html.TextAreaFor(model => model.Content, new { @class = "commentContent", maxlength = "500" })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="commentSubmit">
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+
+    }
+</div>

@@ -141,24 +141,40 @@ a
   border-top: .6rem double
   margin-top: 4rem
   text-align: left
-  h2
-    margin: 1.5rem 0 2rem
-    font-family: "Fondamento", cursive
-    font-weight: bold
-  .comment
-    padding: 2rem .5rem 2rem
-    border-top: .06rem solid
-    p
-      margin: 0
-
-    .commentHeaderContainer
-      .commentHeaderUser
+  .commentNew
+    padding: 2rem 0
+    .commentContent
+        width: 60%
+        height: 8rem
+        background-color: rgb(237, 237, 237)
+    .commentSubmit
+      input
+        padding-left: 0
         font-weight: bold
-      .commentHeaderDate
-        font-size: .8em
-    
-    .commentBodyContainer
-      margin-top: 1rem
+        &:hover
+          padding-left: .5rem
+          transition: .5s
+  .commentsList
+    border-top: .6rem double
+    h2
+      margin: 1.5rem 0 2rem
+      font-family: "Fondamento", cursive
+      font-weight: bold
+    div::first-of-type
+      border-top: none
+    .comment
+      padding: 2rem .5rem 2rem
+      border-top: .06rem solid
+      p
+        margin: 0
+      .commentHeaderContainer
+        .commentHeaderUser
+          font-weight: bold
+        .commentHeaderDate
+          font-size: .8em
+      
+      .commentBodyContainer
+        margin-top: 1rem
 
 .registerContainer
   text-align: left
@@ -168,6 +184,10 @@ a
     padding-left: 0
   input
     padding-left: 0
+    font-weight: bold
+    &:hover
+      padding-left: .5rem
+      transition: .5s
   .bioEditor
     height: 10rem 
   .birthdayEditor
