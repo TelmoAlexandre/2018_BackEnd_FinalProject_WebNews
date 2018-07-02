@@ -68,7 +68,6 @@ a
     border-left: .06rem solid black
     border-right: .06rem solid black
 
-
 .bodyContainer
   margin-top: .6rem
   border-top: .19rem solid black
@@ -105,7 +104,6 @@ a
         padding: 1.25rem
         transition: 0.5s
     
-
 // News/Details/{id}
 .newsDetail
   margin-top: 1rem
@@ -145,7 +143,7 @@ a
     padding: 2rem 0
     .commentContent
         width: 60%
-        height: 8rem
+        height: 5rem
         background-color: rgb(237, 237, 237)
     .commentSubmit
       input
@@ -155,7 +153,6 @@ a
           padding-left: .5rem
           transition: .5s
   .commentsList
-    border-top: .6rem double
     h2
       margin: 1.5rem 0 2rem
       font-family: "Fondamento", cursive
@@ -182,7 +179,7 @@ a
   font-family: "Fondamento", cursive
   div
     padding-left: 0
-  input
+  .registerButton
     padding-left: 0
     font-weight: bold
     &:hover
@@ -193,15 +190,27 @@ a
   .birthdayEditor
     width: 50%
     
-.login
+.loginContent
   text-align: left
   margin-top: 2rem
   font-family: "Fondamento", cursive
   div
     padding-left: 0
-  input
+  .checkbox
+    input
+      cursor: pointer
+  .logInButton
     padding-left: 0
-
+    font-weight: bold
+    &:hover
+      padding-left: .5rem
+      transition: .5s
+  a
+    padding-left: 0
+    font-weight: bold
+    &:hover
+      padding-left: .5rem
+      transition: .5s
 
 // News/Edit/{id}
 .editNews
@@ -220,6 +229,9 @@ a
     height: 15rem
     width: 100%
 
+.createNewsLink
+  margin-left: 2.5rem
+
 .createNews
   text-align: left
   margin-top: 2rem
@@ -236,6 +248,11 @@ a
     height: 15rem
   .createDate
     width: 35%
+  .createButton
+    font-weight: bold
+    &:hover
+      padding-left: .5rem
+      transition: .5s
 
 .newsDelete
   text-align: left
@@ -283,6 +300,9 @@ img
 
 // Dropdown menu no _layout -----------------------------------------------------------------------------
 
+.dropdown
+  width: 100px
+
 .nav-container
   background-color: #fff
   border-radius: 4px
@@ -293,8 +313,6 @@ img
   max-width: 400px
   margin: 0 auto
   text-align: center
-
-
 
 //Navigation menu
 .nav-item 

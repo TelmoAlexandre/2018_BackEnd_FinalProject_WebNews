@@ -48,6 +48,10 @@ namespace WebNews_19089.Controllers {
             if (News == null) {
                 return HttpNotFound();
             }
+
+            // Orderna os cometários por ordem (Mais recente primeiro)
+            News.CommentsList = News.CommentsList.OrderByDescending(c => c.CommentDate).ToList();
+
             return View(News);
         }
 
@@ -115,6 +119,7 @@ namespace WebNews_19089.Controllers {
         }
 
         // GET: News/Edit/5
+        [Authorize(Roles = "Admin,NewsEditor")]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -148,6 +153,7 @@ namespace WebNews_19089.Controllers {
         }
 
         // GET: News/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return RedirectToAction("Index");

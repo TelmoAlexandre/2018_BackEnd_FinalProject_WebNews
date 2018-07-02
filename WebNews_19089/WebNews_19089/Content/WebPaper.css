@@ -193,7 +193,7 @@ a:hover {
 
 .newsCommentsContainer .commentNew .commentContent {
   width: 60%;
-  height: 8rem;
+  height: 5rem;
   background-color: #ededed;
 }
 
@@ -206,10 +206,6 @@ a:hover {
   padding-left: .5rem;
   -webkit-transition: .5s;
   transition: .5s;
-}
-
-.newsCommentsContainer .commentsList {
-  border-top: .6rem double;
 }
 
 .newsCommentsContainer .commentsList h2 {
@@ -253,12 +249,12 @@ a:hover {
   padding-left: 0;
 }
 
-.registerContainer input {
+.registerContainer .registerButton {
   padding-left: 0;
   font-weight: bold;
 }
 
-.registerContainer input:hover {
+.registerContainer .registerButton:hover {
   padding-left: .5rem;
   -webkit-transition: .5s;
   transition: .5s;
@@ -272,18 +268,40 @@ a:hover {
   width: 50%;
 }
 
-.login {
+.loginContent {
   text-align: left;
   margin-top: 2rem;
   font-family: "Fondamento", cursive;
 }
 
-.login div {
+.loginContent div {
   padding-left: 0;
 }
 
-.login input {
+.loginContent .checkbox input {
+  cursor: pointer;
+}
+
+.loginContent .logInButton {
   padding-left: 0;
+  font-weight: bold;
+}
+
+.loginContent .logInButton:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.loginContent a {
+  padding-left: 0;
+  font-weight: bold;
+}
+
+.loginContent a:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 .editNews {
@@ -309,6 +327,10 @@ a:hover {
 .editNews .contentEditor {
   height: 15rem;
   width: 100%;
+}
+
+.createNewsLink {
+  margin-left: 2.5rem;
 }
 
 .createNews {
@@ -337,6 +359,16 @@ a:hover {
 
 .createNews .createDate {
   width: 35%;
+}
+
+.createNews .createButton {
+  font-weight: bold;
+}
+
+.createNews .createButton:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 .newsDelete {
@@ -391,6 +423,10 @@ img {
   padding: .3rem 0rem;
   border-top: 0.19rem double black;
   border-bottom: 0.19rem double black;
+}
+
+.dropdown {
+  width: 100px;
 }
 
 .nav-container {

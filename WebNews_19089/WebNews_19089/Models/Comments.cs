@@ -11,6 +11,7 @@ namespace WebNews_19089.Models {
         [Key]
         public int ID { get; set; }
 
+        [Required(ErrorMessage = "Comment is required.")]
         public string Content { get; set; }
 
         public DateTime CommentDate { get; set; }

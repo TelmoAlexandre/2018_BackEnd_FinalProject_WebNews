@@ -19,18 +19,22 @@ namespace WebNews_19089.Controllers
 
         // GET: Comments
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Content, NewsFK")] Comments comment, string email)
         {
 
             if (ModelState.IsValid)
             {
 
+                // Procura o utilizador no UserProfile pelo email
                 var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).First();
 
-                comment.CommentDate = DateTime.Now;
-
+                // Adiciona o ID do utilizador que comenta
                 comment.UserProfileFK = user.ID;
+
+                // TimeStamp da data
+                comment.CommentDate = DateTime.Now;
 
                 db.Comments.Add(comment);
                 db.SaveChanges();

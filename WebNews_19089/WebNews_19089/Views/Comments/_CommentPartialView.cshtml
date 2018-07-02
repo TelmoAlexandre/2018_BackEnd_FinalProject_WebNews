@@ -15,12 +15,12 @@
         <input id="UserIdentityName" name="email" type="hidden" value="@User.Identity.Name">
 
         <div class="commentText">
-            @Html.TextAreaFor(model => model.Content, new { @class = "commentContent", maxlength = "500" })
+            @Html.TextAreaFor(model => model.Content, new { @class = "commentContent", maxlength = "500", placeholder = "Write your comment... \n\n[Max length is 500 characters]" })
             @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
         </div>
 
         <div class="commentSubmit">
-            <input type="submit" value="Submit" class="btn btn-default" />
+            <input id="submitButton" type="submit" value="Submit" class="btn btn-default" />
         </div>
 
     }
