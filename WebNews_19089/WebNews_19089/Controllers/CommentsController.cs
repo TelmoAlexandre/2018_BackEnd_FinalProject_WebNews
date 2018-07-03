@@ -13,10 +13,6 @@ namespace WebNews_19089.Controllers
 
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public CommentsController()
-        {
-        }
-
         // GET: Comments
         [HttpPost]
         [ValidateAntiForgeryToken]

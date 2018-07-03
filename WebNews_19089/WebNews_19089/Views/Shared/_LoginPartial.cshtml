@@ -11,7 +11,7 @@
             <div class="login">
 
                 <div class="loginLinks">
-                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", new { email=User.Identity.Name }, htmlAttributes: new { title = "Manage" })
                 </div>
 
                 <div class="loginLinks">

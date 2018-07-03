@@ -260,10 +260,6 @@ a:hover {
   transition: .5s;
 }
 
-.registerContainer .bioEditor {
-  height: 10rem;
-}
-
 .registerContainer .birthdayEditor {
   width: 50%;
 }
@@ -327,6 +323,65 @@ a:hover {
 .editNews .contentEditor {
   height: 15rem;
   width: 100%;
+}
+
+.editUser {
+  text-align: left;
+  margin-top: 2rem;
+  font-family: "Fondamento", cursive;
+}
+
+.editUser label {
+  padding: 0;
+}
+
+.editUser div {
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.editUser input {
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.editUser .nameEditor {
+  width: 70%;
+}
+
+.editUser .birthdayEditor {
+  width: 30%;
+}
+
+.editUser .saveButton {
+  padding-left: 0;
+  font-weight: bold;
+}
+
+.editUser .saveButton:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.manageAccount {
+  text-align: left;
+}
+
+.manageAccount p {
+  font-size: 1.1em;
+}
+
+.manageAccount .manageAccountWelcome {
+  padding: 1rem;
+}
+
+.manageAccount .changePasswordLink a {
+  font-size: 1.2em;
+}
+
+.manageAccount .changePasswordLink a:hover {
+  text-decoration: underline;
 }
 
 .createNewsLink {
@@ -407,6 +462,31 @@ a:hover {
 
 .adminUserPermissions h2 {
   padding: 1rem 0 1rem;
+}
+
+.changePassword {
+  text-align: left;
+  margin-top: 2rem;
+  font-family: "Fondamento", cursive;
+}
+
+.changePassword div {
+  padding-left: 0;
+}
+
+.changePassword .form-control {
+  width: 70%;
+}
+
+.changePassword .changePasswordButton {
+  padding-left: 0;
+  font-weight: bold;
+}
+
+.changePassword .changePasswordButton:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 img {

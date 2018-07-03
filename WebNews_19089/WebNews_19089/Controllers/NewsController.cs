@@ -187,7 +187,7 @@ namespace WebNews_19089.Controllers {
             // Correr a lista e eliminar as fotos
             foreach (var photo in listPhotos) {
 
-                //System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images/"), photo.Name));
+                System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images/"), photo.Name));
                 db.Photos.Remove(photo);
 
             }
