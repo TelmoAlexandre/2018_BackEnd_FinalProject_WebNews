@@ -32,6 +32,9 @@ namespace WebNews_19089.Controllers
                 // Adiciona o ID do utilizador que comenta
                 comment.UserProfileFK = user.ID;
 
+                // Adicionar o HTML para o paragrafo na string
+                comment.Content = comment.Content.Replace("\r\n", "<br/>");
+
                 // TimeStamp da data
                 comment.CommentDate = DateTime.Now;
 
