@@ -13,7 +13,10 @@ namespace WebNews_19089.Controllers
 
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Comments
+        
+        
+
+        // POST: Comments
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -34,9 +37,23 @@ namespace WebNews_19089.Controllers
 
                 db.Comments.Add(comment);
                 db.SaveChanges();
+                return RedirectToAction("Details", "News", new { id = comment.NewsFK });
             }
 
-            return RedirectToAction("Details", "News", new { id = comment.NewsFK });
+            // Encontra novamente a noticia e retorna a mesma
+            // Para mostrar a mensagem de validação do comentário.
+            var news = db.News.Where(n => n.ID == comment.NewsFK).First();
+
+            return View("../News/Details", news);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

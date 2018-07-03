@@ -16,7 +16,9 @@
 
         <div class="commentText">
             @Html.TextAreaFor(model => model.Content, new { @class = "commentContent", maxlength = "500", placeholder = "Write your comment... \n\n[Max length is 500 characters]" })
-            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            <p>
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </p>
         </div>
 
         <div class="commentSubmit">
