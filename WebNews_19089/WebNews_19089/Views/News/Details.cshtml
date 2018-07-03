@@ -48,6 +48,12 @@
 
         @Html.Partial("../Comments/_CommentPartialView", new WebNews_19089.Models.Comments { NewsFK = Model.ID })
     }
+    else
+    {
+        <p class="bold">><a href="@Url.Action("Login","Account",null)"> Log In/Register to comment.  </a></p>
+        <hr />
+    }
+
     <div class="commentsList">
         @if (Model.CommentsList.Count != 0)
         {

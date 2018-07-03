@@ -187,6 +187,18 @@ a:hover {
   text-align: left;
 }
 
+.newsCommentsContainer > p {
+  padding: 2rem 0 1rem;
+  font-size: 1.5em;
+}
+
+.newsCommentsContainer > p a:hover {
+  text-decoration: underline;
+  padding: 0 0 0 .3rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
 .newsCommentsContainer .commentNew {
   padding: 2rem 0;
 }
