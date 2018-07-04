@@ -83,6 +83,13 @@
                         @Html.Raw(comment.Content)
                     </div>
 
+                    <div class="commentDeleteOption">
+                        @if(User.IsInRole("Admin") || User.IsInRole("NewsEditor") || User.Identity.Name.Equals(comment.UserProfile.UserName))
+                        {
+                            @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.ID, email = User.Identity.Name }, new { @class = "bold" })
+                        }
+                    </div>
+
                 </div>
 
             }

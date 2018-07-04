@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,62 @@ namespace WebNews_19089.Controllers
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
+        
 
-        
-        
+        // Este GET do delete tem autenticação manual feita por mim
+        // Para garantir que o dono do comentário o pode apagar.
+
+        // GET: ~/Comments/Delete/{id, email}
+        public ActionResult Delete(int? id, string email)
+        {
+
+            if (id != null)
+            {
+
+                Comments comment = db.Comments.Find(id);
+
+                // Caso tenha encontrado o comentário
+                if (comment != null)
+                {
+
+                    // Garantir autenticação manualmente para garantir que o user tem o role necessário
+                    // ou é o dono do comentário
+                    if (email != null)
+                    {
+                        // Garantir que se trata do dono do comentario, ou de um utilizador com o papel necessario para apagar o mesmo
+                        if (email.Equals(comment.UserProfile.UserName) || User.IsInRole("Admin") || User.IsInRole("NewsEditor"))
+                        {
+                            return View(comment);
+                        }
+                    }
+                    else
+                    {
+                        // Se não for o dono do comment ou não tiver o papel necessário para apagar ou não tiver autenticado(email == null)
+                        // Redirecionar para o login
+                        return RedirectToAction("Login", "Account", null);
+                    }
+                }
+
+            }
+
+            return RedirectToAction("Index", "News", null);
+        }
+
+        // POST: ~/Comments/Delete/{id, email}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+
+            Comments comment = db.Comments.Find(id);
+
+            int NewsID = comment.NewsFK;
+
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+
+            return RedirectToAction("Details","News",new { id = NewsID });
+        }
 
         // POST: Comments
         [HttpPost]

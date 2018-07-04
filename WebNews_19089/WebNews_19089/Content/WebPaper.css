@@ -251,6 +251,75 @@ a:hover {
   margin-top: 1rem;
 }
 
+.newsCommentsContainer .commentsList .commentDeleteOption {
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.newsCommentsContainer .commentsList .commentDeleteOption a:hover {
+  padding-right: .2rem;
+  -webkit-transition: .3s;
+  transition: .3s;
+  text-decoration: underline;
+}
+
+.commentDelete {
+  text-align: left;
+}
+
+.commentDelete h2 {
+  margin: 1.5rem 0 2rem;
+  font-family: "Fondamento", cursive;
+  font-weight: bold;
+}
+
+.commentDelete .comment {
+  padding: 1rem 0;
+  border-top: .05rem solid;
+  border-bottom: .05rem solid;
+}
+
+.commentDelete .comment p {
+  margin: 0;
+}
+
+.commentDelete .comment .commentHeaderContainer .commentHeaderUser {
+  font-weight: bold;
+}
+
+.commentDelete .comment .commentHeaderContainer .commentHeaderDate {
+  font-size: .8em;
+}
+
+.commentDelete .comment .commentBodyContainer {
+  margin-top: 1rem;
+}
+
+.commentDelete .commentDeleteOption {
+  padding: 1rem 0 0;
+  font-size: 1.5em;
+}
+
+.commentDelete .commentDeleteOption span {
+  padding: .375rem 0 .375rem 0;
+}
+
+.commentDelete .commentDeleteOption a {
+  padding-left: .7rem;
+}
+
+.commentDelete .commentDeleteOption a:hover {
+  text-decoration: underline;
+}
+
+.commentDelete .commentDeleteOption input {
+  font-size: 1em;
+}
+
+.commentDelete .commentDeleteOption input:hover {
+  text-decoration: underline;
+}
+
 .registerContainer {
   text-align: left;
   margin-top: 2rem;
