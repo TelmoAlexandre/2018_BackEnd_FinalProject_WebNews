@@ -1,0 +1,38 @@
+﻿@model WebNews_19089.Models.CommentsModificationViewModel
+
+<div class="col-2"></div>
+<div class="commentEdit col-8 row">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-12 commentEditTitle">
+            <h4>Edit your comment.</h4>
+            <hr />
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.comment.ID)
+        @Html.HiddenFor(model => model.comment.NewsFK)
+        @Html.HiddenFor(model => model.comment.UserProfileFK)
+        @Html.HiddenFor(model => model.comment.CommentDate)
+        @Html.HiddenFor(model => model.Page)
+
+
+        <div class="commentText">
+            @Html.TextAreaFor(model => model.comment.Content, new { @class = "commentContent", maxlength = "500", placeholder = "Write your comment... \n\n[Max length is 500 characters]" })
+            <p>
+                @Html.ValidationMessageFor(model => model.comment.Content, "", new { @class = "text-danger" })
+            </p>
+        </div>
+
+        <div class="commentEditSaveButton">
+            <div class="">
+                <input type="submit" value="Save" class="btn" />
+            </div>
+        </div>
+
+    }
+
+</div>

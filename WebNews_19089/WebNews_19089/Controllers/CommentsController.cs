@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,11 +16,89 @@ namespace WebNews_19089.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
 
+        // GET: ~/Comments/Edit/{id, email}
+        public ActionResult Edit(int? id, string email, string Page)
+        {
+
+            if (id != null)
+            {
+
+                Comments comment = db.Comments.Find(id);
+
+                // Caso tenha encontrado o comentário
+                if (comment != null)
+                {
+
+                    // Garantir que o utilizador está autenticado
+                    if (email != null)
+                    {
+                        // Garantir que se trata do dono do comentario
+                        if (email.Equals(comment.UserProfile.UserName))
+                        {
+
+                            comment.Content = comment.Content.Replace("<br/>", "\r\n");
+
+                            // Guardar a pagina de origem deste GET para retornar corretamente no DeleteConfirm
+                            // Criei um view model que recebe um objeto Comments e uma string com a página de origem para este GET
+                            return View(new CommentsModificationViewModel
+                            {
+                                comment = comment,
+                                Page = Page
+                            });
+                        }
+                    }
+                    else
+                    {
+                        // Se não estiver logado
+                        // Redirecionar para o login
+                        return RedirectToAction("Login", "Account", null);
+                    }
+                }
+
+            }
+
+            return RedirectToAction("Index", "News", null);
+        }
+
+
+        // POST: ~/Comments/Edit/{id, email}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,NewsFK,UserProfileFK,CommentDate,Content")] Comments comment, string Page)
+        {
+                if (ModelState.IsValid)
+                {
+
+                    comment.Content = comment.Content.Replace("\r\n", "<br/>");
+
+                    db.Entry(comment).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    // Retornar para a página em que foi originado o pedido GET
+                    if (Page == "Manage")
+                    {
+                        return RedirectToAction("Index", "Manage", new { email = User.Identity.Name });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Details", "News", new { id = comment.NewsFK });
+                    }
+                }
+                else
+                {
+                    // Retornar com a validation message
+                    return View(new CommentsModificationViewModel {
+                        comment = comment,
+                        Page = Page
+                    });
+                }
+        }
+
         // Este GET do delete tem autenticação manual feita por mim
         // Para garantir que o dono do comentário o pode apagar.
 
         // GET: ~/Comments/Delete/{id, email}
-        public ActionResult Delete(int? id, string email, string page)
+        public ActionResult Delete(int? id, string email, string Page)
         {
 
             if (id != null)
@@ -41,15 +120,16 @@ namespace WebNews_19089.Controllers
 
                             // Guardar a pagina de origem deste GET para retornar corretamente no DeleteConfirm
                             // Criei um view model que recebe um objeto Comments e uma string com a página de origem para este GET
-                            return View(new CommentsDeleteViewModel {
+                            return View(new CommentsModificationViewModel
+                            {
                                 comment = comment,
-                                Page = page
+                                Page = Page
                             });
                         }
                     }
                     else
                     {
-                        // Se não for o dono do comment ou não tiver o papel necessário para apagar ou não tiver autenticado(email == null)
+                        // Se não tiver autenticado(email == null)
                         // Redirecionar para o login
                         return RedirectToAction("Login", "Account", null);
                     }
@@ -68,8 +148,6 @@ namespace WebNews_19089.Controllers
 
             Comments comment = db.Comments.Find(id);
 
-            int NewsID = comment.NewsFK;
-
             db.Comments.Remove(comment);
             db.SaveChanges();
 
@@ -81,7 +159,7 @@ namespace WebNews_19089.Controllers
             }
             else
             {
-                return RedirectToAction("Details", "News", new { id = NewsID });
+                return RedirectToAction("Details", "News", new { id = comment.NewsFK });
             }
         }
 

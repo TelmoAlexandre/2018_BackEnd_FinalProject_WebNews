@@ -84,8 +84,12 @@
                     </div>
 
                     <div class="commentDeleteOption">
-                        @if(User.IsInRole("Admin") || User.IsInRole("NewsEditor") || User.Identity.Name.Equals(comment.UserProfile.UserName))
+                        @if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || User.Identity.Name.Equals(comment.UserProfile.UserName))
                         {
+                            @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.ID, email = User.Identity.Name }, new { @class = "bold" })
+                            
+                            <span> || </span> 
+
                             @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.ID, email = User.Identity.Name }, new { @class = "bold" })
                         }
                     </div>

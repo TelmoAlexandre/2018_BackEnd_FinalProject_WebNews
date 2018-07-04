@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebNews_19089.Models
 {
-    public class CommentsDeleteViewModel
+    public class CommentsModificationViewModel
 
     {
         
