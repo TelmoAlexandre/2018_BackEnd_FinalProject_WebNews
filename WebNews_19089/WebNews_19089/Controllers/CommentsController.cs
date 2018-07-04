@@ -75,7 +75,7 @@ namespace WebNews_19089.Controllers
 
             // Garantir que retorna para a página de onde foi chamado o get
             // Caso tenha sido diretamente na noticia ou no Manage do user
-            if (Page.Equals("Manage"))
+            if (Page == "Manage")
             {
                 return RedirectToAction("Index", "Manage", new { email = User.Identity.Name });
             }

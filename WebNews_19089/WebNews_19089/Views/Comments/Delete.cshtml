@@ -41,9 +41,22 @@
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.Page)
 
-            <div class="newsDeleteOptions">
-                <input type="submit" value="Delete" class="btn bold" /> <span>|| @Html.ActionLink("Back", "Details", "News", new { id = Model.comment.NewsFK }, new { @class = "bold" })</span>
-            </div>
+                <div class="newsDeleteOptions">
+                    <input type="submit" value="Delete" class="btn bold" /> <span>
+                        ||
+
+                        @if (Model.Page == "Manage")
+                        {
+                            @Html.ActionLink("Back", "Index", "Manage", new { email = User.Identity.Name }, new { @class = "bold" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Back", "Details", "News", new { id = Model.comment.NewsFK }, new { @class = "bold" })
+
+                        }
+
+                    </span>
+                </div>
             }
         </div>
 
