@@ -29,21 +29,74 @@
         <div class="changePasswordLink">
             <p>
                 <span class="bold">
-                    | @Html.ActionLink("Edit your information", "Edit", "UserProfile", new { email = Model.Email }, null ) ||
+                    | @Html.ActionLink("Edit your information", "Edit", "UserProfile", new { email = Model.Email }, null) ||
                     @if (Model.HasPassword)
                     {
-                        @Html.ActionLink("Change your password", "ChangePassword") 
+                        @Html.ActionLink("Change your password", "ChangePassword")
                     }
                     else
                     {
                         @Html.ActionLink("Create", "SetPassword")
                     }
-                    
+
                     |
 
                 </span>
             </p>
+            <hr />
         </div>
+    </div>
+    <div class="col-1"></div>
+
+    <div class="col-3"></div>
+    <div class="commentsList col-8">
+        @if (Model.CommentsList.Count != 0)
+        {
+
+            <h2>
+                Comments
+            </h2>
+
+            foreach (var comment in Model.CommentsList)
+            {
+
+                <div class="comment">
+
+                    <div class="commentHeaderContainer">
+
+                        <p class="commentHeaderUser">
+                            by @comment.UserProfile.Name
+                        </p>
+
+                        <p class="commentHeaderDate">
+                            @comment.CommentDate.Date.ToString("dd-MM-yyyy")
+                        </p>
+
+                    </div>
+
+                    <div class="commentBodyContainer">
+                        @Html.Raw(comment.Content)
+                    </div>
+
+                    <div class="commentDeleteOption">
+                        @if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || User.Identity.Name.Equals(comment.UserProfile.UserName))
+                        {
+                            @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.ID, email = User.Identity.Name, page ="Manage" }, new { @class = "bold" })
+                       }
+                    </div>
+
+                </div>
+
+            }
+
+
+        }
+        else
+        {
+            <h2>
+                No comments
+            </h2>
+        }
     </div>
 
 </div>

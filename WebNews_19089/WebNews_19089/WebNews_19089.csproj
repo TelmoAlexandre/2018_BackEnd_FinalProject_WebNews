@@ -202,6 +202,7 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Comments.cs" />
+    <Compile Include="Models\CommentsDeleteViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\News.cs" />

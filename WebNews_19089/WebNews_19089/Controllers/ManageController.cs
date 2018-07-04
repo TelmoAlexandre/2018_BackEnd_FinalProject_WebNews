@@ -134,21 +134,27 @@ namespace WebNews_19089.Controllers {
 
             var userId = User.Identity.GetUserId();
 
-            // Encontrar o UserProfile pelo email
-            var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).First();
+            if(email != null){
+                // Encontrar o UserProfile pelo email
+                var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).First();
 
-            var model = new IndexViewModel {
-                HasPassword = HasPassword(),
-                // Novos parametros que levam informação do UserProfile
-                Name = user.Name,
-                Birthday = user.Birthday,
-                Email = user.UserName,
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
+                var model = new IndexViewModel
+                {
+                    HasPassword = HasPassword(),
+                    // Novos parametros que levam informação do UserProfile
+                    Name = user.Name,
+                    Birthday = user.Birthday,
+                    Email = user.UserName,
+                    CommentsList = user.CommentsList,
+                    PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                    Logins = await UserManager.GetLoginsAsync(userId),
+                    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                };
+                return View(model);
+            }
+
+            return RedirectToAction("Index", "News", null);
         }
 
         //

@@ -189,7 +189,6 @@ a
           transition: .3s
           text-decoration: underline
 
-
 .commentDelete
   text-align: left
   h2
@@ -311,6 +310,34 @@ a
       font-size: 1.2em
       &:hover
         text-decoration: underline
+  .commentsList
+    h2
+      margin: 1.5rem 0 2rem
+      font-family: "Fondamento", cursive
+      font-weight: bold
+    div::first-of-type
+      border-top: none
+    .comment
+      padding: 2rem .5rem 2rem
+      border-top: .06rem solid
+      p
+        margin: 0
+      .commentHeaderContainer
+        .commentHeaderUser
+          font-weight: bold
+        .commentHeaderDate
+          font-size: .8em
+      
+      .commentBodyContainer
+        margin-top: 1rem
+    .commentDeleteOption
+      text-align: right
+      font-size: 1.2em
+      a
+        &:hover
+          padding-right: .2rem
+          transition: .3s
+          text-decoration: underline
 
 .createNewsLink
   margin-left: 2.5rem

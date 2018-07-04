@@ -13,13 +13,13 @@ namespace WebNews_19089.Controllers
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
-        
+
 
         // Este GET do delete tem autenticação manual feita por mim
         // Para garantir que o dono do comentário o pode apagar.
 
         // GET: ~/Comments/Delete/{id, email}
-        public ActionResult Delete(int? id, string email)
+        public ActionResult Delete(int? id, string email, string page)
         {
 
             if (id != null)
@@ -38,7 +38,13 @@ namespace WebNews_19089.Controllers
                         // Garantir que se trata do dono do comentario, ou de um utilizador com o papel necessario para apagar o mesmo
                         if (email.Equals(comment.UserProfile.UserName) || User.IsInRole("Admin") || User.IsInRole("NewsEditor"))
                         {
-                            return View(comment);
+
+                            // Guardar a pagina de origem deste GET para retornar corretamente no DeleteConfirm
+                            // Criei um view model que recebe um objeto Comments e uma string com a página de origem para este GET
+                            return View(new CommentsDeleteViewModel {
+                                comment = comment,
+                                Page = page
+                            });
                         }
                     }
                     else
@@ -57,7 +63,7 @@ namespace WebNews_19089.Controllers
         // POST: ~/Comments/Delete/{id, email}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, string Page)
         {
 
             Comments comment = db.Comments.Find(id);
@@ -67,7 +73,16 @@ namespace WebNews_19089.Controllers
             db.Comments.Remove(comment);
             db.SaveChanges();
 
-            return RedirectToAction("Details","News",new { id = NewsID });
+            // Garantir que retorna para a página de onde foi chamado o get
+            // Caso tenha sido diretamente na noticia ou no Manage do user
+            if (Page.Equals("Manage"))
+            {
+                return RedirectToAction("Index", "Manage", new { email = User.Identity.Name });
+            }
+            else
+            {
+                return RedirectToAction("Details", "News", new { id = NewsID });
+            }
         }
 
         // POST: Comments

@@ -1,4 +1,4 @@
-﻿@model WebNews_19089.Models.Comments
+﻿@model WebNews_19089.Models.CommentsDeleteViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -21,17 +21,17 @@
             <div class="commentHeaderContainer">
 
                 <p class="commentHeaderUser">
-                    by @Model.UserProfile.Name
+                    by @Model.comment.UserProfile.Name
                 </p>
 
                 <p class="commentHeaderDate">
-                    @Model.CommentDate.Date.ToString("dd-MM-yyyy")
+                    @Model.comment.CommentDate.Date.ToString("dd-MM-yyyy")
                 </p>
 
             </div>
 
             <div class="commentBodyContainer">
-                @Html.Raw(Model.Content)
+                @Html.Raw(Model.comment.Content)
             </div>
         </div>
 
@@ -39,9 +39,10 @@
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Page)
 
             <div class="newsDeleteOptions">
-                <input type="submit" value="Delete" class="btn bold" /> <span>|| @Html.ActionLink("Back", "Details", "News", new { id = Model.NewsFK }, new { @class = "bold" })</span>
+                <input type="submit" value="Delete" class="btn bold" /> <span>|| @Html.ActionLink("Back", "Details", "News", new { id = Model.comment.NewsFK }, new { @class = "bold" })</span>
             </div>
             }
         </div>

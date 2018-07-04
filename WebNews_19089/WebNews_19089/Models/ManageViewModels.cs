@@ -16,6 +16,7 @@ namespace WebNews_19089.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public DateTime Birthday { get; set; }
+        public virtual ICollection<Comments> CommentsList { get; set; }
     }
 
     public class ManageLoginsViewModel

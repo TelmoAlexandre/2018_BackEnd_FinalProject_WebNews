@@ -465,6 +465,49 @@ a:hover {
   text-decoration: underline;
 }
 
+.manageAccount .commentsList h2 {
+  margin: 1.5rem 0 2rem;
+  font-family: "Fondamento", cursive;
+  font-weight: bold;
+}
+
+.manageAccount .commentsList div::first-of-type {
+  border-top: none;
+}
+
+.manageAccount .commentsList .comment {
+  padding: 2rem .5rem 2rem;
+  border-top: .06rem solid;
+}
+
+.manageAccount .commentsList .comment p {
+  margin: 0;
+}
+
+.manageAccount .commentsList .comment .commentHeaderContainer .commentHeaderUser {
+  font-weight: bold;
+}
+
+.manageAccount .commentsList .comment .commentHeaderContainer .commentHeaderDate {
+  font-size: .8em;
+}
+
+.manageAccount .commentsList .comment .commentBodyContainer {
+  margin-top: 1rem;
+}
+
+.manageAccount .commentsList .commentDeleteOption {
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.manageAccount .commentsList .commentDeleteOption a:hover {
+  padding-right: .2rem;
+  -webkit-transition: .3s;
+  transition: .3s;
+  text-decoration: underline;
+}
+
 .createNewsLink {
   margin-left: 2.5rem;
 }
