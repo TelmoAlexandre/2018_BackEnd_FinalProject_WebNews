@@ -29,6 +29,7 @@ namespace WebNews_19089.Models {
         
         public DateTime NewsDate { get; set; }
 
+        [Display(Name = "Category")]
         [ForeignKey("Category")]
         public int CategoryFK { get; set; }
         public virtual Categories Category { get; set; }
