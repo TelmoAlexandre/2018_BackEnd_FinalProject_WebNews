@@ -51,13 +51,15 @@ namespace WebNews_19089.Controllers
         // POST: UserProfile
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Birthday")] UsersProfile user)
+        public ActionResult Edit([Bind(Include = "ID,Name,Birthday,UserName")] UsersProfile user)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("LogOff", "Account", null);
+
+                // Retorna para o index do Manage
+                return RedirectToAction("Index", "Manage", new { email = user.UserName});
             }
 
             return View();

@@ -17,7 +17,7 @@ namespace WebNews_19089.Controllers {
         public ActionResult Index(string category, int? pageNum) {
 
             // Número de notícias por página
-            const int newsPerPage = 3;
+            const int newsPerPage = 6;
 
             // Calcular o numero de noticias que deve fazer 'skip' para ter uma paginação correta
             int takeNum = (pageNum != null) ? ((int)pageNum - 1) * newsPerPage : 0;

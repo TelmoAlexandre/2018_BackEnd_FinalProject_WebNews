@@ -135,8 +135,9 @@ namespace WebNews_19089.Controllers {
             var userId = User.Identity.GetUserId();
 
             if(email != null){
+
                 // Encontrar o UserProfile pelo email
-                var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).First();
+                var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).ToList().First();
 
                 var model = new IndexViewModel
                 {
