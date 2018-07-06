@@ -4,60 +4,83 @@
     ViewBag.Title = "Web Paper";
 }
 
-@foreach (var news in Model.News)
+<div class="col-12 searchOption">
+    <form action="/News/Index" method="post">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.category)
+        <input name="searchFilter" id="serchFilter" type="text" placeholder="Insert your search here..." />
+        <input type="submit" value="Search" class="btn" />
+    </form>
+</div>
+
+
+@if (Model.News.Count != 0)
 {
+    foreach (var news in Model.News)
+    {
 
-    <div class="newsBlock col-4">
-        <h1 class="newsTitle">
-            @Html.ActionLink("" + news.Title, "Details", new { id = news.ID })
-        </h1>
-        <p class="newsDescription">
-            @Html.DisplayFor(modelNews => news.Description)
-        </p>
+        <div class="newsBlock col-4">
+            <h1 class="newsTitle">
+                @Html.ActionLink("" + news.Title, "Details", new { id = news.ID })
+            </h1>
+            <p class="newsDescription">
+                @Html.DisplayFor(modelNews => news.Description)
+            </p>
 
-        @*
-            Caso o utilizador logado seja administrator ou editor de redação ele pode alterar a noticia
-        *@
+            @*
+                Caso o utilizador logado seja administrator ou editor de redação ele pode alterar a noticia
+            *@
 
-        @{
+            @{
 
-            bool author = false;
+                bool author = false;
 
-            foreach (var user in news.UsersProfileList)
-            {
-                // Se o utilizador autenticado for algum dos autores
-                if (user.UserName == User.Identity.Name)
+                foreach (var user in news.UsersProfileList)
                 {
-                    author = true;
+                    // Se o utilizador autenticado for algum dos autores
+                    if (user.UserName == User.Identity.Name)
+                    {
+                        author = true;
+                    }
+                }
+
+                if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || author)
+                {
+
+                    <div class="newsOptions">
+
+                        <span>|</span>
+                        @Html.ActionLink("Edit", "Edit", new { id = news.ID }, new { @class = "newsOptionLink" })
+                        <span>|</span>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+
+                            <span>|</span>
+                            @Html.ActionLink("Delete", "Delete", new { id = news.ID }, new { @class = "newsOptionLink" })
+                            <span>|</span>
+
+                        }
+
+                    </div>
+
                 }
             }
 
-            if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || author)
-            {
+        </div>
 
-                <div class="newsOptions">
-
-                    <span>|</span>
-                    @Html.ActionLink("Edit", "Edit", new { id = news.ID }, new { @class = "newsOptionLink" })
-                    <span>|</span>
-
-                    @if (User.IsInRole("Admin"))
-                    {
-
-                        <span>|</span>
-                        @Html.ActionLink("Delete", "Delete", new { id = news.ID }, new { @class = "newsOptionLink" })
-                        <span>|</span>
-
-                    }
-
-                </div>
-
-            }
-        }
-
-    </div>
+    }
 
 }
+else
+{
+        <div class="noFoundNews col-12">
+            <h1>No News were found.</h1>
+        </div>
+}
+
+
+
 
 <div class="col-12 row pageOption">
     <div class="col-6 previousPage">

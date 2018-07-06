@@ -28,7 +28,7 @@ namespace WebNews_19089.Controllers {
             // Caso o caregory tenha conteudo
             // Significa foi pedido um index com filtragem de categorias
             // Retorna as noticias dessa categoria
-            if (category != "all" && category != null) {
+            if (category != "All" && category != null) {
 
                 // Procura as noticias da categoria, salta o numero de noticias necessárias para paginação e 'traz' o número de noticias por página
                 var NewsCategories = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).Skip(takeNum).Take(newsPerPage).ToList();
@@ -71,10 +71,21 @@ namespace WebNews_19089.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string searchFilter)
+        public ActionResult Index(string searchFilter, string category)
         {
+
+            // Declaração
+            ICollection<News> news;
+
+            if (category != ""  && category != "All")
+            {
+                news = db.News.Where(n => n.Category.Name == category).Where(n => n.Title.Contains(searchFilter)).OrderByDescending(n => n.NewsDate).ToList();
+            }
+            else
+            {
+                news = db.News.Where(n => n.Title.Contains(searchFilter)).OrderByDescending(n => n.NewsDate).ToList();
+            }
             
-            var news = db.News.Where(n => n.Title.StartsWith(searchFilter)).ToList();
 
             return View(new NewsWithPageModelView
             {

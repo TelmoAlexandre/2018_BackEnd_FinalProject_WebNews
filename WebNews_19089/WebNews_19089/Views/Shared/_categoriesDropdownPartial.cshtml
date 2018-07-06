@@ -9,7 +9,7 @@
                 Dropdown option com 'all'    
             *@
 
-            <a href="@Url.Action("Index", "News" ,new { category = "all", pageNum = 1 })"><li class="dropdown-menu-item">All</li></a>
+            <a href="@Url.Action("Index", "News" ,new { category = "All", pageNum = 1 })"><li class="dropdown-menu-item">All</li></a>
 
             @foreach (var category in Model)
             {

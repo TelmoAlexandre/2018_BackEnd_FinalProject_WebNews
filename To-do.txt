@@ -7,9 +7,7 @@ To-do:
 
 This commit:
 
-Implementado o Search de Noticias.
+Search input colocada no Index das News.
 
-Criado uma search box no _Layout onde é possível procurar noticias.
-Criado um POST para o Index das Noticias.
-Os autores de cada noticia já a podem editar.
-Alterado a acção Edit para verificar a autenticação do utilizador.
+Pesquisa agora funciona no contexto das categorias.
+Criado uma mensagem que reporta não terem sido encontradas noticias no caso de uma pesquisa 'falhada'.
