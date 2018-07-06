@@ -1,15 +1,8 @@
 To-do:
 
--Pages numbers
+- Link das noticias dos commetns no Index do Manage.
+- Regular expressions
 
 
 This commit:
 
-Adicionado paginação no Index das News.
-
-O controller do Index das News agora recebe uma string com o nome da categoria, para ser mais legivel o url.
-Alterado o seed para ter datas mais especificas (com horas).
-Inicio da criação da paginação.
-Já recebe o numero da página pretendida, faz a conversão para saltar o numero de noticias necessárias e recolher o numero de noticias que é suposto por página.
-Criado NewsWithPageModelView para enviar mais informações para a Razor View Index das News para consultar informações sobre a paginação.
-Adionados links no Index do News para a página seguinte ou para a anterior.

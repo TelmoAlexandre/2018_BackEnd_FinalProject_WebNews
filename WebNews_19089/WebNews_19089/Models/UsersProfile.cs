@@ -15,11 +15,14 @@ namespace WebNews_19089.Models {
         [Key]
         public int ID { set; get; }
 
+        [Required]
         public string Name { get; set; }
 
         [DataType(DataType.Date)]
+        [Required]
         public DateTime Birthday { get; set; }
 
+        [Required]
         public string UserName { get; set; }
 
         // Comentários do utilizador

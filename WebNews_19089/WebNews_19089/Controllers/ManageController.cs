@@ -10,9 +10,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebNews_19089.Models;
 
-namespace WebNews_19089.Controllers {
+namespace WebNews_19089.Controllers
+{
     [Authorize]
-    public class ManageController : Controller {
+    public class ManageController : Controller
+    {
 
         // Declarar o contexto da BD
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -20,12 +22,14 @@ namespace WebNews_19089.Controllers {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        
 
-        public ManageController() {
+
+        public ManageController()
+        {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager) {
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
             UserManager = userManager;
             SignInManager = signInManager;
         }
@@ -49,18 +53,21 @@ namespace WebNews_19089.Controllers {
         }
 
         // GET: /Manage/UserList
-        public ActionResult UserList() {
+        public ActionResult UserList()
+        {
             return View(db.UsersProfile.ToList());
         }
 
         [Authorize(Roles = "Admin")]
         // GET: /Manage/UserProfile/{id}
-        public ActionResult UserPermissions(int? userProfileID) {
+        public ActionResult UserPermissions(int? userProfileID)
+        {
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
             // Se houver valor de id
-            if (userProfileID != null) {
+            if (userProfileID != null)
+            {
 
                 // Recolhe o userProfile pelo id
                 var userProfile = db.UsersProfile.Find(userProfileID);
@@ -70,10 +77,12 @@ namespace WebNews_19089.Controllers {
                 // Recolhe os Roles do user
                 var userRoles = UserManager.GetRoles(user.Id);
 
-                return View(new EditUserViewModel() {
+                return View(new EditUserViewModel()
+                {
                     Id = user.Id,
                     Email = user.Email,
-                    RolesList = roleManager.Roles.ToList().Select(x => new SelectListItem() {
+                    RolesList = roleManager.Roles.ToList().Select(x => new SelectListItem()
+                    {
                         Selected = userRoles.Contains(x.Name),
                         Text = x.Name,
                         Value = x.Name
@@ -87,30 +96,35 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/UserProfile/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserPermissions([Bind(Include = "Email,Id")] EditUserViewModel editUser, params string[] selectedRole) {
+        public ActionResult UserPermissions([Bind(Include = "Email,Id")] EditUserViewModel editUser, params string[] selectedRole)
+        {
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
 
                 var user = UserManager.FindById(editUser.Id);
                 var userRoles = UserManager.GetRoles(user.Id);
 
-                if (user == null) {
+                if (user == null)
+                {
                     return RedirectToAction("UserList");
                 }
-                
+
                 selectedRole = selectedRole ?? new string[] { };
 
                 var result = UserManager.AddToRoles(user.Id, selectedRole.Except(userRoles).ToArray<string>());
 
-                if (!result.Succeeded) {
+                if (!result.Succeeded)
+                {
                     ModelState.AddModelError("", result.Errors.First());
                     return RedirectToAction("UserList");
                 }
                 result = UserManager.RemoveFromRoles(user.Id, userRoles.Except(selectedRole).ToArray<string>());
 
-                if (!result.Succeeded) {
+                if (!result.Succeeded)
+                {
                     ModelState.AddModelError("", result.Errors.First());
                     return RedirectToAction("UserList");
                 }
@@ -122,7 +136,8 @@ namespace WebNews_19089.Controllers {
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message, string email) {
+        public async Task<ActionResult> Index(ManageMessageId? message, string email)
+        {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -134,35 +149,38 @@ namespace WebNews_19089.Controllers {
 
             var userId = User.Identity.GetUserId();
 
-            if(email != null){
-
-                // Garantir que o user que está a tentar editar a informação é o user autenticado
-                if (email == User.Identity.Name)
+            if (userId != null)
+            {
+                if (email != null)
                 {
-                    // Encontrar o UserProfile pelo email
-                    var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).ToList().First();
-
-                    var model = new IndexViewModel
+                    // Garantir que o user que está a tentar editar a informação é o user autenticado
+                    if (email == User.Identity.Name)
                     {
-                        HasPassword = HasPassword(),
-                        // Novos parametros que levam informação do UserProfile
-                        Name = user.Name,
-                        Birthday = user.Birthday,
-                        Email = user.UserName,
-                        CommentsList = user.CommentsList,
-                        PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                        TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                        Logins = await UserManager.GetLoginsAsync(userId),
-                        BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-                    };
+                        // Encontrar o UserProfile pelo email
+                        var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).ToList().First();
 
-                    return View(model);
+                        var model = new IndexViewModel
+                        {
+                            HasPassword = HasPassword(),
+                            // Novos parametros que levam informação do UserProfile
+                            Name = user.Name,
+                            Birthday = user.Birthday,
+                            Email = user.UserName,
+                            CommentsList = user.CommentsList,
+                            PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                            TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                            Logins = await UserManager.GetLoginsAsync(userId),
+                            BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                        };
+
+                        return View(model);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "News", null);
+                    }
+
                 }
-                else
-                {
-                    return RedirectToAction("Index", "News", null);
-                }
-                    
             }
 
             return RedirectToAction("Index", "News", null);
@@ -172,16 +190,21 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey) {
+        public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
+        {
             ManageMessageId? message;
             var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
-            if (result.Succeeded) {
+            if (result.Succeeded)
+            {
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null) {
+                if (user != null)
+                {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
                 message = ManageMessageId.RemoveLoginSuccess;
-            } else {
+            }
+            else
+            {
                 message = ManageMessageId.Error;
             }
             return RedirectToAction("ManageLogins", new { Message = message });
@@ -189,7 +212,8 @@ namespace WebNews_19089.Controllers {
 
         //
         // GET: /Manage/AddPhoneNumber
-        public ActionResult AddPhoneNumber() {
+        public ActionResult AddPhoneNumber()
+        {
             return View();
         }
 
@@ -197,14 +221,18 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model) {
-            if (!ModelState.IsValid) {
+        public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
                 return View(model);
             }
             // Generate the token and send it
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
-            if (UserManager.SmsService != null) {
-                var message = new IdentityMessage {
+            if (UserManager.SmsService != null)
+            {
+                var message = new IdentityMessage
+                {
                     Destination = model.Number,
                     Body = "Your security code is: " + code
                 };
@@ -217,10 +245,12 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EnableTwoFactorAuthentication() {
+        public async Task<ActionResult> EnableTwoFactorAuthentication()
+        {
             await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null) {
+            if (user != null)
+            {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
             return RedirectToAction("Index", "Manage");
@@ -230,10 +260,12 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/DisableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DisableTwoFactorAuthentication() {
+        public async Task<ActionResult> DisableTwoFactorAuthentication()
+        {
             await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null) {
+            if (user != null)
+            {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
             return RedirectToAction("Index", "Manage");
@@ -241,7 +273,8 @@ namespace WebNews_19089.Controllers {
 
         //
         // GET: /Manage/VerifyPhoneNumber
-        public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber) {
+        public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
+        {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
             // Send an SMS through the SMS provider to verify the phone number
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
@@ -251,14 +284,18 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model) {
-            if (!ModelState.IsValid) {
+        public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
                 return View(model);
             }
             var result = await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
-            if (result.Succeeded) {
+            if (result.Succeeded)
+            {
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null) {
+                if (user != null)
+                {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
@@ -272,13 +309,16 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RemovePhoneNumber() {
+        public async Task<ActionResult> RemovePhoneNumber()
+        {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
-            if (!result.Succeeded) {
+            if (!result.Succeeded)
+            {
                 return RedirectToAction("Index", new { Message = ManageMessageId.Error });
             }
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null) {
+            if (user != null)
+            {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
@@ -286,7 +326,8 @@ namespace WebNews_19089.Controllers {
 
         //
         // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword() {
+        public ActionResult ChangePassword()
+        {
             return View();
         }
 
@@ -294,15 +335,19 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model) {
-            if (!ModelState.IsValid) {
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
                 return View(model);
             }
-            
+
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-            if (result.Succeeded) {
+            if (result.Succeeded)
+            {
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null) {
+                if (user != null)
+                {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
                 return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
@@ -313,7 +358,8 @@ namespace WebNews_19089.Controllers {
 
         //
         // GET: /Manage/SetPassword
-        public ActionResult SetPassword() {
+        public ActionResult SetPassword()
+        {
             return View();
         }
 
@@ -321,12 +367,16 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SetPassword(SetPasswordViewModel model) {
-            if (ModelState.IsValid) {
+        public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
                 var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
                     var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                    if (user != null) {
+                    if (user != null)
+                    {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     }
                     return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
@@ -340,19 +390,22 @@ namespace WebNews_19089.Controllers {
 
         //
         // GET: /Manage/ManageLogins
-        public async Task<ActionResult> ManageLogins(ManageMessageId? message) {
+        public async Task<ActionResult> ManageLogins(ManageMessageId? message)
+        {
             ViewBag.StatusMessage =
                 message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : "";
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user == null) {
+            if (user == null)
+            {
                 return View("Error");
             }
             var userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
             var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
             ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
-            return View(new ManageLoginsViewModel {
+            return View(new ManageLoginsViewModel
+            {
                 CurrentLogins = userLogins,
                 OtherLogins = otherLogins
             });
@@ -362,24 +415,29 @@ namespace WebNews_19089.Controllers {
         // POST: /Manage/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LinkLogin(string provider) {
+        public ActionResult LinkLogin(string provider)
+        {
             // Request a redirect to the external login provider to link a login for the current user
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
 
         //
         // GET: /Manage/LinkLoginCallback
-        public async Task<ActionResult> LinkLoginCallback() {
+        public async Task<ActionResult> LinkLoginCallback()
+        {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-            if (loginInfo == null) {
+            if (loginInfo == null)
+            {
                 return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
-        protected override void Dispose(bool disposing) {
-            if (disposing && _userManager != null) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && _userManager != null)
+            {
                 _userManager.Dispose();
                 _userManager = null;
                 db.Dispose();
@@ -398,29 +456,36 @@ namespace WebNews_19089.Controllers {
             }
         }
 
-        private void AddErrors(IdentityResult result) {
-            foreach (var error in result.Errors) {
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
                 ModelState.AddModelError("", error);
             }
         }
 
-        private bool HasPassword() {
+        private bool HasPassword()
+        {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null) {
+            if (user != null)
+            {
                 return user.PasswordHash != null;
             }
             return false;
         }
 
-        private bool HasPhoneNumber() {
+        private bool HasPhoneNumber()
+        {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            if (user != null) {
+            if (user != null)
+            {
                 return user.PhoneNumber != null;
             }
             return false;
         }
 
-        public enum ManageMessageId {
+        public enum ManageMessageId
+        {
             AddPhoneSuccess,
             ChangePasswordSuccess,
             SetTwoFactorSuccess,

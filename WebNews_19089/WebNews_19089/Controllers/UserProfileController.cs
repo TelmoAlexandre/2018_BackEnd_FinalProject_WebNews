@@ -71,7 +71,7 @@ namespace WebNews_19089.Controllers
                 return RedirectToAction("Index", "Manage", new { email = user.UserName});
             }
 
-            return View();
+            return View(user);
         }
     }
 }
