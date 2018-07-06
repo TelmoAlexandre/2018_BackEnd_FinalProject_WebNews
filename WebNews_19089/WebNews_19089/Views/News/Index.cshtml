@@ -4,7 +4,8 @@
     ViewBag.Title = "Web Paper";
 }
 
-@foreach (var news in Model.News) {
+@foreach (var news in Model.News)
+{
 
     <div class="newsBlock col-4">
         <h1 class="newsTitle">
@@ -18,24 +19,40 @@
             Caso o utilizador logado seja administrator ou editor de redação ele pode alterar a noticia
         *@
 
-        @if (User.IsInRole("Admin") || User.IsInRole("NewsEditor")) {
+        @{
 
-            <div class="newsOptions">
+            bool author = false;
 
-                <span>|</span>
-                @Html.ActionLink("Edit", "Edit", new { id = news.ID }, new { @class = "newsOptionLink" })
-                <span>|</span>
-
-                @if (User.IsInRole("Admin")) {
-
-                    <span>|</span>
-                    @Html.ActionLink("Delete", "Delete", new { id = news.ID }, new { @class = "newsOptionLink" })
-                    <span>|</span>
-
+            foreach (var user in news.UsersProfileList)
+            {
+                // Se o utilizador autenticado for algum dos autores
+                if (user.UserName == User.Identity.Name)
+                {
+                    author = true;
                 }
+            }
 
-            </div>
+            if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || author)
+            {
 
+                <div class="newsOptions">
+
+                    <span>|</span>
+                    @Html.ActionLink("Edit", "Edit", new { id = news.ID }, new { @class = "newsOptionLink" })
+                    <span>|</span>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+
+                        <span>|</span>
+                        @Html.ActionLink("Delete", "Delete", new { id = news.ID }, new { @class = "newsOptionLink" })
+                        <span>|</span>
+
+                    }
+
+                </div>
+
+            }
         }
 
     </div>
@@ -45,11 +62,11 @@
 <div class="col-12 row pageOption">
     <div class="col-6 previousPage">
         @*
-            Se não estiver na primeira página, mostra o link para retornar à pagina anterior    
+            Se não estiver na primeira página, mostra o link para retornar à pagina anterior
         *@
         @if (!Model.firstPage)
         {
-            @Html.ActionLink("< Previous Page", "Index", new { category = Model.category, pageNum = (Model.pageNum-1) })
+            @Html.ActionLink("< Previous Page", "Index", new { category = Model.category, pageNum = (Model.pageNum - 1) })
         }
 
     </div>
@@ -59,7 +76,7 @@
         *@
         @if (!Model.lastPage)
         {
-            @Html.ActionLink("Next Page >", "Index", new { category = Model.category, pageNum = (Model.pageNum+1) })
+            @Html.ActionLink("Next Page >", "Index", new { category = Model.category, pageNum = (Model.pageNum + 1) })
         }
     </div>
 </div>

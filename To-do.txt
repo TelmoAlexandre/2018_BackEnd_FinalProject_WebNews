@@ -2,7 +2,14 @@ To-do:
 
 - Link das noticias dos commetns no Index do Manage.
 - Regular expressions
+- Pesquisa de noticias
 
 
 This commit:
 
+Implementado o Search de Noticias.
+
+Criado uma search box no _Layout onde é possível procurar noticias.
+Criado um POST para o Index das Noticias.
+Os autores de cada noticia já a podem editar.
+Alterado a acção Edit para verificar a autenticação do utilizador.

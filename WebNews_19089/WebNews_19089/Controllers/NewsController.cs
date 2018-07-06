@@ -69,6 +69,25 @@ namespace WebNews_19089.Controllers {
             });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(string searchFilter)
+        {
+            
+            var news = db.News.Where(n => n.Title.StartsWith(searchFilter)).ToList();
+
+            return View(new NewsWithPageModelView
+            {
+                News = news,
+                // Booleanos a verdade para não aparecer os links para a proxima pagina, nem anterior
+                firstPage = true,
+                lastPage = true
+            });
+
+            
+        }
+
+
         // GET: News/Details/5
         public ActionResult Details(int? id) {
 
@@ -153,7 +172,7 @@ namespace WebNews_19089.Controllers {
         }
 
         // GET: News/Edit/5
-        [Authorize(Roles = "Admin,NewsEditor")]
+        [Authorize]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -162,11 +181,28 @@ namespace WebNews_19089.Controllers {
             News News = db.News.Find(id);
             News.Content = News.Content.Replace("<br/>", "\r\n");
 
-            if (News == null) {
-                return HttpNotFound();
+            bool author = false;
+
+            // Percorrer os autores da noticia e verificar se o utilizador autenticado um deles
+            foreach(var user in News.UsersProfileList)
+            {
+                if (User.Identity.Name == user.UserName) {
+                    author = true;
+                }
             }
-            ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name", News.CategoryFK);
-            return View(News);
+
+            // Se o utilizador autenticado for um dos autores ou tiver permissão, pode editar a noticia
+            if(User.IsInRole("Admin") || User.IsInRole("NewsEditor") || author)
+            {
+                if (News == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name", News.CategoryFK);
+                return View(News);
+            }
+
+            return RedirectToAction("Index");
         }
 
         // POST: News/Edit/5
@@ -174,6 +210,7 @@ namespace WebNews_19089.Controllers {
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,Title,Description,Content,NewsDate,CategoryFK")] News News) {
             if (ModelState.IsValid) {
                 // Adicionar o HTML para o paragrafo na string

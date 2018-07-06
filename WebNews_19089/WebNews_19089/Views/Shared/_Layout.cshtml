@@ -46,6 +46,12 @@
                     @Html.ActionLink("Create News", "Create", "News", new { @class = "cursive createNewsLink" })
                 }
 
+                <form action="/News/Index" method="post">
+                    @Html.AntiForgeryToken()
+                    <input name="searchFilter" id="serchFilter" type="text" placeholder="Insert your search here..." />
+                    <input type="submit" value="Search" class="btn" />
+                </form>
+
                 @Html.Partial("_LoginPartial")
 
             </div>
