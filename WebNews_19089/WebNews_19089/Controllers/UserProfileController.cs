@@ -42,7 +42,16 @@ namespace WebNews_19089.Controllers
         {
             if (email != null)
             {
-                return View(db.UsersProfile.Where(u => u.UserName.Equals(email)).First());
+                // Garantir que o user que está a tentar editar a informação é o user autenticado
+                if(email == User.Identity.Name)
+                {
+                    return View(db.UsersProfile.Where(u => u.UserName.Equals(email)).First());
+                }
+                else
+                {
+                    return RedirectToAction("Index", "News", null);
+                }
+                
             }
 
             return RedirectToAction("Index","News",null);

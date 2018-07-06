@@ -136,23 +136,33 @@ namespace WebNews_19089.Controllers {
 
             if(email != null){
 
-                // Encontrar o UserProfile pelo email
-                var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).ToList().First();
-
-                var model = new IndexViewModel
+                // Garantir que o user que está a tentar editar a informação é o user autenticado
+                if (email == User.Identity.Name)
                 {
-                    HasPassword = HasPassword(),
-                    // Novos parametros que levam informação do UserProfile
-                    Name = user.Name,
-                    Birthday = user.Birthday,
-                    Email = user.UserName,
-                    CommentsList = user.CommentsList,
-                    PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                    Logins = await UserManager.GetLoginsAsync(userId),
-                    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-                };
-                return View(model);
+                    // Encontrar o UserProfile pelo email
+                    var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).ToList().First();
+
+                    var model = new IndexViewModel
+                    {
+                        HasPassword = HasPassword(),
+                        // Novos parametros que levam informação do UserProfile
+                        Name = user.Name,
+                        Birthday = user.Birthday,
+                        Email = user.UserName,
+                        CommentsList = user.CommentsList,
+                        PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                        TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                        Logins = await UserManager.GetLoginsAsync(userId),
+                        BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                    };
+
+                    return View(model);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "News", null);
+                }
+                    
             }
 
             return RedirectToAction("Index", "News", null);
