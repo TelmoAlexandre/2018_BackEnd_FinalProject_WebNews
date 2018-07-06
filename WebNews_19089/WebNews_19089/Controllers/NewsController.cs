@@ -14,25 +14,59 @@ namespace WebNews_19089.Controllers {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: News/Index/id?
-        public ActionResult Index(int? categoryID) {
+        public ActionResult Index(string category, int? pageNum) {
 
+            // Número de notícias por página
+            const int newsPerPage = 3;
 
-            // Caso o caregoryID tenha conteudo
+            // Calcular o numero de noticias que deve fazer 'skip' para ter uma paginação correta
+            int takeNum = (pageNum != null) ? ((int)pageNum - 1) * newsPerPage : 0;
+
+            // Booleano que informa se é a primeira página
+            bool firstPage = (pageNum == null || (int)pageNum == 1) ? true : false;
+
+            // Caso o caregory tenha conteudo
             // Significa foi pedido um index com filtragem de categorias
             // Retorna as noticias dessa categoria
-            if (categoryID != null) {
+            if (category != "all" && category != null) {
 
-                var NewsCategories = db.News.Where(n => n.Category.ID == categoryID).OrderByDescending(n => n.NewsDate);
-                return View(NewsCategories.ToList());
+                // Procura as noticias da categoria, salta o numero de noticias necessárias para paginação e 'traz' o número de noticias por página
+                var NewsCategories = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).Skip(takeNum).Take(newsPerPage).ToList();
 
+                // Guardar a última notícia para comprar se ainda existe mais páginas
+                News news = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).ToList().Last();
+
+                // Booleano que vai informar na view se ainda existem mais páginas
+                var lastPage = (NewsCategories.Count() != newsPerPage || NewsCategories.Contains(news)) ? true : false;
+
+                return View(new NewsWithPageModelView {
+                    News = NewsCategories,
+                    pageNum = (int)pageNum,
+                    lastPage = lastPage,
+                    category = category,
+                    firstPage = firstPage
+                });
             }
 
-
-            // Caso o categoryID esteja vazio
+            // Caso o category seja 'all'
             // Significa que foram pedidas todas as noticias
             // Retorna todas as noticias
-            var News = db.News.Include(n => n.Category).OrderByDescending(n => n.NewsDate);
-            return View(News.ToList());
+
+            var News = db.News.Include(n => n.Category).OrderByDescending(n => n.NewsDate).Skip(takeNum).Take(newsPerPage).ToList();
+            
+            // Verifica qual é a ultima noticia para poder saber se é a ultima página
+            var lastNews = db.News.OrderByDescending(n => n.NewsDate).ToList().Last();
+
+            return View(new NewsWithPageModelView {
+                News = News,
+                // Se o pageNum for null, é porque nos encontramos na pagina 1
+                // Senão, devolve o número da página
+                pageNum = (pageNum == null) ? 1 : (int)pageNum,
+                // Verifica se se encontra na ultima página
+                lastPage = (News.Count() != newsPerPage || News.Contains(lastNews))? true : false,
+                category = category,
+                firstPage = firstPage
+            });
         }
 
         // GET: News/Details/5

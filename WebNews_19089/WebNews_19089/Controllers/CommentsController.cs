@@ -10,6 +10,7 @@ using WebNews_19089.Models;
 
 namespace WebNews_19089.Controllers
 {
+    [Authorize]
     public class CommentsController : Controller
     {
 
@@ -166,7 +167,6 @@ namespace WebNews_19089.Controllers
         // POST: Comments
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult Create([Bind(Include = "Content, NewsFK")] Comments comment, string email)
         {
 

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<WebNews_19089.Models.News>
+﻿@model WebNews_19089.Models.NewsWithPageModelView
 
 @{
     ViewBag.Title = "Web Paper";
 }
 
-@foreach (var news in Model) {
+@foreach (var news in Model.News) {
 
     <div class="newsBlock col-4">
         <h1 class="newsTitle">
@@ -41,3 +41,25 @@
     </div>
 
 }
+
+<div class="col-12 row pageOption">
+    <div class="col-6 previousPage">
+        @*
+            Se não estiver na primeira página, mostra o link para retornar à pagina anterior    
+        *@
+        @if (!Model.firstPage)
+        {
+            @Html.ActionLink("< Previous Page", "Index", new { category = Model.category, pageNum = (Model.pageNum-1) })
+        }
+
+    </div>
+    <div class="col-6 nextPage">
+        @*
+            Se não estiver na última página, mostra o link para ir para a próxima página
+        *@
+        @if (!Model.lastPage)
+        {
+            @Html.ActionLink("Next Page >", "Index", new { category = Model.category, pageNum = (Model.pageNum+1) })
+        }
+    </div>
+</div>

@@ -141,6 +141,31 @@ a:hover {
   text-decoration: underline;
 }
 
+.pageOption {
+  padding: 4rem 0 2rem;
+}
+
+.pageOption .previousPage, .pageOption .nextPage {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.pageOption .previousPage a:hover, .pageOption .nextPage a:hover {
+  text-decoration: underline;
+}
+
+.pageOption .previousPage a:hover {
+  padding-right: 1rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.pageOption .nextPage a:hover {
+  padding-left: 1rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
 .newsDetail {
   margin-top: 1rem;
   font-family: "Fondamento", cursive;

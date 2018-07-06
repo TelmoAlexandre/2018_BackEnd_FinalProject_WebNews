@@ -11,6 +11,7 @@ using WebNews_19089.Models;
 
 namespace WebNews_19089.Controllers
 {
+    [Authorize]
     public class UserProfileController : Controller
     {
 
@@ -37,7 +38,6 @@ namespace WebNews_19089.Controllers
         }
 
         // GET: UserProfile
-        [Authorize]
         public ActionResult Edit(string email)
         {
             if (email != null)

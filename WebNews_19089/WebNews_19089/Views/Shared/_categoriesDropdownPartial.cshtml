@@ -4,10 +4,18 @@
     <div class="nav-item nav-item-dropdown">
         <span class="dropdown-trigger">Categories</span>
         <ul class="dropdown-menu">
-            @foreach (var category in Model) {
-                
-                <a href="@Url.Action("Index", "News" ,new { categoryID = category.ID })"><li class="dropdown-menu-item">@category.Name</li></a>
-                
+
+            @*
+                Dropdown option com 'all'    
+            *@
+
+            <a href="@Url.Action("Index", "News" ,new { category = "all", pageNum = 1 })"><li class="dropdown-menu-item">All</li></a>
+
+            @foreach (var category in Model)
+            {
+
+                <a href="@Url.Action("Index", "News" ,new { category = category.Name, pageNum = 1 })"><li class="dropdown-menu-item">@category.Name</li></a>
+
             }
         </ul>
     </div>
