@@ -1,13 +1,7 @@
 To-do:
 
-- Link das noticias dos commetns no Index do Manage.
 - Regular expressions
-- Pesquisa de noticias
-
+- Criação de uma página para mostrar erros amigáveis ao utilizador.
 
 This commit:
 
-Search input colocada no Index das News.
-
-Pesquisa agora funciona no contexto das categorias.
-Criado uma mensagem que reporta não terem sido encontradas noticias no caso de uma pesquisa 'falhada'.

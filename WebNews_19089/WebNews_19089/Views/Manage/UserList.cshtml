@@ -9,25 +9,35 @@
     <div class="col-2"></div>
     <div class="adminUserList col-8 row">
 
+
+    <div class="col-12 searchOption">
+        <form action="/Manage/UserList" method="post">
+            @Html.AntiForgeryToken()
+            <input name="searchFilter" id="serchFilter" type="text" placeholder="Insert your search here..." />
+            <input type="submit" value="Search" class="btn" />
+        </form>
+    </div>
+
         <div class="col-12">
             <h1 class="bold">Users.</h1>
         </div>
 
 
-        @foreach (var user in Model) {
+        @foreach (var user in Model)
+        {
 
-        
-        <div class="userBlock col-4">
-            <a href="@Url.Action("UserPermissions","Manage",new { userProfileID = user.ID })">
-                <div class="name">
-                    <h1>@user.Name</h1>
-                </div>
-                <div class="email">
-                    @user.UserName
-                </div>
-            </a>
-        </div>
-       
+
+            <div class="userBlock col-4">
+                <a href="@Url.Action("UserPermissions","Manage",new { userProfileID = user.ID })">
+                    <div class="name">
+                        <h1>@user.Name</h1>
+                    </div>
+                    <div class="email">
+                        @user.UserName
+                    </div>
+                </a>
+            </div>
+
 
         }
 

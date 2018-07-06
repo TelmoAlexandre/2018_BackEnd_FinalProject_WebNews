@@ -81,6 +81,11 @@
                     <div class="commentDeleteOption">
                         @if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || User.Identity.Name.Equals(comment.UserProfile.UserName))
                         {
+
+                            @Html.ActionLink("News Context", "Details", "News", new { id = comment.NewsFK }, new { @class = "bold" })
+
+                            <span> || </span>
+
                             @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.ID, email = User.Identity.Name, Page = "Manage" }, new { @class = "bold" })
 
                             <span> || </span>

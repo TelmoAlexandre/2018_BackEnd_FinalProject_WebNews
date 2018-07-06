@@ -53,9 +53,23 @@ namespace WebNews_19089.Controllers
         }
 
         // GET: /Manage/UserList
+        [Authorize(Roles = "Admin")]
         public ActionResult UserList()
         {
             return View(db.UsersProfile.ToList());
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserList(string searchFilter)
+        {
+
+            // Pesquisa os utilizadores usando o filtro de pesquisa
+            var model = db.UsersProfile.Where(u => u.Name.Contains(searchFilter)).ToList();
+
+            return View(model);
         }
 
         [Authorize(Roles = "Admin")]
@@ -186,6 +200,7 @@ namespace WebNews_19089.Controllers
             return RedirectToAction("Index", "News", null);
         }
 
+        
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
