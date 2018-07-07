@@ -25,6 +25,26 @@
             }
         </div>
 
+        <div class="newsInfo row">
+
+            <div class="newsAuthors col-6">
+                <h4 class="bold">Authors:</h4>
+                @foreach (var author in Model.UsersProfileList)
+                {
+                    <p>
+                        - @author.Name
+                    </p>
+                }
+            </div>
+
+            <div class="newsDate col-6">
+                <p class="bold date">@Model.NewsDate.ToString("MM-dd-yyyy")</p>
+                <p class="time">@Model.NewsDate.ToString("hh:mm:ss tt")</p>
+            </div>
+
+        </div>
+        
+
     </div>
 
 

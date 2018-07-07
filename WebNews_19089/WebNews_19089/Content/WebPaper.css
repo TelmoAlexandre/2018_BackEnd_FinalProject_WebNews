@@ -274,6 +274,27 @@ a:hover {
   height: 100%;
 }
 
+.newsDetail .newsInfo {
+  padding: 1rem 0 0;
+  font-size: 1.2em;
+}
+
+.newsDetail .newsInfo .newsAuthors {
+  text-align: left;
+}
+
+.newsDetail .newsInfo .newsDate {
+  text-align: right;
+}
+
+.newsDetail .newsInfo .newsDate p {
+  margin: 0;
+}
+
+.newsDetail .newsInfo .newsDate .time {
+  font-size: .8em;
+}
+
 .newsDetail .newsDetailBodyContainer {
   text-align: justify;
   margin: .4rem auto;
