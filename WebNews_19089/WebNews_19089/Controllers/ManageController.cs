@@ -192,10 +192,7 @@ namespace WebNews_19089.Controllers
                         {
                             HasPassword = HasPassword(),
                             // Novos parametros que levam informação do UserProfile
-                            Name = user.Name,
-                            Birthday = user.Birthday,
-                            Email = user.UserName,
-                            CommentsList = user.CommentsList,
+                            User = user,
                             PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                             TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                             Logins = await UserManager.GetLoginsAsync(userId),

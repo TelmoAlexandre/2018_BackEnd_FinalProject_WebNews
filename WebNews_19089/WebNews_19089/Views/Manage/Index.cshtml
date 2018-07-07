@@ -8,8 +8,8 @@
     <div class="col-3"></div>
     <div class="col-6 manageAccountWelcome">
         <h2>
-            @if (User.Identity.Name == Model.Email)
-            {<span>Wecolme</span>}@Model.Name.
+            @if (User.Identity.Name == Model.User.UserName)
+            {<span>Wecolme</span> }@Model.User.Name.
         </h2>
     </div>
     <div class="col-3"></div>
@@ -17,27 +17,27 @@
     <p class="text-success">@ViewBag.StatusMessage</p>
     <div class="col-3"></div>
     <div class="col-8">
-        @if (User.Identity.Name == Model.Email)
+        @if (User.Identity.Name == Model.User.UserName)
         {
             <h5>Change your account settings</h5>
         }
         <hr />
         <p>
-            <span class="bold">Name: </span> @Model.Name
+            <span class="bold">Name: </span> @Model.User.Name
         </p>
         <p>
-            <span class="bold">Birthday: </span> @Model.Birthday.ToString("MM-dd-yyyy")
+            <span class="bold">Birthday: </span> @Model.User.Birthday.ToString("MM-dd-yyyy")
         </p>
         <p>
-            <span class="bold">Email: </span> @Model.Email
+            <span class="bold">Email: </span> @Model.User.UserName
         </p>
-        @if (User.Identity.Name == Model.Email)
+        @if (User.Identity.Name == Model.User.UserName)
         {
             <hr />
             <div class="changePasswordLink">
                 <p>
                     <span class="bold">
-                        @Html.ActionLink("Edit your information", "Edit", "UserProfile", new { email = Model.Email }, null) ||
+                        @Html.ActionLink("Edit your information", "Edit", "UserProfile", new { email = Model.User.UserName }, null) ||
                         @if (Model.HasPassword)
                         {
                             @Html.ActionLink("Change your password", "ChangePassword")
@@ -51,23 +51,39 @@
 
                     </span>
                 </p>
-                <hr />
+
             </div>
         }
+        <hr />
+    </div>
+    <div class="col-1"></div>
 
+    <div class="col-3"></div>
+    <div class="col-8 newsList">
+
+        <h2>
+            News
+        </h2>
+
+        @foreach (var news in Model.User.NewsList)
+        {
+            <p>- @Html.ActionLink(news.Title, "Details", "News", new { id = news.ID }, null)</p>
+        }
+
+        <hr />
     </div>
     <div class="col-1"></div>
 
     <div class="col-3"></div>
     <div class="commentsList col-8">
-        @if (Model.CommentsList.Count != 0)
+        @if (Model.User.CommentsList.Count != 0)
         {
 
             <h2>
                 Comments
             </h2>
 
-            foreach (var comment in Model.CommentsList)
+            foreach (var comment in Model.User.CommentsList)
             {
 
                 <div class="comment">
@@ -90,13 +106,10 @@
 
                     <div class="commentDeleteOption">
                         @Html.ActionLink("News Context", "Details", "News", new { id = comment.NewsFK }, new { @class = "bold" })
-                        @if (User.Identity.Name == Model.Email)
+                        @if (User.Identity.Name == Model.User.UserName)
                         {
                             if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || User.Identity.Name.Equals(comment.UserProfile.UserName))
                             {
-
-
-
                                 <span> || </span>
 
                                 @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.ID, email = User.Identity.Name, Page = "Manage" }, new { @class = "bold" })
@@ -122,5 +135,6 @@
             </h2>
         }
     </div>
+    <div class="col-1"></div>
 
 </div>

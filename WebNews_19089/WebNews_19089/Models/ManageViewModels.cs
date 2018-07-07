@@ -13,10 +13,7 @@ namespace WebNews_19089.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public DateTime Birthday { get; set; }
-        public virtual ICollection<Comments> CommentsList { get; set; }
+        public UsersProfile User { get; set; }
     }
 
     public class ManageLoginsViewModel

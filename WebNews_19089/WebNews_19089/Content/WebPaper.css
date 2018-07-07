@@ -659,6 +659,18 @@ a:hover {
   text-decoration: underline;
 }
 
+.manageAccount .newsList h2 {
+  padding: 0 0 1rem;
+}
+
+.manageAccount .newsList a:hover {
+  text-decoration: underline;
+  font-weight: bold;
+  padding-left: .3rem;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
 .createNewsLink {
   margin-left: 2.5rem;
 }
