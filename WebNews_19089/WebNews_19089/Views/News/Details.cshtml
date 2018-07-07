@@ -32,7 +32,7 @@
                 @foreach (var author in Model.UsersProfileList)
                 {
                     <p>
-                        - @author.Name
+                        - @Html.ActionLink(author.Name,"Index","Manage",new { email = author.UserName},null )
                     </p>
                 }
             </div>

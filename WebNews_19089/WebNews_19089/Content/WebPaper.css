@@ -279,16 +279,21 @@ a:hover {
   font-size: 1.2em;
 }
 
+.newsDetail .newsInfo p {
+  margin: 0;
+}
+
 .newsDetail .newsInfo .newsAuthors {
   text-align: left;
 }
 
-.newsDetail .newsInfo .newsDate {
-  text-align: right;
+.newsDetail .newsInfo .newsAuthors a:hover {
+  text-decoration: underline;
+  font-weight: bold;
 }
 
-.newsDetail .newsInfo .newsDate p {
-  margin: 0;
+.newsDetail .newsInfo .newsDate {
+  text-align: right;
 }
 
 .newsDetail .newsInfo .newsDate .time {

@@ -199,12 +199,16 @@ a
   .newsInfo
     padding: 1rem 0 0
     font-size: 1.2em
+    p
+      margin: 0
     .newsAuthors
       text-align: left
+      a
+        &:hover
+          text-decoration: underline
+          font-weight: bold
     .newsDate
       text-align: right
-      p
-        margin: 0
       .time
         font-size: .8em
 

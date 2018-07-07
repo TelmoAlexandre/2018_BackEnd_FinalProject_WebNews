@@ -8,6 +8,9 @@ To-do:
 
 This commit:
 
+Já é permitido aos users verem os perfis de outros users.
+
+Adicionado um link nos nomes do autores para poder ver o seu perfil.
 
 // ------------ Seed ----------------------
 

@@ -12,7 +12,6 @@ using WebNews_19089.Models;
 
 namespace WebNews_19089.Controllers
 {
-    [Authorize]
     public class ManageController : Controller
     {
 
@@ -59,7 +58,7 @@ namespace WebNews_19089.Controllers
             return View(db.UsersProfile.ToList());
         }
 
-
+        
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -110,6 +109,7 @@ namespace WebNews_19089.Controllers
         // POST: /Manage/UserProfile/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult UserPermissions([Bind(Include = "Email,Id")] EditUserViewModel editUser, params string[] selectedRole)
         {
 
@@ -161,18 +161,33 @@ namespace WebNews_19089.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
-
-            if (userId != null)
+            // Verificar se foi recebido email || Caso não tenha sido recebido, encaminhar o utilizador para o News/Index
+            if (email != null)
             {
-                if (email != null)
-                {
-                    // Garantir que o user que está a tentar editar a informação é o user autenticado
-                    if (email == User.Identity.Name)
-                    {
-                        // Encontrar o UserProfile pelo email
-                        var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).ToList().First();
 
+                ApplicationUser userASP;
+                string userId = null; 
+
+                try
+                {
+                    userASP = UserManager.FindByEmail(email);
+                    userId = userASP.Id;
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("Index", "News", null);
+                }
+                
+
+                if (userId != null)
+                {
+
+                    // Encontrar o UserProfile pelo email
+                    var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).ToList().First();
+
+                    // Se foi encontrado o user, então enviar o model para a view
+                    if(user != null)
+                    {
                         var model = new IndexViewModel
                         {
                             HasPassword = HasPassword(),
@@ -189,22 +204,18 @@ namespace WebNews_19089.Controllers
 
                         return View(model);
                     }
-                    else
-                    {
-                        return RedirectToAction("Index", "News", null);
-                    }
-
                 }
             }
 
             return RedirectToAction("Index", "News", null);
         }
 
-        
+
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
             ManageMessageId? message;
@@ -227,6 +238,7 @@ namespace WebNews_19089.Controllers
 
         //
         // GET: /Manage/AddPhoneNumber
+        [Authorize]
         public ActionResult AddPhoneNumber()
         {
             return View();
@@ -236,6 +248,7 @@ namespace WebNews_19089.Controllers
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -260,6 +273,7 @@ namespace WebNews_19089.Controllers
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
         {
             await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
@@ -275,6 +289,7 @@ namespace WebNews_19089.Controllers
         // POST: /Manage/DisableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
         {
             await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
@@ -288,6 +303,7 @@ namespace WebNews_19089.Controllers
 
         //
         // GET: /Manage/VerifyPhoneNumber
+        [Authorize]
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
@@ -299,6 +315,7 @@ namespace WebNews_19089.Controllers
         // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
@@ -324,6 +341,7 @@ namespace WebNews_19089.Controllers
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> RemovePhoneNumber()
         {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
@@ -341,6 +359,7 @@ namespace WebNews_19089.Controllers
 
         //
         // GET: /Manage/ChangePassword
+        [Authorize]
         public ActionResult ChangePassword()
         {
             return View();
@@ -350,6 +369,7 @@ namespace WebNews_19089.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -373,6 +393,7 @@ namespace WebNews_19089.Controllers
 
         //
         // GET: /Manage/SetPassword
+        [Authorize]
         public ActionResult SetPassword()
         {
             return View();
@@ -382,6 +403,7 @@ namespace WebNews_19089.Controllers
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -405,6 +427,7 @@ namespace WebNews_19089.Controllers
 
         //
         // GET: /Manage/ManageLogins
+        [Authorize]
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -430,6 +453,7 @@ namespace WebNews_19089.Controllers
         // POST: /Manage/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
@@ -438,6 +462,7 @@ namespace WebNews_19089.Controllers
 
         //
         // GET: /Manage/LinkLoginCallback
+        [Authorize]
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
