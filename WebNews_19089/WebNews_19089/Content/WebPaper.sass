@@ -1,3 +1,5 @@
+$tl: 1s;
+  
 body
   background-color: rgb(235, 234, 231)
   background-image: url("https://i.imgur.com/W9YCify.png")
@@ -127,6 +129,54 @@ a
     font-weight: bold
     &:hover
       text-decoration: underline
+  .searchInput
+    padding-left: 5rem
+  .searchInputManager
+    padding-left: 1rem
+  .search-box
+    transition: width $tl, border-radius $tl, background $tl, box-shadow $tl
+    width: 60px
+    height: 60px
+    border-radius: 30px
+    border: none
+    cursor: pointer
+    background-color: rgb(235, 234, 231)
+    background-image: url("https://i.imgur.com/W9YCify.png")
+    color: black
+    & + label .search-icon  
+      color: black    
+    &:hover
+      color: white
+    &:focus
+      transition: width $tl cubic-bezier(0,1.22,.66,1.39), border-radius $tl, background $tl
+      border: none
+      outline: none
+      box-shadow: none
+      padding-left: 15px
+      cursor: text
+      width: 300px
+      border-radius: auto
+      background: rgb(210, 210, 210)
+      background-image: url("https://i.imgur.com/W9YCify.png")
+      color: black
+      & + label .search-icon    
+        display: none
+    &:not(:focus)     
+      text-indent: -5000px  
+
+
+#search-submit 
+  position: relative
+  left: -5000px
+
+
+.search-icon
+  position: relative
+  left: -51px
+  top: 11px
+  color: white
+  cursor: pointer
+
 
 .noFoundNews
   padding: 6rem 0 0
@@ -538,14 +588,32 @@ img
   a 
     color: #000
   
-
-
 .dropdown-menu-item 
   cursor: pointer
   padding: 1em
   text-align: center
   list-style: none
-  -webkit-padding-start: 0
-  
+  -webkit-padding-start: 0  
   &:hover 
     background-color: darken(rgb(235, 234, 231), 15%)
+
+
+// Bootstrap 3.3
+
+.glyphicon-search:before
+  content: "\e003"
+
+.glyphicon
+  position: relative
+  display: inline-block
+  font-family: 'Glyphicons Halflings'
+  -webkit-font-smoothing: antialiased
+  font-style: normal
+  font-weight: normal
+  line-height: 1
+  font-size: 2rem
+
+@font-face 
+  font-family: 'Glyphicons Halflings'
+  src: url('../fonts/glyphicons-halflings-regular.eot')
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')

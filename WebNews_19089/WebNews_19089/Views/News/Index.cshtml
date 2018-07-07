@@ -5,13 +5,20 @@
 }
 
 <div class="col-12 searchOption">
-    <form action="/News/Index" method="post">
+    <form action="/News/Index" method="post" class="search-container">
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.category)
-        <input name="searchFilter" id="serchFilter" type="text" placeholder="Insert your search here..." />
-        <input type="submit" value="Search" class="btn" />
+
+        <div class="searchInput">
+            <input name="searchFilter" id="search-box" type="text" placeholder="Insert your search here..." class="search-box" />
+            <label for="search-box"><span class="glyphicon glyphicon-search search-icon blink"></span></label>
+            <input type="submit" value="Search" class="btn" id="search-submit" />
+        </div>
+
     </form>
 </div>
+
+
 
 
 @if (Model.News.Count != 0)
@@ -74,9 +81,9 @@
 }
 else
 {
-        <div class="noFoundNews col-12">
-            <h1>No News were found.</h1>
-        </div>
+    <div class="noFoundNews col-12">
+        <h1>No News were found.</h1>
+    </div>
 }
 
 

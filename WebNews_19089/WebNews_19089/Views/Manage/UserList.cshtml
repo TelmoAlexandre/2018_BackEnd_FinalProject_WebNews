@@ -9,18 +9,21 @@
     <div class="col-2"></div>
     <div class="adminUserList col-8 row">
 
-
-    <div class="col-12 searchOption">
-        <form action="/Manage/UserList" method="post">
-            @Html.AntiForgeryToken()
-            <input name="searchFilter" id="serchFilter" type="text" placeholder="Insert your search here..." />
-            <input type="submit" value="Search" class="btn" />
-        </form>
-    </div>
-
-        <div class="col-12">
+        <div class="col-2" style="padding-top:0.6rem">
             <h1 class="bold">Users.</h1>
         </div>
+        <div class="col-10 searchOption">
+            <form action="/Manage/UserList" method="post">
+                @Html.AntiForgeryToken()
+                <div class="searchInputManager">
+                    <input name="searchFilter" id="search-box" type="text" placeholder="Insert your search here..." class="search-box" />
+                    <label for="search-box"><span class="glyphicon glyphicon-search search-icon blink"></span></label>
+                    <input type="submit" value="Search" class="btn" id="search-submit" />
+                </div>
+            </form>
+        </div>
+
+
 
 
         @foreach (var user in Model)

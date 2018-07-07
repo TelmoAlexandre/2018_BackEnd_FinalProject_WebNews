@@ -178,6 +178,74 @@ a:hover {
   text-decoration: underline;
 }
 
+.searchOption .searchInput {
+  padding-left: 5rem;
+}
+
+.searchOption .searchInputManager {
+  padding-left: 1rem;
+}
+
+.searchOption .search-box {
+  -webkit-transition: width 1s, border-radius 1s, background 1s, -webkit-box-shadow 1s;
+  transition: width 1s, border-radius 1s, background 1s, -webkit-box-shadow 1s;
+  transition: width 1s, border-radius 1s, background 1s, box-shadow 1s;
+  transition: width 1s, border-radius 1s, background 1s, box-shadow 1s, -webkit-box-shadow 1s;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background-color: #ebeae7;
+  background-image: url("https://i.imgur.com/W9YCify.png");
+  color: black;
+}
+
+.searchOption .search-box + label .search-icon {
+  color: black;
+}
+
+.searchOption .search-box:hover {
+  color: white;
+}
+
+.searchOption .search-box:focus {
+  -webkit-transition: width 1s cubic-bezier(0, 1.22, 0.66, 1.39), border-radius 1s, background 1s;
+  transition: width 1s cubic-bezier(0, 1.22, 0.66, 1.39), border-radius 1s, background 1s;
+  border: none;
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding-left: 15px;
+  cursor: text;
+  width: 300px;
+  border-radius: auto;
+  background: #d2d2d2;
+  background-image: url("https://i.imgur.com/W9YCify.png");
+  color: black;
+}
+
+.searchOption .search-box:focus + label .search-icon {
+  display: none;
+}
+
+.searchOption .search-box:not(:focus) {
+  text-indent: -5000px;
+}
+
+#search-submit {
+  position: relative;
+  left: -5000px;
+}
+
+.search-icon {
+  position: relative;
+  left: -51px;
+  top: 11px;
+  color: white;
+  cursor: pointer;
+}
+
 .noFoundNews {
   padding: 6rem 0 0;
 }
@@ -772,5 +840,26 @@ img {
 
 .dropdown-menu-item:hover {
   background-color: #c8c5bd;
+}
+
+.glyphicon-search:before {
+  content: "\e003";
+}
+
+.glyphicon {
+  position: relative;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  font-size: 2rem;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url("../fonts/glyphicons-halflings-regular.eot");
+  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular") format("svg");
 }
 /*# sourceMappingURL=WebPaper.css.map */
