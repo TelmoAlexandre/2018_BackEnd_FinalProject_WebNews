@@ -2,6 +2,22 @@ To-do:
 
 - Regular expressions
 - Criação de uma página para mostrar erros amigáveis ao utilizador.
+- Slidshow para as imagens das noticias.
+- Adicionar outros autores dentro da noticia e no create.
 
 This commit:
 
+
+// ------------ Seed ----------------------
+
+// News
+
+new News {
+	ID=,
+	Title="",
+	Description="",
+	Content="",
+	NewsDate= new DateTime(2018,06,07,18,0,0),
+	CategoryFK=3,
+	UsersProfileList = new List<UsersProfile> { user[2]}
+}
