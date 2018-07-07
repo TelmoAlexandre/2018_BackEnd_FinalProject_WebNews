@@ -2,8 +2,8 @@ To-do:
 
 - Regular expressions
 - Criação de uma página para mostrar erros amigáveis ao utilizador.
-- Slidshow para as imagens das noticias.
 - Adicionar outros autores dentro da noticia e no create.
+- Criar uma página about com informações minhas e dos utilizadores criados.
 
 This commit:
 
