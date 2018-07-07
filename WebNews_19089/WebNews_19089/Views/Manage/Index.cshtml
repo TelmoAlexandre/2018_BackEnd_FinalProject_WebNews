@@ -62,11 +62,11 @@
     <div class="col-8 newsList">
         @if (Model.User.NewsList.Count() != 0)
         {
-            <h2>
+            <h2 class="bold">
                 News
             </h2>
 
-            @foreach (var news in Model.User.NewsList)
+            foreach (var news in Model.User.NewsList)
             {
                 <p>- @Html.ActionLink(news.Title, "Details", "News", new { id = news.ID }, null)</p>
             }
