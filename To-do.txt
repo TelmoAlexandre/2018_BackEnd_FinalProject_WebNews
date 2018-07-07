@@ -1,6 +1,5 @@
 To-do:
 
-- Transformar o index do Manager num local publico onde qualquer user pode ver informações de outro user e ver os seus comentários.
 - Regular expressions
 - Criação de uma página para mostrar erros amigáveis ao utilizador.
 - Adicionar outros autores dentro da noticia e no create.
