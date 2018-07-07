@@ -43,7 +43,7 @@
                 @if (User.IsInRole("Journalist") || User.IsInRole("Admin"))
                 {
 
-                    @Html.ActionLink("Create News", "Create", "News", new { @class = "cursive createNewsLink" })
+                    @Html.ActionLink("Create News", "Create", "News", null, new { @class = "cursive createNewsLink" })
                 }
 
                 @Html.Partial("_LoginPartial")
