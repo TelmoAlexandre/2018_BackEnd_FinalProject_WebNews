@@ -58,7 +58,7 @@ namespace WebNews_19089.Controllers
             return View(db.UsersProfile.ToList());
         }
 
-        
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -79,37 +79,46 @@ namespace WebNews_19089.Controllers
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
             // Se houver valor de id
-            if (userProfileID != null)
+            if (userProfileID == null)
             {
-
-                // Recolhe o userProfile pelo id
-                var userProfile = db.UsersProfile.Find(userProfileID);
-
-                // Recolhe o user ASPNET pelo email
-                var user = UserManager.FindByEmail(userProfile.UserName);
-                // Recolhe os Roles do user
-                var userRoles = UserManager.GetRoles(user.Id);
-
-                return View(new EditUserViewModel()
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    RolesList = roleManager.Roles.ToList().Select(x => new SelectListItem()
-                    {
-                        Selected = userRoles.Contains(x.Name),
-                        Text = x.Name,
-                        Value = x.Name
-                    })
-                });
+                return RedirectToAction("Index", "UserError", new { error = "ID not provided." });
             }
 
-            return RedirectToAction("userList");
+            // Recolhe o userProfile pelo id
+            var userProfile = db.UsersProfile.Find(userProfileID);
+
+            if (userProfile == null)
+            {
+                return RedirectToAction("Index", "UserError", new { error = "We couldn't find this user.", details = "The ID was not valid." });
+            }
+
+            // Recolhe o user ASPNET pelo email
+            var user = UserManager.FindByEmail(userProfile.UserName);
+
+            if (user == null)
+            {
+                return RedirectToAction("Index", "UserError", new { error = "We couldn't find this user.", details = "The ID was not valid." });
+            }
+
+            // Recolhe os Roles do user
+            var userRoles = UserManager.GetRoles(user.Id);
+
+            return View(new EditUserViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                RolesList = roleManager.Roles.ToList().Select(x => new SelectListItem()
+                {
+                    Selected = userRoles.Contains(x.Name),
+                    Text = x.Name,
+                    Value = x.Name
+                })
+            });
         }
 
         // POST: /Manage/UserProfile/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public ActionResult UserPermissions([Bind(Include = "Email,Id")] EditUserViewModel editUser, params string[] selectedRole)
         {
 
@@ -118,13 +127,16 @@ namespace WebNews_19089.Controllers
             if (ModelState.IsValid)
             {
 
+                // Encontra o utilizador
                 var user = UserManager.FindById(editUser.Id);
-                var userRoles = UserManager.GetRoles(user.Id);
 
                 if (user == null)
                 {
-                    return RedirectToAction("UserList");
+                    return RedirectToAction("Index", "UserError", new { error = "We couldn't find this user.", details = "The ID was not valid." });
                 }
+
+                // Encontra os seus roles
+                var userRoles = UserManager.GetRoles(user.Id);
 
                 selectedRole = selectedRole ?? new string[] { };
 
@@ -132,18 +144,19 @@ namespace WebNews_19089.Controllers
 
                 if (!result.Succeeded)
                 {
-                    ModelState.AddModelError("", result.Errors.First());
-                    return RedirectToAction("UserList");
+                    return RedirectToAction("Index", "UserError", new { error = "We couldn't add those roles to that user.", details = "Something went wrong." });
                 }
+
                 result = UserManager.RemoveFromRoles(user.Id, userRoles.Except(selectedRole).ToArray<string>());
 
                 if (!result.Succeeded)
                 {
-                    ModelState.AddModelError("", result.Errors.First());
-                    return RedirectToAction("UserList");
+                    return RedirectToAction("Index", "UserError", new { error = "We couldn't remove those roles from that user.", details = "Something went wrong." });
                 }
+
                 return RedirectToAction("UserList");
             }
+
             ModelState.AddModelError("", "Something failed.");
             return View();
         }
@@ -161,50 +174,43 @@ namespace WebNews_19089.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            // Verificar se foi recebido email || Caso não tenha sido recebido, encaminhar o utilizador para o News/Index
+            // Verificar se foi recebido email
             if (email != null)
             {
-
-                ApplicationUser userASP;
-                string userId = null; 
-
-                try
-                {
-                    userASP = UserManager.FindByEmail(email);
-                    userId = userASP.Id;
-                }
-                catch (Exception)
-                {
-                    return RedirectToAction("Index", "News", null);
-                }
                 
+                ApplicationUser userASP = UserManager.FindByEmail(email);
 
-                if (userId != null)
+                if (userASP != null)
                 {
+                    string userId = userASP.Id;
 
-                    // Encontrar o UserProfile pelo email
-                    var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).ToList().First();
-
-                    // Se foi encontrado o user, então enviar o model para a view
-                    if(user != null)
+                    if (userId != null)
                     {
-                        var model = new IndexViewModel
-                        {
-                            HasPassword = HasPassword(),
-                            // Novos parametros que levam informação do UserProfile
-                            User = user,
-                            PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                            TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                            Logins = await UserManager.GetLoginsAsync(userId),
-                            BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-                        };
 
-                        return View(model);
+                        // Encontrar o UserProfile pelo email
+                        var user = db.UsersProfile.Where(u => u.UserName.Equals(email)).ToList().First();
+
+                        // Se foi encontrado o user, então enviar o model para a view
+                        if (user != null)
+                        {
+                            var model = new IndexViewModel
+                            {
+                                HasPassword = HasPassword(),
+                                // Novos parametros que levam informação do UserProfile
+                                User = user,
+                                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                                Logins = await UserManager.GetLoginsAsync(userId),
+                                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                            };
+
+                            return View(model);
+                        }
                     }
                 }
             }
 
-            return RedirectToAction("Index", "News", null);
+            return RedirectToAction("Index", "UserError", new { error = "We couldn't find this user's profile.", details = "Something went wrong." });
         }
 
 
