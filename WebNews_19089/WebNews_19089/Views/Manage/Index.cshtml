@@ -9,7 +9,7 @@
     <div class="col-6 manageAccountWelcome">
         <h2>
             @if (User.Identity.Name == Model.User.UserName)
-            {<span>Wecolme</span> }@Model.User.Name.
+            {<span>Wecolme</span>}@Model.User.Name.
         </h2>
     </div>
     <div class="col-3"></div>
@@ -58,26 +58,50 @@
     </div>
     <div class="col-1"></div>
 
-    <div class="col-3"></div>
-    <div class="col-8 newsList">
-        @if (Model.User.NewsList.Count() != 0)
-        {
+    @if (Model.User.NewsList.Count() != 0)
+    {
+        <div class="col-6 newsList">
+
             <h2 class="bold">
-                News
+                Author of:
             </h2>
 
-            foreach (var news in Model.User.NewsList)
+            @foreach (var news in Model.User.NewsList)
             {
                 <p>- @Html.ActionLink(news.Title, "Details", "News", new { id = news.ID }, null)</p>
             }
 
             <hr />
-        }
-    </div>
-    <div class="col-1"></div>
 
-    <div class="col-3"></div>
-    <div class="commentsList col-8">
+        </div>
+    }
+
+
+    @*
+        O codigo seguinte vai verificar se existem noticias para serem representadas.
+        Caso exista, mostra ambos os comentários e as noticias lado a lado
+        Caso não exista, garantir que apenas os comments são mostrados no meio da página
+
+        O que eu fiz foi criar IFs que iram alterar as classes dos DIVs devido ao seu Bootstrap
+    *@
+
+    @**
+        Cria um DIV ao lado do DIV dos comments para centrar o dos comments caso o utilizador não seja autor de nenhuma noticia.
+    *@
+    @if (Model.User.NewsList.Count() == 0)
+    {
+        <div class="col-3"></div>
+    }
+
+    <div class="commentsList @if(Model.User.NewsList.Count() == 0) {
+
+         @:col-8
+
+         } else {
+
+         @:col -6
+
+         } ">
         @if (Model.User.CommentsList.Count != 0)
         {
 
@@ -137,6 +161,5 @@
             </h2>
         }
     </div>
-    <div class="col-1"></div>
 
 </div>
