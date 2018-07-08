@@ -6,9 +6,7 @@ To-do:
 
 This commit:
 
-Criada uma view para mostrar erros ao utilizador.
-
-Criado um controller UserError que contem um Index com 2 parametros que irá chamar a view e mostrar o erro.
+Adicionados os possíveis erros no NewsController.
 
 // ------------ Seed ----------------------
 

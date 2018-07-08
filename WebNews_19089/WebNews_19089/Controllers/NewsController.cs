@@ -28,7 +28,7 @@ namespace WebNews_19089.Controllers
             // Booleano que informa se é a primeira página
             bool firstPage = (pageNum == null || (int)pageNum == 1) ? true : false;
 
-            // Caso o caregory tenha conteudo
+            // Caso o category tenha conteudo
             // Significa foi pedido um index com filtragem de categorias
             // Retorna as noticias dessa categoria
             if (category != "All" && category != null)
@@ -203,7 +203,8 @@ namespace WebNews_19089.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Se chegar aqui é porque o id não é válido
+                return RedirectToAction("Index", "UserError", new { error = "We couldn't find this News Article.", details = "The ID was not valid." });
             }
 
             News News = db.News.Find(id);
@@ -211,12 +212,15 @@ namespace WebNews_19089.Controllers
 
             bool author = false;
 
-            // Percorrer os autores da noticia e verificar se o utilizador autenticado um deles
-            foreach (var user in News.UsersProfileList)
+            if (News != null)
             {
-                if (User.Identity.Name == user.UserName)
+                // Percorrer os autores da noticia e verificar se o utilizador autenticado um deles
+                foreach (var user in News.UsersProfileList)
                 {
-                    author = true;
+                    if (User.Identity.Name == user.UserName)
+                    {
+                        author = true;
+                    }
                 }
             }
 
@@ -231,7 +235,8 @@ namespace WebNews_19089.Controllers
                 return View(News);
             }
 
-            return RedirectToAction("Index");
+            // Se chegar aqui é porque o utilziador não tem autorização
+            return RedirectToAction("Index", "UserError", new { error = "You're not allowed to edit.", details = "You lack enough permission to edit this News article." });
         }
 
         // POST: News/Edit/5
@@ -290,11 +295,21 @@ namespace WebNews_19089.Controllers
 
                         return View(news);
                     }
+                    else
+                    {
+                        // Se chegar aqui é porque o utilziador não tem autorização
+                        return RedirectToAction("Index", "UserError", new { error = "You're not allowed to add authors.", details = "You don't have enough permissions." });
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index", "UserError", new { error = "We couldn't find this News Article.", details = "The ID was not valid." });
                 }
             }
-
-
-            return RedirectToAction("Index");
+            else
+            {
+                return RedirectToAction("Index", "UserError", new { error = "ID not provided." });
+            }
         }
 
         // POST: ~/News/AddAuthor/{id}
@@ -323,26 +338,32 @@ namespace WebNews_19089.Controllers
         }
 
         // GET: News/RemoveAuthor/{id}
+        [Authorize(Roles = "Admin,NewsEditor")]
         public ActionResult RemoveAuthor(int? id)
         {
 
-            // Autenticação
-            if (id != null && (User.IsInRole("Admin") || User.IsInRole("NewsEditor")))
+            if (id != null)
             {
+
                 var news = db.News.Find(id);
 
                 if (news != null)
                 {
-
                     // Preparar uma lista com os utilizadores para serem selecionados numa dropdown
                     ViewBag.Users = new SelectList(news.UsersProfileList, "ID", "Name");
 
                     return View(news);
 
                 }
+                else
+                {
+                    return RedirectToAction("Index", "UserError", new { error = "We couldn't find this News Article.", details = "The ID was not valid." });
+                }
             }
-            
-            return RedirectToAction("Index");
+            else
+            {
+                return RedirectToAction("Index", "UserError", new { error = "ID not provided." });
+            }
         }
 
         // POST: News/RemoveAuthor/{id}
@@ -353,13 +374,14 @@ namespace WebNews_19089.Controllers
 
             if (Users != null && newsID != null)
             {
-
+                // Encontra o utilizador e a noticia em questão, usando os IDs que chegaram do form
                 var user = db.UsersProfile.Find(Users);
                 var actualNews = db.News.Find(newsID);
 
                 if (actualNews != null && user != null)
                 {
 
+                    // Remove o utilizador
                     actualNews.UsersProfileList.Remove(user);
                     db.SaveChanges();
 
@@ -367,7 +389,7 @@ namespace WebNews_19089.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "UserError", new { error = "We weren't able to remove this Author.", details = "Something went wrong." });
         }
 
         // GET: News/Delete/5
@@ -376,13 +398,16 @@ namespace WebNews_19089.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "UserError", new { error = "ID not provided." });
             }
+
             News News = db.News.Find(id);
+
             if (News == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "UserError", new { error = "We couldn't find this News Article.", details = "The ID was not valid." });
             }
+
             return View(News);
         }
 
@@ -393,51 +418,51 @@ namespace WebNews_19089.Controllers
         {
 
 
-            //try {
-
-            News News = db.News.Find(id);
-
-            // Criar uma lista de photos para serem eliminadas
-            // Isto porque correr um foreach diretamente no News.PhotoList iria causar problemas
-            // Pois as fotos elimandas estariam a alterar o News.PhotoList o que causaria um erro.
-            List<Photos> listPhotos = new List<Photos>();
-
-            // Adicionar todas as fotos à lista
-            foreach (var photo in News.PhotosList)
-                listPhotos.Add(photo);
-
-            // Correr a lista e eliminar as fotos
-            foreach (var photo in listPhotos)
+            try
             {
 
-                System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images/"), photo.Name));
-                db.Photos.Remove(photo);
+                News News = db.News.Find(id);
+
+                // Criar uma lista de photos para serem eliminadas
+                // Isto porque correr um foreach diretamente no News.PhotoList iria causar problemas
+                // Pois as fotos elimandas estariam a alterar o News.PhotoList o que causaria um erro.
+                List<Photos> listPhotos = new List<Photos>();
+
+                // Adicionar todas as fotos à lista
+                foreach (var photo in News.PhotosList)
+                    listPhotos.Add(photo);
+
+                // Correr a lista e eliminar as fotos
+                foreach (var photo in listPhotos)
+                {
+
+                    System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images/"), photo.Name));
+                    db.Photos.Remove(photo);
+
+                }
+
+                // A mesma situação, mas para os comments
+                List<Comments> listComments = new List<Comments>();
+
+                foreach (var comment in News.CommentsList)
+                    listComments.Add(comment);
+
+                // Remover os comentários da notícia
+                foreach (var comment in listComments)
+                    db.Comments.Remove(comment);
+                
+                // Remove a noticia
+                db.News.Remove(News);
+                db.SaveChanges();
+
 
             }
+            catch (Exception)
+            {
 
-            // A mesma situação, mas para os comments
-            List<Comments> listComments = new List<Comments>();
+                return RedirectToAction("Index", "UserError", new { error = "We weren't able to delete this News Article.", details = "There's still data associated with it." });
 
-            foreach (var comment in News.CommentsList)
-                listComments.Add(comment);
-
-            // Remover os comentários da notícia
-            foreach (var comment in listComments)
-                db.Comments.Remove(comment);
-
-            // Curtar a realação n-n
-
-
-
-            db.News.Remove(News);
-            db.SaveChanges();
-
-
-            //} catch (Exception) {
-
-            //    ModelState.AddModelError("", string.Format("I wasn't possible to remove this news article because there's still comments associated with it."));
-
-            //}
+            }
 
 
             return RedirectToAction("Index");

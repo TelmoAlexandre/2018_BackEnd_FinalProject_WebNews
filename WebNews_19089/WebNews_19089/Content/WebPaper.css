@@ -644,6 +644,10 @@ a:hover {
   font-size: 1.2em;
 }
 
+.userError h3 {
+  margin-top: 2rem;
+}
+
 .userError p {
   margin-top: 1rem;
 }
