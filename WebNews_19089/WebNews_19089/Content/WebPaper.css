@@ -387,6 +387,10 @@ a:hover {
   font-weight: bold;
 }
 
+.newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderUser a:hover {
+  text-decoration: underline;
+}
+
 .newsCommentsContainer .commentsList .comment .commentHeaderContainer .commentHeaderDate {
   font-size: .8em;
 }

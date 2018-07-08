@@ -2,14 +2,9 @@ To-do:
 
 - Regular expressions
 - Criação de uma página para mostrar erros amigáveis ao utilizador.
-- Adicionar outros autores dentro da noticia e no create.
 - Criar uma página about com informações minhas e dos utilizadores criados.
 
 This commit:
-
-Já é permitido aos users verem os perfis de outros users.
-
-Adicionado um link nos nomes do autores para poder ver o seu perfil.
 
 // ------------ Seed ----------------------
 

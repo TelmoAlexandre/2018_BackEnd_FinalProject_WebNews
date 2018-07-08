@@ -111,7 +111,7 @@
                     <div class="commentHeaderContainer">
 
                         <p class="commentHeaderUser">
-                            by @comment.UserProfile.Name
+                            by @Html.ActionLink(comment.UserProfile.Name, "Index", "Manage", new { email = comment.UserProfile.UserName }, null)
                         </p>
 
                         <p class="commentHeaderDate">
