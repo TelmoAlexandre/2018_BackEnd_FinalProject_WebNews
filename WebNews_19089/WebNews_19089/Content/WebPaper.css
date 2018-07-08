@@ -338,6 +338,7 @@ a:hover {
 .newsDetail .newsDetailBodyContainer {
   text-align: justify;
   margin: .4rem auto;
+  font-size: 1.1em;
   width: 100%;
   padding: .5rem 2rem;
 }
@@ -433,6 +434,7 @@ a:hover {
 
 .addAndRemoveAuthor {
   margin: 2rem;
+  text-align: left;
 }
 
 .addAndRemoveAuthor h2 {
@@ -445,11 +447,12 @@ a:hover {
 
 .addAndRemoveAuthor .dropbox input {
   margin-top: 2rem;
+  font-size: 1.4em;
+  padding-left: 0;
 }
 
 .addAndRemoveAuthor .dropbox input:hover {
-  text-decoration: underline;
-  padding-left: 1rem;
+  padding-left: .5rem;
   -webkit-transition: .5s;
   transition: .5s;
 }
@@ -608,13 +611,13 @@ a:hover {
   max-width: 100%;
 }
 
-.editNews input {
+.editNews .saveButton {
   padding-left: 0;
   max-width: 100%;
   font-size: 1.4em;
 }
 
-.editNews input:hover {
+.editNews .saveButton:hover {
   padding-left: .5rem;
   -webkit-transition: .5s;
   transition: .5s;

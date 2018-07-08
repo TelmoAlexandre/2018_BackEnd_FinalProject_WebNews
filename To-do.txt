@@ -1,7 +1,6 @@
 To-do:
 
 - Regular expressions
-- Criar uma página about com informações minhas e dos utilizadores criados.
 - Permitir serem apagados utilizadores. Por eles mesmos ou pelos admins.
 
 This commit:

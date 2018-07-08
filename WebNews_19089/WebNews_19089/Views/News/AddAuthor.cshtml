@@ -4,19 +4,20 @@
     ViewBag.Title = "Add Author";
 }
 
+<div class="col-1"></div>
+<div class="addAndRemoveAuthor col-4">
 
-<div class="addAndRemoveAuthor">
-
-    <h2>
+    <h2 class="bold">
         Add another Author.
     </h2>
-
+    
     <form action="/News/AddAuthor" method="post">
         @Html.AntiForgeryToken()
         <input data-val="true" name="newsID" type="hidden" value=@Model.ID>
 
         <div class="dropbox">
             @Html.DropDownList("Users", null, htmlAttributes: new { @class = "form-control" })
+
             <input type="submit" value="Add" class="btn bold" />
         </div>
 
