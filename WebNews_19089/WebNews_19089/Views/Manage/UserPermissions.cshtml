@@ -9,7 +9,7 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
         <div class="adminUserPermissions">
-            <h2>Edit User Permissions.</h2>
+            <h2 class="bold">Edit User Permissions.</h2>
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.Email)
@@ -31,7 +31,7 @@
 
             <div class="form-group">
                 <div>
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn bold" />
                 </div>
             </div>
         </div>

@@ -791,6 +791,12 @@ a:hover {
   padding: 1rem 0 1rem;
 }
 
+.adminUserPermissions input:hover {
+  padding-left: 1rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
 .changePassword {
   text-align: left;
   margin-top: 2rem;
