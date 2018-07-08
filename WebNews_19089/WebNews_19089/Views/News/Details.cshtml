@@ -61,10 +61,38 @@
             <div class="newsDate col-6">
                 <p class="bold date">@Model.NewsDate.ToString("MM-dd-yyyy")</p>
                 <p class="time">@Model.NewsDate.ToString("hh:mm:ss tt")</p>
+                
+                @if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || isAuthor)
+                {
+
+                    <div class="newsOptions bold">
+                        <h4 class="bold">
+                            News options:
+                        </h4>
+
+                        <div class="newsOptionsLinks">
+
+                            <span>|</span>
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "newsOptionLink" })
+                            <span>|</span>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+
+                                <span>|</span>
+                                @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "newsOptionLink" })
+                                <span>|</span>
+
+                            }
+
+                        </div>
+                    </div>
+                }
+
             </div>
 
         </div>
-        
+
 
     </div>
 
@@ -133,7 +161,7 @@
 
                                 <span> || </span>
                             }
-                            
+
                             @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.ID }, new { @class = "bold" })
                         }
                     </div>

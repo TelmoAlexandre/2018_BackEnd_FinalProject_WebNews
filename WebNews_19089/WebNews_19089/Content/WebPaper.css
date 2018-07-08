@@ -26,6 +26,11 @@ a:hover {
   font-family: "Fondamento", cursive;
 }
 
+.headerContainer .headerLinks .createNewsLink:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .headerContainer .loginRegister {
   position: absolute;
   top: 0;
@@ -306,6 +311,14 @@ a:hover {
 
 .newsDetail .newsInfo .newsDate {
   text-align: right;
+}
+
+.newsDetail .newsInfo .newsDate .newsOptions {
+  margin-top: 2rem;
+}
+
+.newsDetail .newsInfo .newsDate .newsOptions a:hover {
+  text-decoration: underline;
 }
 
 .newsDetail .newsInfo .newsDate .time {
