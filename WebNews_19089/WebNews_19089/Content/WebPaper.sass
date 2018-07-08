@@ -23,15 +23,21 @@ a
 
 .headerContainer
   .headerLinks
-    .createNewsLink
+    font-size: 1.2em
+    margin-top: .5rem
+    .categoriesDropdown
+      margin-left: 0
+    .aboutPageLink
       &:hover
         text-decoration: underline
         font-weight: bold
+        
   .loginRegister
     position: absolute
     top: 0
     right: 0
     margin-right: 1.25rem
+    margin-top: .5rem
     font-family: "Fondamento", cursive
     .login
       display: inline
@@ -370,7 +376,7 @@ a
     padding-left: 0
   .registerButton
     padding-left: 0
-    font-weight: bold
+    font-size: 1.4em
     &:hover
       padding-left: .5rem
       transition: .5s
@@ -386,18 +392,20 @@ a
   .checkbox
     input
       cursor: pointer
-  .logInButton
-    padding-left: 0
-    font-weight: bold
-    &:hover
-      padding-left: .5rem
-      transition: .5s
-  a
-    padding-left: 0
-    font-weight: bold
-    &:hover
-      padding-left: .5rem
-      transition: .5s
+  .logRegister
+    
+    .logInButton
+      padding-left: 0
+      font-size: 1.4em
+      &:hover
+        padding-left: .5rem
+        transition: .5s
+    a
+      font-size: 1.4em
+      padding-left: 0
+      &:hover
+        padding-left: .5rem
+        transition: .5s
 
 // News/Edit/{id}
 .editNews
@@ -410,6 +418,10 @@ a
   input
     padding-left: 0
     max-width: 100%
+    font-size: 1.4em
+    &:hover
+      padding-left: .5rem
+      transition: .5s
   .descriptionEditor
     height: 6rem
   .contentEditor
@@ -425,9 +437,6 @@ a
   div
     padding-left: 0
     max-width: 100%
-  input
-    padding-left: 0
-    max-width: 100%
   .nameEditor
     width: 70%
   .birthdayEditor
@@ -435,6 +444,7 @@ a
   .saveButton
     padding-left: 0
     font-weight: bold
+    font-size: 1.4em
     &:hover
       padding-left: .5rem
       transition: .5s
@@ -496,8 +506,8 @@ a
         padding-left: .3rem
         transition: .3s 
 
-.createNewsLink
-  margin-left: 2.5rem
+.aboutPageLink
+  margin-left: 2rem
 
 .createNews
   text-align: left
@@ -517,17 +527,25 @@ a
     width: 35%
   .createButton
     font-weight: bold
+    font-size: 1.4em
     &:hover
       padding-left: .5rem
       transition: .5s
 
 .newsDelete
   text-align: left
+  padding: 2rem 0
   .newsDeleteConfirm
-    h3
-      padding: 1.5rem 0
+    h2
+      padding: 1.5rem 0 0
   .newsDeleteOptions
-    text-align: center
+    text-align: left
+    input
+      font-size: 1.4em
+      padding-left: 0
+      &:hover
+        padding-left: .5rem
+        transition: .5s
 
 .adminUserList
   font-family: "Fondamento", cursive
@@ -544,11 +562,14 @@ a
 
 .adminUserPermissions
   text-align: left
+  margin-top: 1rem
   h2
     padding: 1rem 0 1rem
   input
+    font-size: 1.4em
+    padding-left: 0
     &:hover
-      padding-left: 1rem
+      padding-left: .5rem
       transition: .5s
 
 .changePassword
@@ -561,10 +582,14 @@ a
     width: 70%
   .changePasswordButton
     padding-left: 0
-    font-weight: bold
+    font-size: 1.4em
     &:hover
       padding-left: .5rem
       transition: .5s
+
+.about
+  text-align: left
+  margin: 3rem 0 2rem
 
 div
   //border: 1px solid
@@ -588,6 +613,7 @@ img
 
 .dropdown
   width: 100px
+  margin-left: 1rem
 
 .nav-container
   background-color: #fff

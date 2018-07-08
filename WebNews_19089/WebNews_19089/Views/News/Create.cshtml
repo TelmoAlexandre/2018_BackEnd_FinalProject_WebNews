@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-
+<div class="col-1"></div>
 <div class="col-8 createNews">
 
     @using (Html.BeginForm(
@@ -16,7 +16,7 @@
 
         @Html.AntiForgeryToken()
 
-        <h2>Create News</h2>
+        <h2 class="bold">Create News</h2>
         <hr />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -71,9 +71,11 @@
 
         </div>
 
+        <hr />
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default createButton" />
+                <input type="submit" value="Create" class="btn bold createButton" />
             </div>
         </div>
     }

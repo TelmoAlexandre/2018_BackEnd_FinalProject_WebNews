@@ -4,13 +4,14 @@
     ViewBag.Title = "Edit";
 }
 
-<div class="col-6 editNews">
+<div class="col-1"></div>
+<div class="col-8 editNews">
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h2>Edit News</h2>
+            <h2 class="bold">Edit News</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.ID)
@@ -48,9 +49,11 @@
                 </div>
             </div>
 
+            <hr />
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn bold" />
                 </div>
             </div>
         </div>

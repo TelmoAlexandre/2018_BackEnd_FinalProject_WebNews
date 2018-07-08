@@ -5,14 +5,16 @@
 }
 <div class="col-12 newsDelete row">
 
-    <div class="col-2"></div>
-    <div class="col-8 newsDeleteConfirm">
-        <h3>Are you sure you want to delete this News Article?</h3>
+    <div class="col-1"></div>
+    <div class="col-10 newsDeleteConfirm">
+        <h2 class="bold">Are you sure you want to delete this News Article?</h2>
+        <hr />
     </div>
-    <div class="col-2"></div>
+    
+    <div class="col-1"></div>
 
-    <div class="col-2"></div>
-    <div class="col-8">
+    <div class="col-1"></div>
+    <div class="col-10">
 
         <p class="newsDeleteTitle">
             <span class="bold">@Html.DisplayNameFor(model => model.Title):</span>
@@ -52,17 +54,18 @@
             @Html.DisplayFor(model => model.NewsDate)
         </p>
 
+        <hr />
 
-        @using (Html.BeginForm()) {
+        @using (Html.BeginForm())
+        {
             @Html.AntiForgeryToken()
 
             <div class="newsDeleteOptions">
-                <input type="submit" value="Delete" class="btn btn-default" />| 
-                @Html.ActionLink("Back", "Index")
+                <input type="submit" value="Delete" class="btn bold" />
             </div>
         }
     </div>
 
-    <div class="col-2"></div>
+    <div class="col-1"></div>
 
 </div>

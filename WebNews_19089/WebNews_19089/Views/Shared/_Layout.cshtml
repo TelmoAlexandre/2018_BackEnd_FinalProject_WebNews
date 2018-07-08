@@ -24,15 +24,21 @@
 
                 @Html.Action("categoriesDropdown", "News")
 
-                @if (User.IsInRole("Admin"))
+                @if (User.IsInRole("Admin") || User.IsInRole("Journalist"))
                 {
 
                     <div class="dropdown">
                         <div class="nav-item nav-item-dropdown">
-                            <span class="dropdown-trigger">Administrator</span>
+                            <span class="dropdown-trigger">Options</span>
                             <ul class="dropdown-menu">
 
-                                <a href="@Url.Action("UserList", "Manage")"><li class="dropdown-menu-item">Permissions</li></a>
+                                <a href="@Url.Action("Create", "News")"><li class="dropdown-menu-item">Create News</li></a>
+
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a href="@Url.Action("UserList", "Manage")"><li class="dropdown-menu-item">Permissions</li></a>
+                                }
+
                             </ul>
                         </div>
                     </div>
@@ -40,11 +46,7 @@
 
                 }
 
-                @if (User.IsInRole("Journalist") || User.IsInRole("Admin"))
-                {
-
-                    @Html.ActionLink("Create News", "Create", "News", null, new { @class = "cursive createNewsLink" })
-                }
+                @Html.ActionLink("About", "Index", "About", null, new { @class = "cursive aboutPageLink" })
 
                 @Html.Partial("_LoginPartial")
 

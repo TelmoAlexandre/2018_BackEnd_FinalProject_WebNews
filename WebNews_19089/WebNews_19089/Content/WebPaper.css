@@ -26,7 +26,16 @@ a:hover {
   font-family: "Fondamento", cursive;
 }
 
-.headerContainer .headerLinks .createNewsLink:hover {
+.headerContainer .headerLinks {
+  font-size: 1.2em;
+  margin-top: .5rem;
+}
+
+.headerContainer .headerLinks .categoriesDropdown {
+  margin-left: 0;
+}
+
+.headerContainer .headerLinks .aboutPageLink:hover {
   text-decoration: underline;
   font-weight: bold;
 }
@@ -36,6 +45,7 @@ a:hover {
   top: 0;
   right: 0;
   margin-right: 1.25rem;
+  margin-top: .5rem;
   font-family: "Fondamento", cursive;
 }
 
@@ -538,7 +548,7 @@ a:hover {
 
 .registerContainer .registerButton {
   padding-left: 0;
-  font-weight: bold;
+  font-size: 1.4em;
 }
 
 .registerContainer .registerButton:hover {
@@ -565,23 +575,23 @@ a:hover {
   cursor: pointer;
 }
 
-.loginContent .logInButton {
+.loginContent .logRegister .logInButton {
   padding-left: 0;
-  font-weight: bold;
+  font-size: 1.4em;
 }
 
-.loginContent .logInButton:hover {
+.loginContent .logRegister .logInButton:hover {
   padding-left: .5rem;
   -webkit-transition: .5s;
   transition: .5s;
 }
 
-.loginContent a {
+.loginContent .logRegister a {
+  font-size: 1.4em;
   padding-left: 0;
-  font-weight: bold;
 }
 
-.loginContent a:hover {
+.loginContent .logRegister a:hover {
   padding-left: .5rem;
   -webkit-transition: .5s;
   transition: .5s;
@@ -601,6 +611,13 @@ a:hover {
 .editNews input {
   padding-left: 0;
   max-width: 100%;
+  font-size: 1.4em;
+}
+
+.editNews input:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 .editNews .descriptionEditor {
@@ -627,11 +644,6 @@ a:hover {
   max-width: 100%;
 }
 
-.editUser input {
-  padding-left: 0;
-  max-width: 100%;
-}
-
 .editUser .nameEditor {
   width: 70%;
 }
@@ -643,6 +655,7 @@ a:hover {
 .editUser .saveButton {
   padding-left: 0;
   font-weight: bold;
+  font-size: 1.4em;
 }
 
 .editUser .saveButton:hover {
@@ -738,8 +751,8 @@ a:hover {
   transition: .3s;
 }
 
-.createNewsLink {
-  margin-left: 2.5rem;
+.aboutPageLink {
+  margin-left: 2rem;
 }
 
 .createNews {
@@ -772,6 +785,7 @@ a:hover {
 
 .createNews .createButton {
   font-weight: bold;
+  font-size: 1.4em;
 }
 
 .createNews .createButton:hover {
@@ -782,14 +796,26 @@ a:hover {
 
 .newsDelete {
   text-align: left;
+  padding: 2rem 0;
 }
 
-.newsDelete .newsDeleteConfirm h3 {
-  padding: 1.5rem 0;
+.newsDelete .newsDeleteConfirm h2 {
+  padding: 1.5rem 0 0;
 }
 
 .newsDelete .newsDeleteOptions {
-  text-align: center;
+  text-align: left;
+}
+
+.newsDelete .newsDeleteOptions input {
+  font-size: 1.4em;
+  padding-left: 0;
+}
+
+.newsDelete .newsDeleteOptions input:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 .adminUserList {
@@ -812,14 +838,20 @@ a:hover {
 
 .adminUserPermissions {
   text-align: left;
+  margin-top: 1rem;
 }
 
 .adminUserPermissions h2 {
   padding: 1rem 0 1rem;
 }
 
+.adminUserPermissions input {
+  font-size: 1.4em;
+  padding-left: 0;
+}
+
 .adminUserPermissions input:hover {
-  padding-left: 1rem;
+  padding-left: .5rem;
   -webkit-transition: .5s;
   transition: .5s;
 }
@@ -840,13 +872,18 @@ a:hover {
 
 .changePassword .changePasswordButton {
   padding-left: 0;
-  font-weight: bold;
+  font-size: 1.4em;
 }
 
 .changePassword .changePasswordButton:hover {
   padding-left: .5rem;
   -webkit-transition: .5s;
   transition: .5s;
+}
+
+.about {
+  text-align: left;
+  margin: 3rem 0 2rem;
 }
 
 img {
@@ -865,6 +902,7 @@ img {
 
 .dropdown {
   width: 100px;
+  margin-left: 1rem;
 }
 
 .nav-container {
