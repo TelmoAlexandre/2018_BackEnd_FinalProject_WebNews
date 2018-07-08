@@ -1,0 +1,22 @@
+﻿@model WebNews_19089.Models.UserErrorModelView
+
+@{ 
+    ViewBag.Title = "Error";
+}
+
+<div class="col-2"></div>
+<div class="col-8 userError">
+
+    <h1>
+        @Model.Error
+    </h1>
+
+    @if(Model.AdditionalDetails != null)
+    {
+        <p>
+            - @Model.AdditionalDetails
+        </p>
+    }
+
+</div>
+<div class="col-2"></div>

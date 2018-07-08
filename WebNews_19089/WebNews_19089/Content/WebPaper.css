@@ -638,6 +638,16 @@ a:hover {
   transition: .5s;
 }
 
+.userError {
+  margin: 2rem 0;
+  text-align: left;
+  font-size: 1.2em;
+}
+
+.userError p {
+  margin-top: 1rem;
+}
+
 .manageAccount {
   text-align: left;
 }
