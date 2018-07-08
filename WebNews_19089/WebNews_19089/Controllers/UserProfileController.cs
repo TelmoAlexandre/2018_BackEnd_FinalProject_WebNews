@@ -40,21 +40,9 @@ namespace WebNews_19089.Controllers
         // GET: UserProfile
         public ActionResult Edit(string email)
         {
-            if (email != null)
-            {
-                // Garantir que o user que está a tentar editar a informação é o user autenticado
-                if(email == User.Identity.Name)
-                {
-                    return View(db.UsersProfile.Where(u => u.UserName.Equals(email)).First());
-                }
-                else
-                {
-                    return RedirectToAction("Index", "News", null);
-                }
-                
-            }
-
-            return RedirectToAction("Index","News",null);
+            // Re-encaminhar sempre para o perfil do utilizador autenticado
+            // Assim, facilmente se evita utilizadores alterarem informação de outros utilizadores.
+            return View(db.UsersProfile.Where(u => u.UserName == User.Identity.Name).First());
         }
 
         // POST: UserProfile

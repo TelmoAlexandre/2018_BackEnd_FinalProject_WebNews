@@ -37,7 +37,7 @@
             <div class="changePasswordLink">
                 <p>
                     <span class="bold">
-                        @Html.ActionLink("Edit your information", "Edit", "UserProfile", new { email = Model.User.UserName }, null) ||
+                        @Html.ActionLink("Edit your information", "Edit", "UserProfile", null, null) ||
                         @if (Model.HasPassword)
                         {
                             @Html.ActionLink("Change your password", "ChangePassword")
