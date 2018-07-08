@@ -307,6 +307,8 @@
     <Content Include="Views\UserProfile\Edit.cshtml" />
     <Content Include="Views\Comments\Delete.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\News\AddAuthor.cshtml" />
+    <Content Include="Views\News\RemoveAuthor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

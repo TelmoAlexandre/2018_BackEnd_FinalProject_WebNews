@@ -292,6 +292,18 @@ a:hover {
   font-weight: bold;
 }
 
+.newsDetail .newsInfo .newsAuthors .addAuthor {
+  padding-top: 1rem;
+  font-weight: bold;
+}
+
+.newsDetail .newsInfo .newsAuthors .addAuthor a:hover {
+  text-decoration: underline;
+  padding-left: .4rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
 .newsDetail .newsInfo .newsDate {
   text-align: right;
 }
@@ -390,6 +402,29 @@ a:hover {
 
 .newsCommentsContainer .commentsList .commentDeleteOption a:hover {
   text-decoration: underline;
+}
+
+.addAndRemoveAuthor {
+  margin: 2rem;
+}
+
+.addAndRemoveAuthor h2 {
+  margin: 0 0 2rem;
+}
+
+.addAndRemoveAuthor .dropbox {
+  text-align: left;
+}
+
+.addAndRemoveAuthor .dropbox input {
+  margin-top: 2rem;
+}
+
+.addAndRemoveAuthor .dropbox input:hover {
+  text-decoration: underline;
+  padding-left: 1rem;
+  -webkit-transition: .5s;
+  transition: .5s;
 }
 
 .commentDelete {

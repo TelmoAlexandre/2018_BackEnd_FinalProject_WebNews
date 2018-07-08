@@ -1,0 +1,20 @@
+﻿@model WebNews_19089.Models.News
+
+<div class="addAndRemoveAuthor">
+
+    <h2>
+        Add another Author.
+    </h2>
+
+    <form action="/News/AddAuthor" method="post">
+        @Html.AntiForgeryToken()
+        <input data-val="true" name="newsID" type="hidden" value=@Model.ID>
+
+        <div class="dropbox">
+            @Html.DropDownList("Users", null, htmlAttributes: new { @class = "form-control" })
+            <input type="submit" value="Add" class="btn bold" />
+        </div>
+
+    </form>
+
+</div>

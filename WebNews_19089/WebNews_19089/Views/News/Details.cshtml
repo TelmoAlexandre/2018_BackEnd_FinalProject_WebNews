@@ -29,12 +29,33 @@
 
             <div class="newsAuthors col-6">
                 <h4 class="bold">Authors:</h4>
-                @foreach (var author in Model.UsersProfileList)
-                {
-                    <p>
-                        - @Html.ActionLink(author.Name,"Index","Manage",new { email = author.UserName},null )
-                    </p>
+
+                @{
+                    bool isAuthor = false;
+
+                    foreach (var author in Model.UsersProfileList)
+                    {
+                        <p>
+                            - @Html.ActionLink(author.Name, "Index", "Manage", new { email = author.UserName }, null)
+                        </p>
+
+                        if (User.Identity.Name == author.UserName)
+                        {
+                            isAuthor = true;
+                        }
+                    }
+
+                    if (isAuthor || User.IsInRole("Admin") || User.IsInRole("NewsEditor"))
+                    {
+                        <p class="addAuthor">@Html.ActionLink("> Add another author", "AddAuthor", "News", new { id = Model.ID }, null)</p>
+                    }
+
+                    if (User.IsInRole("Admin") || User.IsInRole("NewsEditor"))
+                    {
+                        <p class="addAuthor">@Html.ActionLink("> Remove an author", "RemoveAuthor", "News", new { id = Model.ID }, null)</p>
+                    }
                 }
+
             </div>
 
             <div class="newsDate col-6">
