@@ -139,12 +139,12 @@
                             {
                                 <span> || </span>
 
-                                @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.ID, email = User.Identity.Name, Page = "Manage" }, new { @class = "bold" })
+                                @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.ID, Page = "Manage" }, new { @class = "bold" })
                             }
 
                             <span> || </span>
 
-                            @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.ID, email = User.Identity.Name, Page = "Manage" }, new { @class = "bold" })
+                            @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.ID, Page = "Manage" }, new { @class = "bold" })
                         }
 
                     </div>
