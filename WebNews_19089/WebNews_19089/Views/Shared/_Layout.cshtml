@@ -33,6 +33,8 @@
                             <ul class="dropdown-menu">
 
                                 <a href="@Url.Action("Create", "News")"><li class="dropdown-menu-item">Create News</li></a>
+                                <a href="@Url.Action("Create", "Categories")"><li class="dropdown-menu-item">Create Category</li></a>
+                                <a href="@Url.Action("Delete", "Categories")"><li class="dropdown-menu-item">Delete Category</li></a>
 
                                 @if (User.IsInRole("Admin"))
                                 {

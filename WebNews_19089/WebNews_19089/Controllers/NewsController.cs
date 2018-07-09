@@ -22,6 +22,9 @@ namespace WebNews_19089.Controllers
             // Número de notícias por página
             const int newsPerPage = 6;
 
+            // Objeto noticias
+            News news;
+
             // Calcular o numero de noticias que deve fazer 'skip' para ter uma paginação correta
             int takeNum = (pageNum != null) ? ((int)pageNum - 1) * newsPerPage : 0;
 
@@ -37,7 +40,7 @@ namespace WebNews_19089.Controllers
                 // Procura as noticias da categoria, salta o numero de noticias necessárias para paginação e 'traz' o número de noticias por página
                 var NewsCategories = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).Skip(takeNum).Take(newsPerPage).ToList();
 
-                News news;
+                
 
                 // Tenta encontrar a ultima noticia
                 // Se não conseguir é porque não existe
@@ -71,8 +74,17 @@ namespace WebNews_19089.Controllers
 
             var News = db.News.Include(n => n.Category).OrderByDescending(n => n.NewsDate).Skip(takeNum).Take(newsPerPage).ToList();
 
-            // Verifica qual é a ultima noticia para poder saber se é a ultima página
-            var lastNews = db.News.OrderByDescending(n => n.NewsDate).ToList().Last();
+            // Tenta encontrar a ultima noticia
+            // Se não conseguir é porque não existe
+            try
+            {
+                // Guardar a última notícia para comprar se ainda existe mais páginas
+                news = db.News.OrderByDescending(n => n.NewsDate).ToList().Last();
+            }
+            catch (Exception)
+            {
+                news = null;
+            }
 
             return View(new NewsWithPageModelView
             {
@@ -81,7 +93,7 @@ namespace WebNews_19089.Controllers
                 // Senão, devolve o número da página
                 pageNum = (pageNum == null) ? 1 : (int)pageNum,
                 // Verifica se se encontra na ultima página
-                lastPage = (News.Count() != newsPerPage || News.Contains(lastNews)) ? true : false,
+                lastPage = (News.Count() != newsPerPage || News.Contains(news)) ? true : false,
                 category = category,
                 firstPage = firstPage
             });
@@ -144,7 +156,16 @@ namespace WebNews_19089.Controllers
         // GET: News/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name");
+
+            SelectList list = new SelectList(db.Categories, "ID", "Name");
+
+            // Caso não existam categorias, não deixa criar uma noticia
+            if(list.Count() == 0)
+            {
+                return RedirectToAction("Index", "UserError", new { error = "You can't create a News Article.", details = "There are no categories created." });
+            }
+
+            ViewBag.CategoryFK = list;
             return View();
         }
 

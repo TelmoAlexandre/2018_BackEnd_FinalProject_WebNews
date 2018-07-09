@@ -316,6 +316,7 @@
     <Content Include="Views\UserError\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

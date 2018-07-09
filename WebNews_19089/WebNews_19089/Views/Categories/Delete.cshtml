@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Remove Author";
+}
+
+<div class="col-1"></div>
+<div class="addAndRemoveAuthor col-4">
+
+    <h2 class="bold">
+        Remove an Author.
+    </h2>
+
+    <form action="/Categories/Delete" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="dropbox">
+            @Html.DropDownList("Categories", null, htmlAttributes: new { @class = "form-control" })
+            <input type="submit" value="Remove" class="btn bold" />
+        </div>
+
+    </form>
+
+</div>
