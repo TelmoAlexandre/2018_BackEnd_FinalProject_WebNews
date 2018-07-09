@@ -4,6 +4,12 @@
     ViewBag.Title = "Web Paper";
 }
 
+<div class="col-12 center newsCategory">
+    <h1 class="bold">
+        @Model.category
+    </h1>
+</div>
+
 <div class="col-12 searchOption">
     <form action="/News/Index" method="post" class="search-container">
         @Html.AntiForgeryToken()

@@ -1,10 +1,8 @@
 To-do:
 
-- Regular expressions
 - Permitir serem apagados utilizadores. Por eles mesmos ou pelos admins.
 - Adicionar link do github no about.
 - Delimitar tamanhos máximo de caracters nas textboxes.
-- Listar e eliminar categorias
 - Mostrar a categoria de cada noticia
 
 This commit:

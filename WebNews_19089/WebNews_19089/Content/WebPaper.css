@@ -22,6 +22,10 @@ a:hover {
   font-weight: bold;
 }
 
+.center {
+  text-align: center;
+}
+
 .cursive {
   font-family: "Fondamento", cursive;
 }
@@ -156,6 +160,10 @@ a:hover {
   text-decoration: underline;
 }
 
+.newsCategory {
+  padding: 2rem 0 0;
+}
+
 .pageOption {
   padding: 4rem 0 2rem;
 }
@@ -181,10 +189,6 @@ a:hover {
   transition: .5s;
 }
 
-.searchOption {
-  padding: 2rem 0 0;
-}
-
 .searchOption input {
   font-weight: bold;
 }
@@ -194,7 +198,7 @@ a:hover {
 }
 
 .searchOption .searchInput {
-  padding-left: 5rem;
+  padding-left: 7.5rem;
 }
 
 .searchOption .searchInputManager {
