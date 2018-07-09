@@ -16,6 +16,8 @@ namespace WebNews_19089.Models {
         public int ID { set; get; }
 
         [Required]
+        [RegularExpression("^[A-Z][a-z]+(( ){1}[A-z]{1}[a-z]*)+$")]
+        [StringLength(40)]
         public string Name { get; set; }
 
         [DataType(DataType.Date)]

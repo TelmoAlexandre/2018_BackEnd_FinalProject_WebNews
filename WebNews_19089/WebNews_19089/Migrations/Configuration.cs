@@ -41,31 +41,31 @@
             var user = new List<UsersProfile> {
                 new UsersProfile {
                     ID=1,
-                    Name="Journalist1",
+                    Name="Journalist One",
                     Birthday=new DateTime(1950,01,01),
                     UserName="journalist1@mail.com"
                 },
                 new UsersProfile {
                     ID=2,
-                    Name="Journalist2",
+                    Name="Journalist Two",
                     Birthday=new DateTime(1975,11,23),
                     UserName="journalist2@mail.com"
                 },
                 new UsersProfile {
                     ID=3,
-                    Name="Journalist3",
+                    Name="Journalist Three",
                     Birthday=new DateTime(1980,03,05),
                     UserName="journalist3@mail.com"
                 },
                 new UsersProfile {
                     ID=4,
-                    Name="Admin",
+                    Name="Admin User",
                     Birthday=new DateTime(1985,07,12),
                     UserName="admin@mail.com"
                 },
                 new UsersProfile {
                     ID=5,
-                    Name="Editor",
+                    Name="Editor User",
                     Birthday=new DateTime(1952,05,20),
                     UserName="editor@mail.com"
                 }

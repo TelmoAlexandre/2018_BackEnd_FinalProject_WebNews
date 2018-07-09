@@ -2,6 +2,9 @@ To-do:
 
 - Regular expressions
 - Permitir serem apagados utilizadores. Por eles mesmos ou pelos admins.
+- Adicionar link do github no about.
+- Delimitar tamanhos máximo de caracters nas textboxes.
+- Criar categorias
 
 This commit:
 

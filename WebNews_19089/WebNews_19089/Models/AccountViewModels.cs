@@ -82,9 +82,14 @@ namespace WebNews_19089.Models
         public string ConfirmPassword { get; set; }
 
         // Campos da tabela 'UserProfile' que serão utilizados na view 'Register'
+        [Required]
+        [RegularExpression("^[A-Z][a-z]+(( ){1}[A-z]{1}[a-z]*)+$",
+            ErrorMessage = "This field needs to start with a capital letter, needs at least two names and can't end with a space. Only letters are allowed.")]
+        [StringLength(40)]
         public string Name { get; set; }
+
+        [Required]
         public DateTime Birthday { get; set; }
-        public string Bio { get; set; }
 
     }
 
