@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,8 +14,13 @@ namespace WebNews_19089.Controllers
 
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
+        public ActionResult Index()
+        {
+            return RedirectToAction("Edit");
+        }
+
         // GET: Categories/Create
-        
         public ActionResult Create()
         {
             return View(new Categories { });
@@ -117,6 +123,81 @@ namespace WebNews_19089.Controllers
             }
 
             return View();
+        }
+
+
+
+        // GET: Categories/Edit
+        public ActionResult Edit()
+        {
+            ViewBag.Categories = new SelectList(db.Categories, "ID", "Name");
+            return View();
+        }
+
+        // POST: Categories/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int? Categories)
+        {
+
+            if (Categories == null)
+            {
+                // Se chegar aqui é porque o id não é válido
+                return RedirectToAction("Index", "UserError", new { error = "We couldn't find this Category.", details = "The ID was not valid." });
+            }
+            
+            return RedirectToAction("EditConfirmed", new { id = Categories });
+        }
+
+        public ActionResult EditConfirmed(int? id)
+        {
+
+            Categories category = db.Categories.Find(id);
+
+            if (category == null)
+            {
+                return RedirectToAction("Index", "UserError", new { error = "This category doesn't exist.", details = "Can't edit an nonexistent category." });
+            }
+
+            return View(category);
+        }
+
+        // POST: Categories/EditConfirmed
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditConfirmed([Bind(Include ="ID, Name")] Categories category)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                // Garantir que não existe categorias com o novo nome
+                // Não verifica a própria categoria, pois pode ser inserido o mesmo nome.
+                if (db.Categories.Where(c => c.ID != category.ID).Where(c => c.Name == category.Name).Count() == 0)
+                {
+
+                    db.Entry(category).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index", "News", null);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There's already another category with that name.");
+                }
+
+            }
+
+            return View(category);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

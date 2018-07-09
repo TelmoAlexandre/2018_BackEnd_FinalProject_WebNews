@@ -27,14 +27,15 @@
                 @if (User.IsInRole("Admin") || User.IsInRole("Journalist"))
                 {
 
-                    <div class="dropdown">
+                    <div class="dropdown dropdownOptions">
                         <div class="nav-item nav-item-dropdown">
                             <span class="dropdown-trigger">Options</span>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu dropdown-menuOptions">
 
                                 <a href="@Url.Action("Create", "News")"><li class="dropdown-menu-item">Create News</li></a>
-                                <a href="@Url.Action("Create", "Categories")"><li class="dropdown-menu-item">Create Category</li></a>
-                                <a href="@Url.Action("Delete", "Categories")"><li class="dropdown-menu-item">Delete Category</li></a>
+                                <a href="@Url.Action("Create", "Categories")"><li class="dropdown-menu-item">Create Categories</li></a>
+                                <a href="@Url.Action("Edit", "Categories")"><li class="dropdown-menu-item">Edit Categories</li></a>
+                                <a href="@Url.Action("Delete", "Categories")"><li class="dropdown-menu-item">Delete Categories</li></a>
 
                                 @if (User.IsInRole("Admin"))
                                 {

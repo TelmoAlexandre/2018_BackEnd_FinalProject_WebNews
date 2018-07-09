@@ -848,6 +848,32 @@ a:hover {
   transition: .5s;
 }
 
+.editCategory {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.editCategory div {
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.editCategory label {
+  padding-left: 0;
+}
+
+.editCategory .saveButton {
+  font-weight: bold;
+  font-size: 1.4em;
+  padding-left: 0;
+}
+
+.editCategory .saveButton:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
 .adminUserList {
   font-family: "Fondamento", cursive;
 }
@@ -935,6 +961,10 @@ img {
   margin-left: 1rem;
 }
 
+.dropdownOptions {
+  text-align: left;
+}
+
 .nav-container {
   background-color: #fff;
   border-radius: 4px;
@@ -997,7 +1027,7 @@ img {
   opacity: 0;
   -webkit-transition: opacity 0.5s ease;
   transition: opacity 0.5s ease;
-  width: 160px;
+  min-width: 80px;
   list-style: none;
   -webkit-padding-start: 0;
   padding: 0;
@@ -1009,7 +1039,7 @@ img {
 
 .dropdown-menu-item {
   cursor: pointer;
-  padding: 1em;
+  padding: .5rem;
   text-align: center;
   list-style: none;
   -webkit-padding-start: 0;
@@ -1017,6 +1047,15 @@ img {
 
 .dropdown-menu-item:hover {
   background-color: #c8c5bd;
+}
+
+.dropdown-menuOptions {
+  width: 160px;
+}
+
+.dropdown-menuOptions .dropdown-menu-item {
+  text-align: left;
+  padding-left: .5rem;
 }
 
 .glyphicon-search:before {

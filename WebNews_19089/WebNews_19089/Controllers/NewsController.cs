@@ -262,7 +262,7 @@ namespace WebNews_19089.Controllers
             {
                 if (News == null)
                 {
-                    return HttpNotFound();
+                    return RedirectToAction("Index", "UserError", new { error = "We couldn't find this News Article.", details = "Check the ID." });
                 }
                 ViewBag.CategoryFK = new SelectList(db.Categories, "ID", "Name", News.CategoryFK);
                 return View(News);
