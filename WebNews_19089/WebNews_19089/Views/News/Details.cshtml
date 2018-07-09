@@ -18,6 +18,14 @@
 
         </div>
 
+        <div class="newsDetailHeaderCategoryContainer">
+            <hr />
+            <p class="bold">
+                <span> - @Html.ActionLink(Model.Category.Name, "Index", new { category = Model.Category.Name, pageNum = 1 }) - </span>
+            </p>
+            <hr />
+        </div>
+
         <div class="newsDetailHeaderImagesContainer">
             @foreach (var photo in Model.PhotosList)
             {

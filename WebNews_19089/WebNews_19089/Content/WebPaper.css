@@ -289,6 +289,15 @@ a:hover {
   font-weight: bold;
 }
 
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderCategoryContainer {
+  font-size: 1.5em;
+}
+
+.newsDetail .newsDetailHeaderContainer .newsDetailHeaderCategoryContainer a:hover {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .newsDetail .newsDetailHeaderContainer .newsDetailHeaderImagesContainer img {
   height: 100%;
 }
