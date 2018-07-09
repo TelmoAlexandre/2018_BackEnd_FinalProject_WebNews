@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder="This is the News Headline." } })
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", maxlength = "80", placeholder= "This is the News Headline.  [Max length is 80 characters]" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Description, new { @class = "form-control createDescription", placeholder = "The description will appear in the home page." })
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control createDescription", maxlength = "250", placeholder = "The description will appear in the home page. \n\n[Max length is 250 characters]" })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>

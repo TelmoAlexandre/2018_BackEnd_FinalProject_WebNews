@@ -40,8 +40,6 @@ namespace WebNews_19089.Controllers
                 // Procura as noticias da categoria, salta o numero de noticias necessárias para paginação e 'traz' o número de noticias por página
                 var NewsCategories = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).Skip(takeNum).Take(newsPerPage).ToList();
 
-                
-
                 // Tenta encontrar a ultima noticia
                 // Se não conseguir é porque não existe
                 try
@@ -94,7 +92,7 @@ namespace WebNews_19089.Controllers
                 pageNum = (pageNum == null) ? 1 : (int)pageNum,
                 // Verifica se se encontra na ultima página
                 lastPage = (News.Count() != newsPerPage || News.Contains(news)) ? true : false,
-                category = category,
+                category = (category == null) ? "All" : category,
                 firstPage = firstPage
             });
         }
@@ -122,7 +120,8 @@ namespace WebNews_19089.Controllers
                 News = news,
                 // Booleanos a verdade para não aparecer os links para a proxima pagina, nem anterior
                 firstPage = true,
-                lastPage = true
+                lastPage = true,
+                category = category
             });
 
 

@@ -18,9 +18,11 @@ namespace WebNews_19089.Models {
         public int ID { get; set; }
 
         [Required(ErrorMessage = "A title is required.")]
+        [StringLength(80)]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "A description is required.")]
+        [StringLength(250)]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Content is required.")]
