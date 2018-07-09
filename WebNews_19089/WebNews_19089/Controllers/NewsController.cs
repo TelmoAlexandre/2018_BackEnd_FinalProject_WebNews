@@ -37,8 +37,20 @@ namespace WebNews_19089.Controllers
                 // Procura as noticias da categoria, salta o numero de noticias necessárias para paginação e 'traz' o número de noticias por página
                 var NewsCategories = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).Skip(takeNum).Take(newsPerPage).ToList();
 
-                // Guardar a última notícia para comprar se ainda existe mais páginas
-                News news = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).ToList().Last();
+                News news;
+
+                // Tenta encontrar a ultima noticia
+                // Se não conseguir é porque não existe
+                try
+                {
+                    // Guardar a última notícia para comprar se ainda existe mais páginas
+                    news = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).ToList().Last();
+                }
+                catch (Exception)
+                {
+                    news = null;
+                }
+                
 
                 // Booleano que vai informar na view se ainda existem mais páginas
                 var lastPage = (NewsCategories.Count() != newsPerPage || NewsCategories.Contains(news)) ? true : false;

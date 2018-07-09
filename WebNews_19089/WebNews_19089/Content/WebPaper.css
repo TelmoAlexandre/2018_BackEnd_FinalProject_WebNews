@@ -789,6 +789,7 @@ a:hover {
 .createNews .createButton {
   font-weight: bold;
   font-size: 1.4em;
+  padding-left: 0;
 }
 
 .createNews .createButton:hover {
@@ -816,6 +817,32 @@ a:hover {
 }
 
 .newsDelete .newsDeleteOptions input:hover {
+  padding-left: .5rem;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.createCategory {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.createCategory div {
+  padding-left: 0;
+  max-width: 100%;
+}
+
+.createCategory label {
+  padding-left: 0;
+}
+
+.createCategory .createButton {
+  font-weight: bold;
+  font-size: 1.4em;
+  padding-left: 0;
+}
+
+.createCategory .createButton:hover {
   padding-left: .5rem;
   -webkit-transition: .5s;
   transition: .5s;
