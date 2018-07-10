@@ -2,7 +2,8 @@ To-do:
 
 - Permitir serem apagados utilizadores. Por eles mesmos ou pelos admins.
 - Adicionar link do github no about.
-- Delimitar tamanhos máximo de caracters nas textboxes.
+- Alterar as regular expressions para receber caracteres portugueses.
+- Remover comments e fotos das notcias quando estas são removidas pela remoção das categorias.
 
 This commit:
 
