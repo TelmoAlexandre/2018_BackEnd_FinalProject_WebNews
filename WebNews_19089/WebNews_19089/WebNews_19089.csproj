@@ -322,7 +322,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Media_CSS\" />
     <Folder Include="db\" />
   </ItemGroup>
   <ItemGroup>

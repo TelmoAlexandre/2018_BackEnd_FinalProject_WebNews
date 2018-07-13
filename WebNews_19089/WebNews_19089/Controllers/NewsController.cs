@@ -26,7 +26,7 @@ namespace WebNews_19089.Controllers
             News news;
 
             // Calcular o numero de noticias que deve fazer 'skip' para ter uma paginação correta
-            int takeNum = (pageNum != null) ? ((int)pageNum - 1) * newsPerPage : 0;
+            int skipNum = (pageNum != null) ? ((int)pageNum - 1) * newsPerPage : 0;
 
             // Booleano que informa se é a primeira página
             bool firstPage = (pageNum == null || (int)pageNum == 1) ? true : false;
@@ -38,7 +38,7 @@ namespace WebNews_19089.Controllers
             {
 
                 // Procura as noticias da categoria, salta o numero de noticias necessárias para paginação e 'traz' o número de noticias por página
-                var NewsCategories = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).Skip(takeNum).Take(newsPerPage).ToList();
+                var NewsCategories = db.News.Where(n => n.Category.Name == category).OrderByDescending(n => n.NewsDate).Skip(skipNum).Take(newsPerPage).ToList();
 
                 // Tenta encontrar a ultima noticia
                 // Se não conseguir é porque não existe
@@ -70,7 +70,7 @@ namespace WebNews_19089.Controllers
             // Significa que foram pedidas todas as noticias
             // Retorna todas as noticias
 
-            var News = db.News.Include(n => n.Category).OrderByDescending(n => n.NewsDate).Skip(takeNum).Take(newsPerPage).ToList();
+            var News = db.News.Include(n => n.Category).OrderByDescending(n => n.NewsDate).Skip(skipNum).Take(newsPerPage).ToList();
 
             // Tenta encontrar a ultima noticia
             // Se não conseguir é porque não existe
