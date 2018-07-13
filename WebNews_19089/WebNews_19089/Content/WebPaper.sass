@@ -762,3 +762,49 @@ img
   font-family: 'Glyphicons Halflings'
   src: url('../fonts/glyphicons-halflings-regular.eot')
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')
+
+
+// Media Size
+
+@media only screen and (max-width:1199px)
+  .newsDetail > .col-6
+    -ms-flex: 0 0 100%
+    flex: 0 0 100%
+    max-width: 100%
+  .newsDetail, .newsArticle, .newsDetailHeaderContainer
+    padding-right: 0 !important
+  .newsDetailBodyContainer
+    padding: 1rem 1rem !important
+  .newsBlock
+    h1:hover
+      padding-left: 1rem
+      text-decoration: underline
+  .manageAccount
+    .col-6
+      -ms-flex: 0 0 100%
+      flex: 0 0 100%
+      max-width: 100%
+    .col-12 .col-12
+      padding: 0 .5rem
+  .mobileSeparator
+      display: block !important
+
+@media only screen and  (max-width:767px)
+  .loginContent, .registerContainer
+    -ms-flex: 0 0 100%
+    flex: 0 0 100%
+    max-width: 100%
+
+@media only screen and (min-width:768px) and (max-width:1199px)
+  .col-4 
+    -ms-flex: 0 0 50%
+    flex: 0 0 50%
+    max-width: 50%
+
+@media only screen and (min-width:300px) and (max-width:767px)
+  .container 
+    max-width: 700px
+  .col-4 
+    -ms-flex: 0 0 100%
+    flex: 0 0 100%
+    max-width: 100%

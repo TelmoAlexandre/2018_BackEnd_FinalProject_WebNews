@@ -69,7 +69,7 @@
             <div class="newsDate col-6">
                 <p class="bold date">@Model.NewsDate.ToString("MM-dd-yyyy")</p>
                 <p class="time">@Model.NewsDate.ToString("hh:mm:ss tt")</p>
-                
+
                 @if (User.IsInRole("Admin") || User.IsInRole("NewsEditor") || isAuthor)
                 {
 
