@@ -235,7 +235,7 @@
                     ID=18,
                     Title="The world's first family to live in a 3D-printed home",
                     Description="A family in France has become the first in the world to move into a 3D-printed house. The four-bedroom property is a prototype for bigger projects aiming to make housebuilding quicker and cheaper. Could it cause a shift in the building industry?",
-                    Content="With curved walls designed to reduce the effects of humidity and digital controls for disabled people, this house could be an expensive realisation of an architect's vision. But having taken 54 hours to print - with four more months for contractors to add in things such as windows, doors and the roof - its cost of around £176,000 to build makes it 20% cheaper than an identical construction using more traditional solutions. The team now believe they could print the same house again in only 33 hours. The 95m (1022ft) square house - built for a family of five with four bedrooms and a big central space in Nantes - is a collaboration between the city council, a housing association and University of Nantes. <br/><br/>Francky Trichet, the council's lead on technology and innovation, says the purpose of the project was to see whether this type of construction could become mainstream for housing, and whether its principles could be applied to other communal buildings, such as sports halls. He believes the process will disrupt the construction industry. \"For 2,000 years there hasn't been a change in the paradigm of the construction process. We wanted to sweep this whole construction process away,\" he says. \"That's why I'm saying that we're at the start of a story. We've just written, 'Once upon a time'.\" <br/><br/>Now, he says, their work will \"force\" private companies to \"take the pen\" and continue the narrative. The house has been built in a deprived neighbourhood in the north of the town and was partly funded by the council. Nordine and Nouria Ramdani, along with their three children, were the lucky ones chosen to live there. <br/><br/>\"It's a big honour to be a part of this project,\" says Nordine. \"We lived in a block of council flats from the 60s, so it's a big change for us. \"It's really something amazing to be able to live in a place where there is a garden, and to have a detached house.\" <br/><br/>The house is designed in a studio by a team of architects and scientists, then programmed into a 3D printer. The printer is then brought to the site of the home. It works by printing in layers from the floor upwards. Each wall consists of two layers of the insulator polyurethane, with a space in-between which is filled with cement. <br/><br/>This creates a thick, insulated, fully-durable wall. The windows, doors, and roof are then fitted. And, voila, you have a home. The house was the brainchild of Benoit Furet, who heads up the project at University of Nantes. He thinks that in five years they will reduce the cost of the construction of such houses by 25% while adhering to building regulations, and by 40% in 10 to 15 years. This is partly because of the technology becoming more refined and cheaper to develop and partly because of economies of scale as more houses are built. Printing, he adds, also allows architects to be far more creative with the shapes of the houses they are building. For example, the house in Nantes was built to curve around the 100-year-old protected trees on the plot.",
+                    Content="With curved walls designed to reduce the effects of humidity and digital controls for disabled people, this house could be an expensive realisation of an architect's vision. But having taken 54 hours to print - with four more months for contractors to add in things such as windows, doors and the roof - its cost of around £176,000 to build makes it 20% cheaper than an identical construction using more traditional solutions. The team now believe they could print the same house again in only 33 hours. The 95m (1022ft) square house - built for a family of five with four bedrooms and a big central space in Nantes - is a collaboration between the city council, a housing association and University of Nantes. <br/><br/>Francky Trichet, the council's lead on technology and innovation, says the purpose of the project was to see whether this type of construction could become mainstream for housing, and whether its principles could be applied to other communal buildings, such as sports halls. He believes the process will disrupt the construction industry. \"For 2,000 years there hasn't been a change in the paradigm of the construction process. We wanted to sweep this whole construction process away,\" he says. \"That's why I'm saying that we're at the start of a story. We've just written, 'Once upon a time'.\" <br/><br/>Now, he says, their work will \"force\" private companies to \"take the pen\" and continue the narrative. The house has been built in a deprived neighbourhood in the north of the town and was partly funded by the council.",
                     NewsDate= new DateTime(2018,06,04,21,11,0),
                     CategoryFK=3,
                     UsersProfileList = new List<UsersProfile> { user[2], user[1] }
@@ -257,6 +257,15 @@
                     NewsDate= new DateTime(2018,06,06,23,34,0),
                     CategoryFK=3,
                     UsersProfileList = new List<UsersProfile> { user[0]}
+                },
+                new News {
+                    ID=21,
+                    Title="Boeing 'concerns' over US-China trade row",
+                    Description="The head of US aerospace and defence giant Boeing has warned about potential damage of the growing US-China trade row.",
+                    Content="\"Aerospace thrives on free and open trade,\" said chief executive Dennis Muilenburg. He said he was concerned tariffs could push up costs for aircraft manufacturers. \"The aerospace sector drives economic benefits globally,\" he added.With both the US and China imposing tariffs on each other's goods, Mr Muilenburg said Boeing wanted to find \"alternative solutions\" to trade disputes. <br/><br/>\"We are concerned it could affect supply chain costs - but those supply chains are flowing in both directions [between China and the US], it is an intricate network around the world.\" Speaking to reporters ahead of this week's Farnborough Airshow, Mr Muilenburg insisted that the White House was listening to his firm's arguments. \"We engaged very much with both governments [in China and the US,\" he said, \"our voice is being heard.\" He was hopeful that there would be a \"good resolution\" to the disputes, adding \"our job is to maintain a long-term perspective\".",
+                    NewsDate= new DateTime(2018,06,15,12,34,0),
+                    CategoryFK=1,
+                    UsersProfileList = new List<UsersProfile> { user[2], user[1]}
                 }
             };
             news.ForEach(aa => context.News.AddOrUpdate(a => a.Title, aa));
@@ -428,6 +437,16 @@
                     ID=24,
                     Name="News24.jpg",
                     NewsFK=20
+                },
+                new Photos {
+                    ID=25,
+                    Name="News25.jpg",
+                    NewsFK=21
+                },
+                new Photos {
+                    ID=26,
+                    Name="News26.jpg",
+                    NewsFK=21
                 }
             };
             photos.ForEach(pp => context.Photos.AddOrUpdate(p => p.ID, pp));

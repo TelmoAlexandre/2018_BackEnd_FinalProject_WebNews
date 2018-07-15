@@ -40,6 +40,15 @@
                 @Html.DisplayFor(modelNews => news.Description)
             </p>
 
+            <div class="newsInfo">
+                <p class="bold">
+                    @news.NewsDate.ToString("MM-dd-yyyy")
+                </p>
+                <p class="bold">
+                    <a href="@Url.Action("Index", "News" ,new { category = news.Category.Name, pageNum = 1 })">> @news.Category.Name <</a>
+                </p>
+            </div>
+
             @*
                 Caso o utilizador logado seja administrator ou editor de redação ele pode alterar a noticia
             *@
@@ -88,7 +97,7 @@
 else
 {
     <div class="noFoundNews col-12">
-        <h1 class="bold" >No News found.</h1>
+        <h1 class="bold">No News found.</h1>
     </div>
 }
 

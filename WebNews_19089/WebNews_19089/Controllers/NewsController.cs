@@ -22,7 +22,6 @@ namespace WebNews_19089.Controllers
             // Número de notícias por página
             const int newsPerPage = 6;
 
-            // Objeto noticias
             News news;
 
             // Calcular o numero de noticias que deve fazer 'skip' para ter uma paginação correta
@@ -142,7 +141,7 @@ namespace WebNews_19089.Controllers
             News News = db.News.Find(id);
             if (News == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "UserError", new { error = "News Article not found.", details = "The ID was not provided." });
             }
 
             // Orderna os cometários por ordem (Mais recente primeiro)

@@ -24,7 +24,7 @@
 
                 @Html.Action("categoriesDropdown", "News")
 
-                @if (User.IsInRole("Admin") || User.IsInRole("Journalist"))
+                @if (User.IsInRole("Admin") || User.IsInRole("Journalist") || User.IsInRole("NewsEditor"))
                 {
 
                     <div class="dropdown dropdownOptions">
@@ -33,13 +33,13 @@
                             <ul class="dropdown-menu dropdown-menuOptions">
 
                                 <a href="@Url.Action("Create", "News")"><li class="dropdown-menu-item">Create News</li></a>
-                                <a href="@Url.Action("Create", "Categories")"><li class="dropdown-menu-item">Create Categories</li></a>
-                                <a href="@Url.Action("Edit", "Categories")"><li class="dropdown-menu-item">Edit Categories</li></a>
-                                <a href="@Url.Action("Delete", "Categories")"><li class="dropdown-menu-item">Delete Categories</li></a>
 
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <a href="@Url.Action("UserList", "Manage")"><li class="dropdown-menu-item">Permissions</li></a>
+                                    <a href="@Url.Action("Create", "Categories")"><li class="dropdown-menu-item">Create Categories</li></a>
+                                    <a href="@Url.Action("Edit", "Categories")"><li class="dropdown-menu-item">Edit Categories</li></a>
+                                    <a href="@Url.Action("Delete", "Categories")"><li class="dropdown-menu-item">Delete Categories</li></a>
                                 }
 
                             </ul>

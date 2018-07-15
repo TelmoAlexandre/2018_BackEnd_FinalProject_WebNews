@@ -242,6 +242,8 @@
     <Content Include="Images\News22.jpg" />
     <Content Include="Images\News23.jpg" />
     <Content Include="Images\News24.jpg" />
+    <Content Include="Images\News25.jpg" />
+    <Content Include="Images\News26.jpg" />
     <Content Include="Images\News3.jpg" />
     <Content Include="Images\News4.jpg" />
     <Content Include="Images\News5.jpg" />
@@ -268,7 +270,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -146,6 +146,14 @@ a:hover {
   transition: 0.5s;
 }
 
+.newsBlock .newsInfo p {
+  margin: 0;
+}
+
+.newsBlock .newsInfo a:hover {
+  text-decoration: underline;
+}
+
 .newsBlock .newsOptions {
   font-size: 1.5em;
   font-weight: bold;
