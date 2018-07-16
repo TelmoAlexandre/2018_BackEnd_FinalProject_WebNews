@@ -150,7 +150,7 @@ namespace WebNews_19089.Controllers
             return View(News);
         }
 
-        [Authorize(Roles = "Admin,Journalist")]
+        [Authorize(Roles = "Admin,Journalist,NewsEditor")]
         // GET: News/Create
         public ActionResult Create()
         {
@@ -202,7 +202,7 @@ namespace WebNews_19089.Controllers
                     {
 
                         // Cria um nome para a imagem recebida e guarda a mesma
-                        string photoName = DateTime.Now.ToString("_yyyyMMdd_hhmmss") + ".jpg";
+                        string photoName = DateTime.Now.ToString("_yyyyMMdd_hhmmss") + i + ".jpg";
                         string photoPath = Path.Combine(Server.MapPath("~/Images/"), photoName);
 
                         // Cria um objeto photo e adiciona-lhe o nome
