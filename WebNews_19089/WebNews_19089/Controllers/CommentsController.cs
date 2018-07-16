@@ -163,6 +163,8 @@ namespace WebNews_19089.Controllers
 
             Comments comment = db.Comments.Find(id);
 
+            string userEmail = comment.UserProfile.UserName;
+
             db.Comments.Remove(comment);
             db.SaveChanges();
 
@@ -170,7 +172,7 @@ namespace WebNews_19089.Controllers
             // Caso tenha sido diretamente na noticia ou no Manage do user
             if (Page == "Manage")
             {
-                return RedirectToAction("Index", "Manage", new { email = User.Identity.Name });
+                return RedirectToAction("Index", "Manage", new { email = userEmail });
             }
             else
             {
